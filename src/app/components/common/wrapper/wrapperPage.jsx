@@ -5,7 +5,6 @@ import WrapperPageCss from './wrapperPage.module.css';
 import imgBack from '../../../../img/backdrop.png';
 
 const WrapperPage = () => {
-  console.log(WrapperPageCss);
   return (
     <div className={WrapperPageCss.wrapperPage}>
       <img
@@ -14,7 +13,8 @@ const WrapperPage = () => {
         className={WrapperPageCss.imgBackClass}
       />
       <Header />
-      <main className={WrapperPageCss.mainPage}>Hello</main>
+
+      <main className={WrapperPageCss.mainPage}></main>
       <Footer />
     </div>
   );

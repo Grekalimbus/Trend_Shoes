@@ -105,7 +105,7 @@ const api = [
     id: 'sdfng879fn95rg9gf293904g',
     price: 8999,
     imgProcut: [
-      'https://i.postimg.cc/0jjzZBft/1-Photo-Room-1.png',
+      'https://i.postimg.cc/rmTfyVpw/Photo-Room.png',
       'https://i.postimg.cc/xTF4sN0g/2-Photo-Room-1.png',
       'https://i.postimg.cc/KzFqKnNc/3-Photo-Room-2.png',
     ],

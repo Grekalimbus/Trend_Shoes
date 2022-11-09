@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap');
+.wrapp{    
+    height: 100vh;
+    width: 100%;
+    border: 3px solid #000;    
+    background-color: rgb(99, 99, 99);
+}
+.contentWrapp{
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 35%;
+    height: 60vh;
+    /* border: 3px solid #000; */
+    overflow: hidden;
+}
+.h3{    
+    margin-left: 2%;
+    font-size: 28px;
+    color: aliceblue    ;
+}
+.button{    
+    text-align: center;
+    margin-top: 4%;
+    background-color: #2b2b2b;
+    color: rgb(245, 245, 245);
+    height: 6vh;
+    width: 98%;
+    border-radius: 7px;
+    transition: all 2s;
+}
+.button:hover{
+    background-color: rgb(22, 22, 22);
+    box-shadow: 0px 4px 25px 9px rgba(0, 0, 0, 0.3);
+}
+.p{
+    padding-top: 2.4%;
+}
+
+.flex{
+    width: 100%;
+    height: 100%;
+    /* border: 2px solid #000; */
+    display: flex;    
+    flex-wrap: wrap;
+    margin-top: 5%;
+    overflow: hidden;
+}
+.flexElem{
+    width: 50%;
+    height: 50%;  
+    /* border: 2px solid #000; */
+}
+.flexImg{ 
+    
+    margin-left: 2%;  
+    
+    width: 95%;
+    height: 95%;    
+    border-radius: 18px;
+    background-color: #1F1F1F;
+    border: 5px solid rgba(224, 224, 224, 0.788);
+}
+
+.img{
+    width: 100%;
+    height: 100%;
+}
