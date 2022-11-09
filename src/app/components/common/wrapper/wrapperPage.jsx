@@ -4,7 +4,8 @@ import Header from './header/header';
 import WrapperPageCss from './wrapperPage.module.css';
 import imgBack from '../../../../img/backdrop.png';
 
-const WrapperPage = () => {
+const WrapperPage = ({ componentPage }) => {
+  const component = componentPage().props.children;
   return (
     <div className={WrapperPageCss.wrapperPage}>
       <img
@@ -14,7 +15,7 @@ const WrapperPage = () => {
       />
       <Header />
 
-      <main className={WrapperPageCss.mainPage}></main>
+      <main className={WrapperPageCss.mainPage}>{component}</main>
       <Footer />
     </div>
   );

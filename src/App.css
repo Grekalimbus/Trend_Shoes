@@ -1,4 +1,6 @@
 /*Обнуление*/
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap');
+
 *{
     padding: 0;
     margin: 0;
@@ -13,6 +15,7 @@
   a:focus,a:active{outline: none;}
   nav,footer,header,aside{display: block;}
   html,body{
+    font-family: 'Rubik', sans-serif;
     height: 100%;
     width: 100%;
     font-size: 100%;

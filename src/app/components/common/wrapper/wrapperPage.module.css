@@ -16,5 +16,6 @@
     position: fixed;
     top: -11%;
     left: 34%;
+    z-index: 1;
     
 }
