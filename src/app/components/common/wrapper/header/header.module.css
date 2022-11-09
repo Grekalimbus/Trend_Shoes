@@ -1,0 +1,18 @@
+.header{        
+    width: 100%;
+    color: aliceblue   ;
+    background-color: #232323;
+    height: 9vh;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image{
+    height: 60%;
+    width: 60%;
+}
+.text{
+    /* font-size: 26px;     */
+    position: fixed;
+    right: 7%;    
+}
