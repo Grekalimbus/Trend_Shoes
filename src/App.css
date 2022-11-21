@@ -16,6 +16,7 @@
   nav,footer,header,aside{display: block;}
   html,body{
     font-family: 'Rubik', sans-serif;
+    font-weight: bold;
     height: 100%;
     width: 100%;
     font-size: 100%;
