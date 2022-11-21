@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './mainPage.module.css';
+import { Link } from 'react-router-dom';
 const ContentMainPage = () => {
   return (
     <div className={styles.wrapp}>
@@ -8,9 +9,11 @@ const ContentMainPage = () => {
           <h3 className={styles.h3}>
             Чтобы посмотреть все товары, перейдите в магазин по кнопке ниже
           </h3>
-          <div className={styles.button}>
-            <p className={styles.p}>Перейти в магазин</p>
-          </div>
+          <Link to="/productPage" className={styles.button}>
+            <div>
+              <p className={styles.p}>Перейти в магазин</p>
+            </div>
+          </Link>
 
           <div className={styles.flex}>
             <div className={styles.flexElem}>

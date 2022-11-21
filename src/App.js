@@ -1,10 +1,18 @@
-// import WrapperPage from './app/components/common/wrapper/wrapperPage';
 import nullingStyles from './App.css';
-// import ContentMainPage from './app/components/page/mainPage/contentPage/contentMainPage';
-import MainPage from './app/components/page/mainPage/mainPage';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import MainPage from './app/layouts/mainPage';
+import ProductPage from './app/layouts/productPage';
 
 function App() {
-  return <MainPage />;
+  return (
+    <div>
+      <Switch>
+        <Route exact path="/mainPage" component={MainPage} />
+        <Route exact path="/productPage" component={ProductPage} />
+        <Redirect to="/mainPage" />
+      </Switch>
+    </div>
+  );
 }
 
 export default App;
