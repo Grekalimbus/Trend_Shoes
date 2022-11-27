@@ -2,7 +2,7 @@ const brend = {
   adidas: 'Adidas',
   lakai: 'Lakai',
   reebok: 'Reebok',
-  NB: 'NEW BALANCE XC-72',
+  NB: 'NEW BALANCE',
   nike: 'Nike',
 };
 
