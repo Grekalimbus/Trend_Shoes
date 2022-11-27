@@ -73,14 +73,17 @@ const ContentProductPage = () => {
     // =======
     const filterFirm = filterPrice.filter((item) => {
       if (data.firm !== '') {
-        return item.firm.toLowerCase() === data.firm.toLowerCase();
+        return item.firm === data.firm;
       } else {
         return filterPrice;
       }
     });
     return filterFirm;
   };
-
+  // useEffect(() => {
+  //   console.log(data.firm);
+  //   console.log(filter());
+  // }, [data]);
   return (
     <div>
       <div className={styles.svg}>

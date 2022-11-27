@@ -1,11 +1,5 @@
-// const brendObject = {
-//   adidas: 'Adidas',
-//   lakai: 'Lakai',
-//   reebok: 'Reebok',
-//   NB: 'NEW BALANCE XC-72',
-//   nike: 'Nike',
-// };
 import brend from './brend.api';
+
 const api = [
   {
     name: 'ADIDAS NITEBALL',

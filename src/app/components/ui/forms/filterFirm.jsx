@@ -21,7 +21,11 @@ const FilterFirm = ({ getValueForm, clear, firm }) => {
             <option value="">Сортировка по бренду</option>
             {Object.keys(api.brend).map((item) => {
               return (
-                <option key={item} value={item} className={styles.option}>
+                <option
+                  key={item}
+                  value={api.brend[item]}
+                  className={styles.option}
+                >
                   {api.brend[item]}
                 </option>
               );
