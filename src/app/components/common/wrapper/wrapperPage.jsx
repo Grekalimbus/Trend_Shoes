@@ -14,7 +14,6 @@ const WrapperPage = ({ componentPage }) => {
         className={WrapperPageCss.imgBackClass}
       />
       <Header />
-
       <main className={WrapperPageCss.mainPage}>{component}</main>
       <Footer />
     </div>

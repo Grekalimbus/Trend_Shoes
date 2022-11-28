@@ -9,13 +9,6 @@
     /* border: 3px solid rgb(160, 160, 160); */
     overflow: hidden;
 }
-.svg{
-    cursor: pointer;
-    position: fixed;
-    top: 2.5%;
-    left: 1%;
-}
-/* ====== */
 
 .blockProduct{
     width: 60%;    

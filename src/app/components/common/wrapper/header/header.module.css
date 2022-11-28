@@ -21,3 +21,10 @@
     position: fixed;
     right: 7%;    
 }
+.svg{
+    cursor: pointer;
+    position: fixed;
+    top: 2.5%;
+    left: 1%;
+}
+/* ====== */
