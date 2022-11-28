@@ -13,7 +13,7 @@ const CardProduct = ({ name, imgUrl, price }) => {
         <h3>Стоимость: {price} ₽</h3>
         <div className={styles.buttonCard}>
           <Link to="/mainPage">
-            <p className={styles.buttonTitle}>Открыть карточку</p>
+            <button className={styles.buttonTitle}>Открыть карточку</button>
           </Link>
         </div>
       </div>

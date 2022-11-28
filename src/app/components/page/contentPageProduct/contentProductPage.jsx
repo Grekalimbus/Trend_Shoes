@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FilterFirm from '../../ui/forms/filterFirm';
 import FilterName from '../../ui/forms/filterName';
 import FilterPrice from '../../ui/forms/filterPrice';
@@ -80,10 +80,6 @@ const ContentProductPage = () => {
     });
     return filterFirm;
   };
-  // useEffect(() => {
-  //   console.log(data.firm);
-  //   console.log(filter());
-  // }, [data]);
   return (
     <div>
       <div className={styles.svg}>

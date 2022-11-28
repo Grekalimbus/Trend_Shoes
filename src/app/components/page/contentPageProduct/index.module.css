@@ -71,15 +71,19 @@
     width: 40%;
     height: 20%;
     border-radius: 5px;
-    /* border: 1px solid rgb(37, 37, 37);        */    
+    /* border: 10px solid rgb(245, 245, 245);            */
     background-color: #242424;
     display: flex;
     justify-content: center;
     align-items: center;    
     overflow: hidden;    
-}
-.buttonTitle{    
     text-align: center;
     color: aliceblue;
+    font-size: 14px; 
+}
+.buttonTitle{        
+    background-color: #242424;
+    text-align: center;
+    color: rgb(255, 255, 255);
     font-size: 14px; 
 }
