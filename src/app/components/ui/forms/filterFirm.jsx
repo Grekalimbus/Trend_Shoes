@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './index.module.css';
-import api from '../../../api/index';
+// import api from '../../../api/index';
 
-const FilterFirm = ({ getValueForm, clear, firm }) => {
+const FilterFirm = ({ getValueForm, clear, firm, dataFirm }) => {
   const handleChange = ({ target }) => {
     getValueForm(target);
   };
@@ -19,14 +19,10 @@ const FilterFirm = ({ getValueForm, clear, firm }) => {
             onChange={handleChange}
           >
             <option value="">Сортировка по бренду</option>
-            {Object.keys(api.brend).map((item) => {
+            {Object.keys(dataFirm).map((item) => {
               return (
-                <option
-                  key={item}
-                  value={api.brend[item]}
-                  className={styles.option}
-                >
-                  {api.brend[item]}
+                <option key={item} value={item} className={styles.option}>
+                  {dataFirm[item].name}
                 </option>
               );
             })}

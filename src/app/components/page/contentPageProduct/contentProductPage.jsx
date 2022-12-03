@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterFirm from '../../ui/forms/filterFirm';
 import FilterName from '../../ui/forms/filterName';
 import FilterPrice from '../../ui/forms/filterPrice';
 import styles from './index.module.css';
 import CardProduct from './cardProduct';
-import api from '../../../api/index';
+import axios from 'axios';
 
 const ContentProductPage = () => {
   const [data, setData] = useState({
@@ -13,7 +13,22 @@ const ContentProductPage = () => {
     before: '',
     firm: '',
   });
-  const products = api.product();
+  const [product, setProduct] = useState(null);
+  const [dataFirm, setDataFirm] = useState(null);
+  useEffect(() => {
+    const promiseProcuct = axios
+      .get(
+        'https://test-qualitues-default-rtdb.europe-west1.firebasedatabase.app/.json'
+      )
+      .then((res) => {
+        setProduct(
+          Object.keys(res.data.product).map((item) => res.data.product[item])
+        );
+        return res;
+      })
+      .then((res) => setDataFirm(res.data.firm));
+  }, []);
+
   const getValueForm = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
     if (target.value === 'Сортировка по бренду') {
@@ -45,11 +60,11 @@ const ContentProductPage = () => {
   };
   const filter = () => {
     // =======
-    const filterName = products.filter((item) => {
+    const filterName = product.filter((item) => {
       if (data.name !== '') {
         return item.name.toLowerCase().includes(data.name.toLowerCase());
       } else {
-        return data;
+        return product;
       }
     });
     // =======
@@ -79,7 +94,9 @@ const ContentProductPage = () => {
     });
     return filterFirm;
   };
-  return (
+  return product === null ? (
+    <h1>loading</h1>
+  ) : (
     <div>
       <div className={styles.flex}>
         <div className={styles.flexForms}>
@@ -93,13 +110,14 @@ const ContentProductPage = () => {
             getValueForm={getValueForm}
             clear={clear}
             firm={data.firm}
+            dataFirm={dataFirm}
           />
         </div>
         <div className={styles.blockProduct}>
           {filter().map((item) => {
             return (
               <CardProduct
-                key={item.id}
+                key={item._id}
                 name={item.name}
                 price={item.price}
                 imgUrl={item.imgProcut[0]}
