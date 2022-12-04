@@ -15,26 +15,41 @@ const ContentProductPage = () => {
   });
   const [product, setProduct] = useState(null);
   const [dataFirm, setDataFirm] = useState(null);
+
+  // пулл данных в состояния product/dataFirm
   useEffect(() => {
-    const promiseProcuct = axios
-      .get(
-        'https://test-qualitues-default-rtdb.europe-west1.firebasedatabase.app/.json'
-      )
-      .then((res) => {
-        setProduct(
-          Object.keys(res.data.product).map((item) => res.data.product[item])
+    const getDataProductAndFirm = async () => {
+      try {
+        const { data } = await axios.get(
+          'https://test-qualitues-default-rtdb.europe-west1.firebasedatabase.app/.json'
         );
-        return res;
-      })
-      .then((res) => setDataFirm(res.data.firm));
+        const { product, firm } = data;
+        setProduct(Object.keys(product).map((item) => product[item]));
+        setDataFirm(firm);
+      } catch (error) {
+        // ожидаемая ошибка
+        const expectedErrors =
+          error.response &&
+          error.response.status >= 400 &&
+          error.response < 500;
+        if (!expectedErrors) {
+          console.log('UnexpectedErrors');
+        }
+        return console.log('expectedErrors');
+      }
+    };
+
+    getDataProductAndFirm();
   }, []);
 
+  // функция переданная в формы, которая меняет состояние data
   const getValueForm = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
     if (target.value === 'Сортировка по бренду') {
       setData((prevState) => ({ ...prevState, [target.name]: '' }));
     }
   };
+  // Фильтры
   const clearName = () => {
     setData((prevState) => ({ ...prevState, name: '' }));
   };
