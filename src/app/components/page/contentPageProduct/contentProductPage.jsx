@@ -6,6 +6,18 @@ import styles from './index.module.css';
 import CardProduct from './cardProduct';
 import axios from 'axios';
 
+axios.interceptors.response.use(
+  (res) => res,
+  function (error) {
+    const expectedErrors =
+      error.response && error.response.status >= 400 && error.response < 500;
+    if (!expectedErrors) {
+      console.log('UnexpectedErrors');
+    }
+    return Promise.reject(error);
+  }
+);
+
 const ContentProductPage = () => {
   const [data, setData] = useState({
     name: '',
@@ -27,15 +39,7 @@ const ContentProductPage = () => {
         setProduct(Object.keys(product).map((item) => product[item]));
         setDataFirm(firm);
       } catch (error) {
-        // ожидаемая ошибка
-        const expectedErrors =
-          error.response &&
-          error.response.status >= 400 &&
-          error.response < 500;
-        if (!expectedErrors) {
-          console.log('UnexpectedErrors');
-        }
-        return console.log('expectedErrors');
+        console.log('expectedErrors');
       }
     };
 
