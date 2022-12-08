@@ -4,19 +4,7 @@ import FilterName from '../../ui/forms/filterName';
 import FilterPrice from '../../ui/forms/filterPrice';
 import styles from './index.module.css';
 import CardProduct from './cardProduct';
-import axios from 'axios';
-
-axios.interceptors.response.use(
-  (res) => res,
-  function (error) {
-    const expectedErrors =
-      error.response && error.response.status >= 400 && error.response < 500;
-    if (!expectedErrors) {
-      console.log('UnexpectedErrors');
-    }
-    return Promise.reject(error);
-  }
-);
+import httpServices from '../../../services/http.service';
 
 const ContentProductPage = () => {
   const [data, setData] = useState({
@@ -32,7 +20,7 @@ const ContentProductPage = () => {
   useEffect(() => {
     const getDataProductAndFirm = async () => {
       try {
-        const { data } = await axios.get(
+        const { data } = await httpServices.get(
           'https://test-qualitues-default-rtdb.europe-west1.firebasedatabase.app/.json'
         );
         const { product, firm } = data;
