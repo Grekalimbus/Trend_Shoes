@@ -5,6 +5,7 @@ import FilterPrice from '../../ui/forms/filterPrice';
 import styles from './index.module.css';
 import CardProduct from './cardProduct';
 import httpServices from '../../../services/http.service';
+import config from '../../../../config.json';
 
 const ContentProductPage = () => {
   const [data, setData] = useState({
@@ -20,9 +21,8 @@ const ContentProductPage = () => {
   useEffect(() => {
     const getDataProductAndFirm = async () => {
       try {
-        const { data } = await httpServices.get(
-          'https://test-qualitues-default-rtdb.europe-west1.firebasedatabase.app/.json'
-        );
+        const { data } = await httpServices.get('.json');
+
         const { product, firm } = data;
         setProduct(Object.keys(product).map((item) => product[item]));
         setDataFirm(firm);
