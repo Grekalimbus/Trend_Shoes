@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 axios.interceptors.response.use(
   (res) => res,
@@ -6,7 +7,10 @@ axios.interceptors.response.use(
     const expectedErrors =
       error.response && error.response.status >= 400 && error.response < 500;
     if (!expectedErrors) {
-      console.log('UnexpectedErrors');
+      if (error.message === 'Network Error') {
+        toast.info('Попробуйте включить VPN');
+      }
+      toast.warning(error.message);
     }
     return Promise.reject(error);
   }
