@@ -5,7 +5,6 @@ import FilterPrice from '../../ui/forms/filterPrice';
 import styles from './index.module.css';
 import CardProduct from './cardProduct';
 import httpServices from '../../../services/http.service';
-import config from '../../../../config.json';
 
 const ContentProductPage = () => {
   const [data, setData] = useState({
