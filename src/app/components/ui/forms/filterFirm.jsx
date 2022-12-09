@@ -51,7 +51,7 @@ const FilterFirm = ({ getValueForm, clear, firm, dataFirm }) => {
 
 FilterFirm.propTypes = {
     getValueForm: PropTypes.func,
-    clear: PropTypes.func,
+    clear: PropTypes.object,
     firm: PropTypes.func,
     dataFirm: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };

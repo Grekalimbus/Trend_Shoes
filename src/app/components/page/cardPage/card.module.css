@@ -1,0 +1,54 @@
+.flex{
+    display: flex;    
+    position: sticky;
+    overflow: hidden;
+}
+.blockImg{
+    margin-top: 3%;
+    margin-left: 3%;
+    width: 35%;
+    height: 65vh;
+    border: 2px solid rgb(173, 30, 30);
+}
+.blockInfo{
+    margin-top: 3%;
+    margin-left: 3%;
+    width: 55%;
+    height: 65vh;
+    border: 2px solid rgb(173, 30, 30);
+}
+.mainImg{
+    background-color: rgb(29, 29, 29);
+    width: 100%;
+    height: 50vh;
+    border-radius: 20px;
+}
+.flexImage{
+    margin: 0 auto;
+    display: flex;
+    overflow: hidden;
+    width: 80%;
+}
+.divImage{
+    flex: 1 1 auto;
+    margin: 3% 1% 0% 1%;
+    height: 12vh;
+    width: 30%;
+    background-color: rgb(29, 29, 29);
+    border-radius: 10px;
+    transition: all 0.5s;    
+}
+.divImageActive{
+    flex: 1 1 auto;
+    margin: 3% 1% 0% 1%;
+    height: 12vh;
+    width: 30%;
+    background-color: rgb(29, 29, 29);
+    border-radius: 10px;
+    border: 5px solid rgb(161, 161, 161);
+    transition: all 0.5s;    
+}
+.imageSmall{
+    width: 100%;
+    height: 100%;
+}
