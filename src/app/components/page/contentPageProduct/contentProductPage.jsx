@@ -5,8 +5,11 @@ import FilterPrice from '../../ui/forms/filterPrice';
 import styles from './index.module.css';
 import CardProduct from './cardProduct';
 import httpServices from '../../../services/http.service';
+import { useParams } from 'react-router-dom';
+import PrivateCard from '../privateCard/privateCard';
 
 const ContentProductPage = () => {
+  const { cardID } = useParams();
   const [data, setData] = useState({
     name: '',
     from: '',
@@ -21,7 +24,6 @@ const ContentProductPage = () => {
     const getDataProductAndFirm = async () => {
       try {
         const { data } = await httpServices.get('.json');
-
         const { product, firm } = data;
         setProduct(Object.keys(product).map((item) => product[item]));
         setDataFirm(firm);
@@ -100,40 +102,54 @@ const ContentProductPage = () => {
     });
     return filterFirm;
   };
-  return product === null ? (
-    <h1>loading</h1>
-  ) : (
-    <div>
-      <div className={styles.flex}>
-        <div className={styles.flexForms}>
-          <FilterName getValueForm={getValueForm} name={data.name} />
-          <FilterPrice
-            getValueForm={getValueForm}
-            from={data.from}
-            before={data.before}
-          />
-          <FilterFirm
-            getValueForm={getValueForm}
-            clear={clear}
-            firm={data.firm}
-            dataFirm={dataFirm}
-          />
-        </div>
-        <div className={styles.blockProduct}>
-          {filter().map((item) => {
-            return (
-              <CardProduct
-                key={item._id}
-                name={item.name}
-                price={item.price}
-                imgUrl={item.imgProcut[0]}
-              />
-            );
-          })}
+  const dataIdCard =
+    product === null
+      ? null
+      : product.filter((item) => {
+          return item._id === cardID;
+        });
+
+  if (product !== null) {
+    return cardID !== undefined ? (
+      <div>
+        <PrivateCard data={dataIdCard} />
+      </div>
+    ) : (
+      <div>
+        <div className={styles.flex}>
+          <div className={styles.flexForms}>
+            <FilterName getValueForm={getValueForm} name={data.name} />
+            <FilterPrice
+              getValueForm={getValueForm}
+              from={data.from}
+              before={data.before}
+            />
+            <FilterFirm
+              getValueForm={getValueForm}
+              clear={clear}
+              firm={data.firm}
+              dataFirm={dataFirm}
+            />
+          </div>
+          <div className={styles.blockProduct}>
+            {filter().map((item) => {
+              return (
+                <CardProduct
+                  idCard={item._id}
+                  key={item._id}
+                  name={item.name}
+                  price={item.price}
+                  imgUrl={item.imgProduct[0]}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else if (product === null) {
+    return <h1>Loading...</h1>;
+  }
 };
 
 export default ContentProductPage;
