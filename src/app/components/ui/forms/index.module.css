@@ -1,41 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap');
-.dFlex{
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap");
+.dFlex {
     display: flex;
 }
-.textCentr{
+.textCentr {
     text-align: center;
-    margin-top: 2%;    
+    margin-top: 2%;
 }
 /* ============= */
-.blockName{
+.blockName {
     width: 90%;
     height: 10vh;
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     border-radius: 5px;
     margin-top: 2.6%;
-    margin-left: 3%;  
-    overflow: hidden;      
+    margin-left: 3%;
+    overflow: hidden;
 }
-.blockPrice{
+.blockPrice {
     width: 90%;
     height: 20vh;
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     border-radius: 5px;
     margin-top: 3%;
-    margin-left: 3%;      
-    overflow: hidden;  
+    margin-left: 3%;
+    overflow: hidden;
 }
 /* ============= */
 
 /* ============= */
-.label{
+.label {
     margin-top: 3%;
     text-align: center;
 }
-.inputDivName{
+.inputDivName {
     height: 3.5vh;
 }
-.inputName{    
+.inputName {
     font-size: 18px;
     height: 100%;
     margin-left: 14.5%;
@@ -43,17 +43,17 @@
     margin-bottom: 5%;
     width: 70%;
     border-radius: 5px;
-    background-color: #9C9C9C;
+    background-color: #9c9c9c;
     text-align: center;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.inputName:focus{
+.inputName:focus {
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.72);
 }
 /* ============= */
 
 /* ============= */
-.inputPrice{    
+.inputPrice {
     font-size: 18px;
     height: 100%;
     margin-left: 5.5%;
@@ -61,77 +61,76 @@
     margin-bottom: 5%;
     width: 70%;
     border-radius: 5px;
-    background-color: #9C9C9C;
+    background-color: #9c9c9c;
     text-align: center;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.inputPrice:focus{
+.inputPrice:focus {
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.72);
 }
-.blockInputPrice{
-    display: flex;    
+.blockInputPrice {
+    display: flex;
     margin-top: 4%;
     height: 3.5vh;
 }
-.p{
+.p {
     font-weight: bold;
     margin-left: 5%;
     margin-top: 3.5%;
 }
 /* ============= */
 
-.blockFirm{
+.blockFirm {
     width: 90%;
     height: 44.3vh;
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     border-radius: 5px;
     margin-top: 3%;
-    margin-left: 3%;  
-    overflow: hidden;    
+    margin-left: 3%;
+    overflow: hidden;
 }
-.wrapperButtons{
+.wrapperButtons {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
     margin-top: 5%;
-    width: 80%;      
-    height: 80%;    
+    width: 80%;
+    height: 80%;
 }
-.blockSelect{
+.blockSelect {
     width: 100%;
 }
-.selectWrapper{
+.selectWrapper {
     cursor: pointer;
     width: 100%;
     text-align: center;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-weight: bold;
     height: 5vh;
-    border-radius: 5px;    
-    background-color: #9C9C9C;
+    border-radius: 5px;
+    background-color: #9c9c9c;
 }
-.option{
+.option {
     color: #000000;
     text-align: center;
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;       
+    font-family: "Rubik", sans-serif;
+    font-weight: bold;
 }
 /* ======== */
-.clearSort{
+.clearSort {
     overflow: hidden;
     cursor: pointer;
     width: 100%;
     height: 5vh;
-    background-color: #9C9C9C;
+    background-color: #9c9c9c;
     text-align: center;
-    border-radius: 5px;  
-    transition: all 1s;  
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;    
+    border-radius: 5px;
+    transition: all 1s;
+    font-family: "Rubik", sans-serif;
+    font-weight: bold;
 }
-.clearSort:hover{
+.clearSort:hover {
     background-color: #5a5a5a;
 }
-

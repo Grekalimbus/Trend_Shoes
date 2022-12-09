@@ -1,8 +1,8 @@
-import React from 'react';
-import ContentProductPage from '../components/page/contentPageProduct/contentProductPage';
+import React from "react";
+import ContentProductPage from "../components/page/contentPageProduct/contentProductPage";
 
 const ProductPage = () => {
-  return <ContentProductPage />;
+    return <ContentProductPage />;
 };
 
 export default ProductPage;

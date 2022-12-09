@@ -1,9 +1,9 @@
-import product from './fake.api/product.api';
-import brend from './fake.api/brend.api';
+import product from "./fake.api/product.api";
+import brend from "./fake.api/brend.api";
 
 const API = {
-  product,
-  brend,
+    product,
+    brend
 };
 
 export default API;

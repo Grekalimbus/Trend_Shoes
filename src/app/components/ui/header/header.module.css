@@ -1,18 +1,18 @@
-.header{        
+.header {
     width: 100%;
-    color: aliceblue   ;
+    color: aliceblue;
     background-color: #232323;
-    height: 9vh;    
+    height: 9vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;    
+    justify-content: space-around;
 }
 
-.text{    
+.text {
     position: fixed;
-    right: 7%;    
+    right: 7%;
 }
-.svg{
+.svg {
     cursor: pointer;
     position: fixed;
     top: 2.5%;
