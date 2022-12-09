@@ -11,11 +11,10 @@ const CardProduct = ({ name, imgUrl, price, idCard }) => {
       <div className={styles.contentTitle}>
         <h3>{name}</h3>
         <h3>Стоимость: {price} ₽</h3>
-        <div className={styles.buttonCard}>
-          <Link to={`/productPage/${idCard}`}>
-            <button className={styles.buttonTitle}>Открыть карточку</button>
-          </Link>
-        </div>
+
+        <Link to={`/productPage/${idCard}`}>
+          <button className={styles.buttonCard}>Открыть карточку</button>
+        </Link>
       </div>
     </div>
   );
