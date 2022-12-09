@@ -1,7 +1,7 @@
 import React from 'react';
 import stylesFooter from './footer.module.css';
-import imgLogo2 from '../../../../../img/logoFooter.svg';
-import logoInst from '../../../../../img/inst.svg';
+import imgLogo2 from '../../../../img/logoFooter.svg';
+import logoInst from '../../../../img/inst.svg';
 const Footer = () => {
   return (
     <footer className={stylesFooter.footer}>

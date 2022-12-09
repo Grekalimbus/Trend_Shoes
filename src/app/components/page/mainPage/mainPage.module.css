@@ -3,15 +3,14 @@
     display: flex;       
 }
 .wrapp{        
-    height: 100vh;
-    width: 100%;     
-    background-color: rgb(99, 99, 99);
+    height: 100%;    
+    width: 100%;        
 }
 .contentWrapp{   
     color: #DCDADA;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column;    
     margin-top: 5%;
     margin-left: 5%;
     width: 35%;

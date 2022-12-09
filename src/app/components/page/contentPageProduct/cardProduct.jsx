@@ -8,10 +8,10 @@ const CardProduct = ({ name, imgUrl, price, idCard }) => {
       <div className={styles.imgContent}>
         <img className={styles.img} src={imgUrl} alt={name} />
       </div>
+
       <div className={styles.contentTitle}>
         <h3>{name}</h3>
         <h3>Стоимость: {price} ₽</h3>
-
         <Link to={`/productPage/${idCard}`}>
           <button className={styles.buttonCard}>Открыть карточку</button>
         </Link>

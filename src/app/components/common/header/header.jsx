@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './header.module.css';
-import imgLogo1 from '../../../../../img/logoHeader.svg';
+import imgLogo1 from '../../../../img/logoHeader.svg';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          <img src={imgLogo1} alt="imgLogo1" className={styles.image} />
+          <img src={imgLogo1} alt="imgLogo1" />
         </div>
         <div className={styles.text}>
           <a>Вход / </a>

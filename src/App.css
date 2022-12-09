@@ -37,3 +37,27 @@
   h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
   
   /*--------------------*/
+
+.wrapperPage{
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;   
+  flex-direction: column;    
+  justify-content: space-between; 
+  flex: 1 1 auto;
+}
+.mainPage{    
+  flex: 1 1 auto;
+  background: #3D3D3D;
+}
+
+.img{    
+  display: block;
+  width: 75%;
+  height: 125%;
+  position: fixed;
+  /* z-index: 5; */
+  top: -11%;
+  left: 54%;        
+}
+
