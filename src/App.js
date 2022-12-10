@@ -13,7 +13,6 @@ import Footer from "./app/components/ui/footer/footer";
 function App() {
     return (
         <div className={styles.wrapperPage}>
-            <img src={imgBack} alt="imgBack" className={styles.img}></img>
             <Header />
             <main className={styles.mainPage}>
                 <Switch>
