@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import httpServices from "../../../services/http.service";
 import BlockImg from "./blockImg";
+import BlockInfoProduct from "./blockInfoProduct";
 import styles from "./card.module.css";
 
 const CardPage = () => {
@@ -13,7 +14,6 @@ const CardPage = () => {
             try {
                 const { data } = await httpServices.get(`product/${id}/.json`);
                 setData(data);
-                console.log(data);
             } catch (error) {
                 console.log(error);
             }
@@ -26,7 +26,9 @@ const CardPage = () => {
             <div className={styles.blockImg}>
                 <BlockImg image={data !== null ? data.imgProduct : []} />
             </div>
-            <div className={styles.blockInfo}></div>
+            <div className={styles.blockInfo}>
+                <BlockInfoProduct data={data !== null ? data : {}} />
+            </div>
         </div>
     );
 };

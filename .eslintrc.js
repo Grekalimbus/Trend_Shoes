@@ -23,6 +23,7 @@ module.exports = {
         "multiline-ternary": "off",
         "no-useless-return": "off",
         "no-unused-vars": "off",
-        "no-unneeded-ternary": "off"
+        "no-unneeded-ternary": "off",
+        "no-unused-expressions": "off"
     }
 };

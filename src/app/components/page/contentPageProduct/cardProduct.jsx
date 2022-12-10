@@ -26,7 +26,7 @@ const CardProduct = ({ name, imgUrl, price, idCard }) => {
 CardProduct.propTypes = {
     name: PropTypes.string,
     imgUrl: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
     idCard: PropTypes.string
 };
 
