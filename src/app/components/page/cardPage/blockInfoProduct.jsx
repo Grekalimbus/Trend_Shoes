@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import styles from "./card.module.css";
 import httpServices from "../../../services/http.service";
 
-const BlockInfoProduct = ({ data }) => {
+const BlockInfoProduct = ({ data, makeOrder }) => {
     const [firm, setFirm] = useState(null);
     const [activSize, setActivSize] = useState("");
+
     const getQuantity = () => {
         let quantityProduct = 0;
         if (Object.keys(data).length !== 0) {
@@ -24,6 +25,7 @@ const BlockInfoProduct = ({ data }) => {
             return arrSizes;
         }
     };
+
     useEffect(() => {
         const getFirm = async () => {
             try {
@@ -38,6 +40,7 @@ const BlockInfoProduct = ({ data }) => {
     const activeSize = ({ target }) => {
         setActivSize(target.value);
     };
+    const basket = [];
     return (
         <div className={styles.flex}>
             <div className={styles.infoBlockDiv} style={{ width: "100%" }}>
@@ -81,6 +84,13 @@ const BlockInfoProduct = ({ data }) => {
                                         ? styles.buttonBay
                                         : styles.buttonBayActiv
                                 }
+                                onClick={() => {
+                                    makeOrder(
+                                        activSize === ""
+                                            ? activSize
+                                            : Number(activSize)
+                                    );
+                                }}
                             >
                                 Добавить в корзину
                             </button>
@@ -99,7 +109,8 @@ const BlockInfoProduct = ({ data }) => {
 };
 
 BlockInfoProduct.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    makeOrder: PropTypes.func
 };
 
 export default BlockInfoProduct;

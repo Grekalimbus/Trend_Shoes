@@ -7,9 +7,7 @@ const Header = () => {
     setTimeout(() => {
         setColor((pervState) => !pervState);
     }, 5000);
-    localStorage.setItem("balance", 10000);
     const balance = localStorage.getItem("balance");
-    console.log(balance);
 
     return (
         <header>
@@ -26,9 +24,9 @@ const Header = () => {
                 <div className={styles.button}>
                     <h2 className={styles.h2}>₽: {balance}</h2>
                 </div>
-                <div className={styles.button}>
+                <Link to="/basketPage" className={styles.button}>
                     <h2 className={styles.h2}>Корзина</h2>
-                </div>
+                </Link>
                 <div className={styles.button}>
                     <h2 className={styles.h2}>История покупок</h2>
                 </div>
