@@ -72,6 +72,10 @@
     margin-right: 4%;
     height: 4vh;
     color: black;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     background-color: rgb(196, 196, 196);    
     border-radius: 3px;
 }

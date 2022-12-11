@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./card.module.css";
 import httpServices from "../../../services/http.service";
+import { Link } from "react-router-dom";
 
 const BlockInfoProduct = ({ data, makeOrder }) => {
     const [firm, setFirm] = useState(null);
@@ -103,7 +104,9 @@ const BlockInfoProduct = ({ data, makeOrder }) => {
                     </div>
                 )}
             </div>
-            <button className={styles.basket}>Корзина</button>
+            <Link to="/basketPage" className={styles.basket}>
+                Корзина
+            </Link>
         </div>
     );
 };

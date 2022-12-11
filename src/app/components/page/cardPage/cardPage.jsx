@@ -34,17 +34,21 @@ const CardPage = () => {
         const basketLocalStorage = JSON.parse(
             localStorage.getItem("storageBasket")
         );
+        const basket = [];
+        const quantityArray = [];
         const pullDataLocalStorage = () => {
-            const basket = [];
-            const quantityArray = [];
             if (size !== "") {
                 quantitySizes.forEach((item) => {
                     quantityArray.push({ sizes: item.sizes, value: 0 });
                 });
 
-                quantityArray.forEach((item) => {
+                quantityArray.forEach((item, index) => {
                     if (item.sizes === size) {
-                        item.value += 1;
+                        if (quantitySizes[index].value !== 0) {
+                            item.value += 1;
+                        } else {
+                            toast.info("Этого размера уже нет в наличии");
+                        }
                     }
                 });
                 basket.push({ ...data, quantity: quantityArray });
@@ -52,6 +56,7 @@ const CardPage = () => {
                 const stringDataLocalStorage =
                     JSON.stringify(basketLocalStorage);
                 localStorage.setItem("storageBasket", stringDataLocalStorage);
+                toast.success("Товар добавлен в корзину");
             } else if (size === "") {
                 toast.info("Выберите нужный размер");
             }
@@ -67,9 +72,9 @@ const CardPage = () => {
                 if (conditionForArr === true) {
                     pullDataLocalStorage();
                 }
-                basketLocalStorage.forEach((item) => {
-                    if (item._id === id) {
-                        item.quantity.forEach((item, index) => {
+                basketLocalStorage.forEach((objectProduct) => {
+                    if (objectProduct._id === id) {
+                        objectProduct.quantity.forEach((item, index) => {
                             if (
                                 JSON.stringify(item) ===
                                 JSON.stringify(data.quantity[index])
@@ -89,6 +94,7 @@ const CardPage = () => {
                                         "storageBasket",
                                         stringLocalStorage
                                     );
+                                    toast.success("Товар добавлен в корзину");
                                 }
                             }
                         });
@@ -98,6 +104,7 @@ const CardPage = () => {
                 pullDataLocalStorage();
             }
         }
+        console.log(basketLocalStorage);
     };
 
     return (

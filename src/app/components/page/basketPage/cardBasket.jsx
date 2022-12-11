@@ -1,25 +1,27 @@
 import React from "react";
 import styles from "./index.module.css";
 import img from "../../../../img/basket.png";
+import PropTypes from "prop-types";
 
-const CardBasket = () => {
-    const ob = {
-        firm: "dsgfnrfg78erg9043gb7t98",
-        imgProduct: [
-            "https://i.postimg.cc/HLHWLhfr/1-Photo-Room-4.png",
-            "https://i.postimg.cc/wvqhDFsv/2-Photo-Room-3.png",
-            "https://i.postimg.cc/fWgx0cWz/3-Photo-Room-4.png"
-        ],
-        name: "NIKE AIR MAX PLUS",
-        price: 6000,
-        quantity: { sizes: 40, value: 3 },
-        _id: "ds9f875g9n567450f97nfgdsx"
+const CardBasket = ({ data }) => {
+    const sizes = () => {
+        let stringSize = "";
+        data.quantity.forEach((item) => {
+            stringSize += `${item.sizes}(${item.value})`;
+        });
+        return stringSize;
     };
-
+    const quantityProduct = () => {
+        let value = 0;
+        data.quantity.forEach((item) => {
+            value += item.value;
+        });
+        return value;
+    };
     return (
         <div className={styles.flex}>
             <div className={styles.flexSmalImg}>
-                {ob.imgProduct.map((item) => {
+                {data.imgProduct.map((item) => {
                     return (
                         <div key={item} className={styles.smalDivImg}>
                             <img
@@ -34,21 +36,25 @@ const CardBasket = () => {
             <div className={styles.blockBasketCard}>
                 <div className={styles.elemImage}>
                     <img
-                        src={ob.imgProduct[0]}
-                        alt={ob.imgProduct[0]}
+                        src={data.imgProduct[0]}
+                        alt={data.imgProduct[0]}
                         className={styles.smalImg}
                     />
                 </div>
                 <div className={styles.blockButtonChange}>
                     <div className={styles.elemButtonChange}>+</div>
-                    <div className={styles.elemButtonChange}>0</div>
+                    <div className={styles.elemButtonChange}>
+                        {quantityProduct()}
+                    </div>
                     <div className={styles.elemButtonChange}>-</div>
                 </div>
                 <div className={styles.blockInfo}>
-                    <div className={styles.elemInfo}>info</div>
-                    <div className={styles.elemInfo}>info</div>
-                    <div className={styles.elemInfo}>info</div>
-                    <div className={styles.elemInfo}>info</div>
+                    <div className={styles.elemInfo}>{data.name}</div>
+                    <div className={styles.elemInfo}>id: {data._id}</div>
+                    <div className={styles.elemInfo}>
+                        Стоимость: {data.price}
+                    </div>
+                    <div className={styles.elemInfo}>Размеры : {sizes()}</div>
                 </div>
                 <div className={styles.blockDelete}>
                     <img src={img} alt="basket" className={styles.basketImg} />
@@ -59,4 +65,7 @@ const CardBasket = () => {
     );
 };
 
+CardBasket.propTypes = {
+    data: PropTypes.object
+};
 export default CardBasket;
