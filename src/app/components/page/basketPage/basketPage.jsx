@@ -6,12 +6,18 @@ import NotBasket from "./notBasket";
 
 const BasketPage = () => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("storageBasket"));
-    return dataLocalStorage.length <= 0 ? (
+    const dataSizes = JSON.parse(localStorage.getItem("dataSizes"));
+    const filterProductCart = dataLocalStorage.filter((item, index) => {
+        return (
+            JSON.stringify(item.quantity) !== JSON.stringify(dataSizes[index])
+        );
+    });
+    return filterProductCart.length <= 0 ? (
         <NotBasket />
     ) : (
         <div>
             <div className={styles.blockBasket}>
-                {dataLocalStorage.map((item) => {
+                {filterProductCart.map((item) => {
                     return <CardBasket key={item._id} data={item} />;
                 })}
             </div>

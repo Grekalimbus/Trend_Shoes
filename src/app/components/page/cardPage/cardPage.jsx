@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import httpServices from "../../../services/http.service";
 import BlockImg from "./blockImg";
 import BlockInfoProduct from "./blockInfoProduct";
@@ -28,24 +28,22 @@ const CardPage = () => {
         };
         getData();
     }, []);
-
     // метод добавляющий товар в корзину
-    const makeOrder = (size) => {
+    const handleOrder = (size) => {
+        const basket = [];
+        const quantityArray = [];
         const basketLocalStorage = JSON.parse(
             localStorage.getItem("storageBasket")
         );
-        const basket = [];
-        const quantityArray = [];
         const pullDataLocalStorage = () => {
             if (size !== "") {
                 quantitySizes.forEach((item) => {
                     quantityArray.push({ sizes: item.sizes, value: 0 });
                 });
-
                 quantityArray.forEach((item, index) => {
                     if (item.sizes === size) {
                         if (quantitySizes[index].value !== 0) {
-                            item.value += 1;
+                            item.value++;
                         } else {
                             toast.info("Этого размера уже нет в наличии");
                         }
@@ -95,6 +93,11 @@ const CardPage = () => {
                                         stringLocalStorage
                                     );
                                     toast.success("Товар добавлен в корзину");
+                                    console.log(item, "item");
+                                    console.log(
+                                        quantitySizes[index],
+                                        "quantitySizes"
+                                    );
                                 }
                             }
                         });
@@ -104,7 +107,7 @@ const CardPage = () => {
                 pullDataLocalStorage();
             }
         }
-        console.log(basketLocalStorage);
+        // console.log(basketLocalStorage);
     };
 
     return (
@@ -115,7 +118,7 @@ const CardPage = () => {
             <div className={styles.blockInfo}>
                 <BlockInfoProduct
                     data={data !== null ? data : {}}
-                    makeOrder={makeOrder}
+                    handleOrder={handleOrder}
                 />
             </div>
         </div>

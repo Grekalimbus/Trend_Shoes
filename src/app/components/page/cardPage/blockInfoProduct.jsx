@@ -4,7 +4,7 @@ import styles from "./card.module.css";
 import httpServices from "../../../services/http.service";
 import { Link } from "react-router-dom";
 
-const BlockInfoProduct = ({ data, makeOrder }) => {
+const BlockInfoProduct = ({ data, handleOrder }) => {
     const [firm, setFirm] = useState(null);
     const [activSize, setActivSize] = useState("");
 
@@ -86,7 +86,7 @@ const BlockInfoProduct = ({ data, makeOrder }) => {
                                         : styles.buttonBayActiv
                                 }
                                 onClick={() => {
-                                    makeOrder(
+                                    handleOrder(
                                         activSize === ""
                                             ? activSize
                                             : Number(activSize)
@@ -113,7 +113,7 @@ const BlockInfoProduct = ({ data, makeOrder }) => {
 
 BlockInfoProduct.propTypes = {
     data: PropTypes.object,
-    makeOrder: PropTypes.func
+    handleOrder: PropTypes.func
 };
 
 export default BlockInfoProduct;

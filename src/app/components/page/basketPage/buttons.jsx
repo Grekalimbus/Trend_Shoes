@@ -16,6 +16,7 @@ const Buttons = () => {
         localStorage.setItem("storageBasket", "[]");
         location.reload();
     };
+
     return (
         <div className={styles.blockButton}>
             <div className={styles.buttonClick} onClick={clearBasket}>
