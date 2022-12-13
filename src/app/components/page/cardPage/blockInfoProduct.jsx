@@ -4,19 +4,19 @@ import styles from "./card.module.css";
 import httpServices from "../../../services/http.service";
 import { Link } from "react-router-dom";
 
-const BlockInfoProduct = ({ data, handleOrder }) => {
+const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
     const [firm, setFirm] = useState(null);
-    const [activSize, setActivSize] = useState("");
+    const [activeSize, setactiveSize] = useState("");
 
     const getQuantity = () => {
         let quantityProduct = 0;
-        if (Object.keys(data).length !== 0) {
-            data.quantity.forEach((item) => {
+        if (dataSizes !== null) {
+            dataSizes.forEach((item) => {
                 quantityProduct += item.value;
             });
-
             return quantityProduct;
         }
+        return quantityProduct;
     };
     const getSizes = () => {
         if (Object.keys(data).length !== 0) {
@@ -38,10 +38,9 @@ const BlockInfoProduct = ({ data, handleOrder }) => {
         };
         getFirm();
     }, []);
-    const activeSize = ({ target }) => {
-        setActivSize(target.value);
+    const changeSize = ({ target }) => {
+        setactiveSize(target.value);
     };
-    const basket = [];
     return (
         <div className={styles.flex}>
             <div className={styles.infoBlockDiv} style={{ width: "100%" }}>
@@ -69,7 +68,7 @@ const BlockInfoProduct = ({ data, handleOrder }) => {
                                             value={item}
                                             className={styles.buttonSize}
                                             onClick={(e) => {
-                                                activeSize(e);
+                                                changeSize(e);
                                             }}
                                         >
                                             {item}
@@ -81,23 +80,23 @@ const BlockInfoProduct = ({ data, handleOrder }) => {
                         <div className={styles.boxBay}>
                             <button
                                 className={
-                                    activSize === ""
+                                    activeSize === ""
                                         ? styles.buttonBay
                                         : styles.buttonBayActiv
                                 }
                                 onClick={() => {
-                                    handleOrder(
-                                        activSize === ""
-                                            ? activSize
-                                            : Number(activSize)
+                                    handleAddProduct(
+                                        activeSize === ""
+                                            ? activeSize
+                                            : Number(activeSize)
                                     );
                                 }}
                             >
                                 Добавить в корзину
                             </button>
                             <div className={styles.boxSizeValue}>
-                                <h2 className={styles.hActivSize}>
-                                    {activSize}
+                                <h2 className={styles.hActiveSize}>
+                                    {activeSize}
                                 </h2>
                             </div>
                         </div>
@@ -113,7 +112,8 @@ const BlockInfoProduct = ({ data, handleOrder }) => {
 
 BlockInfoProduct.propTypes = {
     data: PropTypes.object,
-    handleOrder: PropTypes.func
+    handleAddProduct: PropTypes.func,
+    dataSizes: PropTypes.array
 };
 
 export default BlockInfoProduct;

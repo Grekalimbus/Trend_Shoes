@@ -15,7 +15,9 @@ const BlockImg = ({ image }) => {
         <h1>loading...</h1>
     ) : (
         <div>
-            <img src={dataImage} alt="mainImage" className={styles.mainImg} />
+            <div className={styles.mainImg}>
+                <img src={dataImage} alt="mainImage" className={styles.image} />
+            </div>
             <div className={styles.flexImage}>
                 {image.map((img) => {
                     return (
@@ -30,11 +32,7 @@ const BlockImg = ({ image }) => {
                                 getUrlImage(e);
                             }}
                         >
-                            <img
-                                src={img}
-                                alt={img}
-                                className={styles.imageSmall}
-                            />
+                            <img src={img} alt={img} className={styles.image} />
                         </div>
                     );
                 })}

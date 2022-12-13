@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
-const FilterFirm = ({ getValueForm, clear, firm, dataFirm }) => {
+const FilterFirm = ({ handleChangeForm, clear, firm, dataFirm }) => {
     const handleChange = ({ target }) => {
-        getValueForm(target);
+        handleChangeForm(target);
     };
     return (
         <div className={styles.blockFirm}>
@@ -50,7 +50,7 @@ const FilterFirm = ({ getValueForm, clear, firm, dataFirm }) => {
 };
 
 FilterFirm.propTypes = {
-    getValueForm: PropTypes.func,
+    handleChangeForm: PropTypes.func,
     clear: PropTypes.object,
     firm: PropTypes.string,
     dataFirm: PropTypes.oneOfType([PropTypes.object, PropTypes.array])

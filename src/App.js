@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import MainPage from "./app/layouts/mainPage";
@@ -9,10 +9,60 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./app/components/ui/header/header";
 import Footer from "./app/components/ui/footer/footer";
 import BasketPage from "./app/components/page/basketPage/basketPage";
+import httpServices from "./app/services/http.service";
 
 function App() {
+    const [dataCart, setDataCart] = useState(null);
+    const [dataSizes, setDataSizes] = useState(null);
+    useEffect(() => {
+        const getAllProduct = async () => {
+            try {
+                const { data } = await httpServices.get("product/.json");
+                const arrData = Object.keys(data).map((item) => data[item]);
+
+                // Размеры (объекты)
+                const arrSizes = arrData.map((item) => {
+                    return (item = item.quantity);
+                });
+                const nullSizes = arrSizes.map((qu) => {
+                    const objectsSize = qu.map((item) => {
+                        return (item = { sizes: item.sizes, value: 0 });
+                    });
+                    return (qu = objectsSize);
+                });
+
+                const dataForCart = arrData.map((item, index) => {
+                    return (item = { ...item, quantity: nullSizes[index] });
+                });
+                setDataSizes(nullSizes);
+                setDataCart(dataForCart);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getAllProduct();
+    }, []);
+    if (dataCart !== null) {
+        if (
+            !localStorage.getItem("storageBasket") ||
+            JSON.parse(localStorage.getItem("storageBasket")).length === 0
+        ) {
+            const stringDataCart = JSON.stringify(dataCart);
+            localStorage.setItem("storageBasket", stringDataCart);
+        }
+    }
+    if (dataSizes !== null) {
+        if (
+            !localStorage.getItem("dataSizes") ||
+            JSON.parse(localStorage.getItem("dataSizes")).length === 0
+        ) {
+            const stringDataCart = JSON.stringify(dataSizes);
+            localStorage.setItem("dataSizes", stringDataCart);
+        }
+    }
+    // console.log(JSON.parse(localStorage.getItem("dataSizes")));
+    // console.log(JSON.parse(localStorage.getItem("storageBasket")));
     // localStorage.setItem("balance", 10000);
-    // localStorage.setItem("storageBasket", "[]");
 
     return (
         <div className={styles.wrapperPage}>

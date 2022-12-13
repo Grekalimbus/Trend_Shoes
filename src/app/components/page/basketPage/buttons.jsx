@@ -1,31 +1,23 @@
 import React from "react";
 import styles from "./index.module.css";
+import PropTypes from "prop-types";
 
-const Buttons = () => {
-    const dataLocalStorage = JSON.parse(localStorage.getItem("storageBasket"));
-    const getAmout = () => {
-        let amout = 0;
-        dataLocalStorage.forEach((item) => {
-            item.quantity.forEach((q) => {
-                amout += item.price * q.value;
-            });
-        });
-        return amout;
-    };
+const Buttons = ({ amount }) => {
     const clearBasket = () => {
         localStorage.setItem("storageBasket", "[]");
         location.reload();
     };
-
     return (
         <div className={styles.blockButton}>
             <div className={styles.buttonClick} onClick={clearBasket}>
                 Очистить
             </div>
-            <div className={styles.amount}>Сумма: {getAmout()}</div>
+            <div className={styles.amount}>Сумма: {amount}</div>
             <div className={styles.buttonClick}>Оформить заказ</div>
         </div>
     );
 };
-
+Buttons.propTypes = {
+    amount: PropTypes.number
+};
 export default Buttons;

@@ -36,7 +36,7 @@ const ContentProductPage = () => {
     }, []);
 
     // функция переданная в формы, которая меняет состояние data
-    const getValueForm = (target) => {
+    const handleChangeForm = (target) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
         if (target.value === "Сортировка по бренду") {
             setData((prevState) => ({ ...prevState, [target.name]: "" }));
@@ -106,33 +106,33 @@ const ContentProductPage = () => {
         });
         return filterFirm;
     };
-    const dataIdCard =
-        product === null
-            ? null
-            : product.filter((item) => {
-                  return item._id === cardID;
-              });
+    const filterProduct = () => {
+        if (product !== null) {
+            const filterArr = product.filter((item) => {
+                return item._id === cardID;
+            });
+            return filterArr;
+        }
+    };
 
     if (product !== null) {
         return cardID !== undefined ? (
-            <div>
-                <PrivateCard data={dataIdCard} />
-            </div>
+            <PrivateCard data={filterProduct()} />
         ) : (
             <div>
                 <div className={styles.flex}>
                     <div className={styles.flexForms}>
                         <FilterName
-                            getValueForm={getValueForm}
+                            handleChangeForm={handleChangeForm}
                             name={data.name}
                         />
                         <FilterPrice
-                            getValueForm={getValueForm}
+                            handleChangeForm={handleChangeForm}
                             from={data.from}
                             before={data.before}
                         />
                         <FilterFirm
-                            getValueForm={getValueForm}
+                            handleChangeForm={handleChangeForm}
                             clear={clear}
                             firm={data.firm}
                             dataFirm={dataFirm}
@@ -154,8 +154,8 @@ const ContentProductPage = () => {
                 </div>
             </div>
         );
-    } else if (product === null) {
-        return <h1>Loading...</h1>;
+    } else {
+        return <div>Loading...</div>;
     }
 };
 

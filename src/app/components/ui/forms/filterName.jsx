@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
-const FilterName = ({ getValueForm, name }) => {
+const FilterName = ({ handleChangeForm, name }) => {
     const handleChange = ({ target }) => {
-        getValueForm(target);
+        handleChangeForm(target);
     };
 
     return (
@@ -27,7 +27,7 @@ const FilterName = ({ getValueForm, name }) => {
 };
 
 FilterName.propTypes = {
-    getValueForm: PropTypes.func,
+    handleChangeForm: PropTypes.func,
     name: PropTypes.string
 };
 

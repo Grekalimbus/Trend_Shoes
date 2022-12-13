@@ -22,7 +22,7 @@
     border-radius: 5px;
     padding: 0.4%;
     background-color: rgb(146, 146, 146);
-    height: 21.2vh;
+    height: 21.3vh;
     align-items: center;
     margin: 0 1% 2% 1%;    
 }
@@ -32,15 +32,32 @@
     flex-direction: column;
     justify-content: space-between;    
     width: 10%;
-    height: 100%;    
+    margin-left: 1%;
+    height: 98%;    
     overflow: hidden;    
 }
 .smalDivImg{
     width: 100%;
-    height: 30%;
+    height: 29%;
     background-color: rgb(29, 29, 29);
     border-radius: 5px;    
+    cursor: pointer;    
+    transition: all 1s;
+}
+.smalDivImg:hover{    
+    background-color: rgb(75, 75, 75);    
+}
+.smalDivImgActive{
+    width: 100%;
+    height: 29%;
+    background-color: rgb(75, 75, 75);   
+    border-radius: 5px;    
     cursor: pointer;
+    transition: all 1s;
+    border: 3px solid rgb(12, 12, 12);
+}
+.smalDivImgActive:hover{
+    border: 3px solid rgb(0, 0, 0);
 }
 .smalImg{
     width: 100%;
@@ -51,7 +68,7 @@
 /* blocks */
 .blockBasketCard{
     width: 100%;
-    height: 100%;
+    height: 98%;
     display: flex;
     align-items: center;
     border-radius: 5px;   
@@ -61,7 +78,7 @@
 }
 .elemImage{    
     width: 35%;
-    height: 85%;
+    height: 90%;
     margin-left: 2%;
     border-radius: 10px;
     background-color: rgb(83, 83, 83);
@@ -73,7 +90,7 @@
     border-radius: 5px;
     margin-left: 2%;
     width: 10%;
-    height: 80%;
+    height: 90%;
 }
 .elemButtonChange{
     height: 30%;
@@ -93,7 +110,7 @@
 
 .blockInfo{
     width: 80%;
-    height: 80%;
+    height: 90%;
     margin-left: 2%;
     border-radius: 5px;
     display: flex;
@@ -102,11 +119,48 @@
     background-color: #9e9d9d;    
     align-items: center;
     text-align: center;
-    overflow: hidden;
+    overflow: hidden;    
 }
 .elemInfo{
    border-bottom: 2px solid #000;
    width: 80%;
+}
+.elemSizes{
+    display: flex;    
+    height: 16%;  
+    width: 80%;
+    align-items: center;
+    justify-content: center;    
+}
+.buttondSizes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 1%;
+    background-color: rgb(54, 54, 54);
+    color: #a3a3a3;
+    cursor: pointer;
+    transition: all 1s;
+    border-radius: 3px;
+}
+.buttondSizes:hover{    
+    background-color: rgb(22, 22, 22);
+    transition: all 1s;
+}
+.buttondSizesActive{
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 1%;
+    background-color: rgb(22, 22, 22);
+    color: #a3a3a3;
+    cursor: pointer;
+    transition: all 1s;
 }
 
 .blockDelete{
