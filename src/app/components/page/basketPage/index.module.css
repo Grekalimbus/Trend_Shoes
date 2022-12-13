@@ -196,7 +196,7 @@
     align-items: center;    
 }
 
-.buttonClick{
+.buttonClick{    
     height: 100%;
     width: 33%;    
     display: flex;
@@ -211,6 +211,9 @@
 }
 .buttonClick:hover{
     background-color: #f7f7f7;
+}
+.title{
+    color: #000;
 }
 
 .amount{

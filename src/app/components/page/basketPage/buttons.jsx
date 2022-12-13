@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const Buttons = ({ amount }) => {
     const clearBasket = () => {
@@ -13,7 +14,9 @@ const Buttons = ({ amount }) => {
                 Очистить
             </div>
             <div className={styles.amount}>Сумма: {amount}</div>
-            <div className={styles.buttonClick}>Оформить заказ</div>
+            <Link to="/formPage" className={styles.buttonClick}>
+                <p className={styles.title}>Оформить заказ</p>
+            </Link>
         </div>
     );
 };

@@ -10,6 +10,7 @@ import Header from "./app/components/ui/header/header";
 import Footer from "./app/components/ui/footer/footer";
 import BasketPage from "./app/components/page/basketPage/basketPage";
 import httpServices from "./app/services/http.service";
+import FormPage from "./app/components/page/formPage/formPage";
 
 function App() {
     const [dataCart, setDataCart] = useState(null);
@@ -77,6 +78,7 @@ function App() {
                     />
                     <Route exact path="/cardPage/:id?" component={CardPage} />
                     <Route exact path="/basketPage/" component={BasketPage} />
+                    <Route exact path="/formPage/" component={FormPage} />
                     <Redirect to="/" />
                 </Switch>
             </main>
