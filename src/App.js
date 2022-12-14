@@ -16,11 +16,11 @@ function App() {
     const [dataCart, setDataCart] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
     useEffect(() => {
+        // в dataCart пушатся вся товарка с базы данных, изменяется ключ quantity в котором value везде по 0
         const getAllProduct = async () => {
             try {
                 const { data } = await httpServices.get("product/.json");
                 const arrData = Object.keys(data).map((item) => data[item]);
-
                 // Размеры (объекты)
                 const arrSizes = arrData.map((item) => {
                     return (item = item.quantity);
@@ -31,7 +31,6 @@ function App() {
                     });
                     return (qu = objectsSize);
                 });
-
                 const dataForCart = arrData.map((item, index) => {
                     return (item = { ...item, quantity: nullSizes[index] });
                 });
@@ -61,6 +60,7 @@ function App() {
             localStorage.setItem("dataSizes", stringDataCart);
         }
     }
+
     // console.log(JSON.parse(localStorage.getItem("dataSizes")));
     // console.log(JSON.parse(localStorage.getItem("storageBasket")));
     // localStorage.setItem("balance", 10000);

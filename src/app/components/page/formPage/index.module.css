@@ -69,3 +69,14 @@ border-radius: 5px;
 .error{    
     color: rgb(179, 9, 9);    
 }
+
+.processing{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 20%;
+    color: aliceblue;
+}
