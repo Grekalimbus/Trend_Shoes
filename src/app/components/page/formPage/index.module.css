@@ -1,13 +1,18 @@
 .form{
     width: 50%;
-    height: 70vh;
+    height: 80vh;
     margin: 0 auto;
-    margin-top: 3%;
-    overflow: auto;
+    margin-top: 2%;    
+    border-radius: 3px;      
+}
+.divForm{
+    height: 100%;    
+    width: 100%;
+    margin: 0 auto;       
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;       
     align-items: center;    
-    border-radius: 3px;
+    border-radius: 3px;        
 }
 .blockForm{
     display: flex;    
@@ -16,20 +21,22 @@
     align-items: center;
     width: 90%;
     margin-top: 5%;
-    height: 16%;   
-    overflow: hidden;     
+    height: 10vh;   
+    flex: 1 1 auto;
+    overflow: hidden;       
 }
 .blockCheckBox{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
-    height: 12%;       
-    overflow: hidden;      
+    height: 5vh;       
+    overflow: hidden;    
+      
 }
 .label{
     color: azure;    
-    margin-bottom: 2%;    
+    margin-bottom: 1%;    
 }
 .labelCheckBox{
     margin-left: 5%;
@@ -37,7 +44,7 @@
 }
 .input{
 width: 70%;
-height: 100%;
+height: 50%;
 text-align: center;
 color: #000;
 font-weight: bold;
@@ -50,11 +57,15 @@ border-radius: 5px;
     border-radius: 3px;    
 }
 .button{
-    overflow: hidden;
+    overflow: hidden;      
     border-radius: 5px;
     width: 30%;
-    height: 6%;
+    height: 3vh;
     font-weight: bold;
     background-color: rgb(189, 187, 187);
     margin-bottom: 5%;
+    
+}
+.error{    
+    color: rgb(179, 9, 9);    
 }
