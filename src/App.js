@@ -11,10 +11,11 @@ import Footer from "./app/components/ui/footer/footer";
 import BasketPage from "./app/components/page/basketPage/basketPage";
 import FormPage from "./app/components/page/formPage/formPage";
 import useProduct from "./app/components/hooks/useProduct";
-import AuthProvider from "./app/components/hooks/useAuth";
+import AuthProvider, { useAuth } from "./app/components/hooks/useAuth";
 import ApiProvider from "./app/components/hooks/useApi";
 
 function App() {
+    // const { signUp } = useAuth();
     useProduct();
     return (
         <div className={styles.wrapperPage}>
