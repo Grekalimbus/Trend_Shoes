@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FilterFirm from "../../ui/forms/filterFirm";
 import FilterName from "../../ui/forms/filterName";
 import FilterPrice from "../../ui/forms/filterPrice";
 import styles from "./index.module.css";
 import CardProduct from "./cardProduct";
-import httpServices from "../../../services/http.service";
 import { useParams } from "react-router-dom";
 import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
@@ -12,30 +11,13 @@ import { useApi } from "../../hooks/useApi";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
+    const { product, dataFirm } = useApi();
     const [data, setData] = useState({
         name: "",
         from: "",
         before: "",
         firm: ""
     });
-    const [product, setProduct] = useState(null);
-    const [dataFirm, setDataFirm] = useState(null);
-
-    // пулл данных в состояния product/dataFirm
-    useEffect(() => {
-        const getDataProductAndFirm = async () => {
-            try {
-                const { data } = await httpServices.get(".json");
-                const { product, firm } = data;
-                setProduct(Object.keys(product).map((item) => product[item]));
-                setDataFirm(firm);
-            } catch (error) {
-                console.log("expectedErrors");
-            }
-        };
-
-        getDataProductAndFirm();
-    }, []);
 
     // функция переданная в формы, которая меняет состояние data
     const handleChangeForm = (target) => {
@@ -44,7 +26,7 @@ const ContentProductPage = () => {
             setData((prevState) => ({ ...prevState, [target.name]: "" }));
         }
     };
-    // Фильтры
+
     const clearName = () => {
         setData((prevState) => ({ ...prevState, name: "" }));
     };
@@ -68,54 +50,6 @@ const ContentProductPage = () => {
         clearFirm,
         clearAll
     };
-    // const filter = () => {
-    //     // =======
-    //     const filterName = product.filter((item) => {
-    //         if (data.name !== "") {
-    //             return item.name
-    //                 .toLowerCase()
-    //                 .includes(data.name.toLowerCase());
-    //         } else {
-    //             return product;
-    //         }
-    //     });
-    //     // =======
-    //     const filterPrice = filterName.filter((item) => {
-    //         if (data.from !== "" && data.before !== "") {
-    //             return (
-    //                 item.price >= Number(data.from) &&
-    //                 item.price <= Number(data.before)
-    //             );
-    //         }
-    //         if (data.from === "" && data.before !== "") {
-    //             return item.price <= Number(data.before);
-    //         }
-    //         if (data.from !== "" && data.before === "") {
-    //             return item.price >= Number(data.from);
-    //         }
-    //         if (data.from === "" && data.before === "") {
-    //             return filterName;
-    //         }
-    //         return filterName;
-    //     });
-    //     // =======
-    //     const filterFirm = filterPrice.filter((item) => {
-    //         if (data.firm !== "") {
-    //             return item.firm === data.firm;
-    //         } else {
-    //             return filterPrice;
-    //         }
-    //     });
-    //     return filterFirm;
-    // };
-    // const filterProduct = () => {
-    //     if (product !== null) {
-    //         const filterArr = product.filter((item) => {
-    //             return item._id === cardID;
-    //         });
-    //         return filterArr;
-    //     }
-    // };
 
     if (product !== null) {
         return cardID !== undefined ? (
