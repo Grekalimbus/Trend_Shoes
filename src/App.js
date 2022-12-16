@@ -12,37 +12,45 @@ import BasketPage from "./app/components/page/basketPage/basketPage";
 import FormPage from "./app/components/page/formPage/formPage";
 import useProduct from "./app/components/hooks/useProduct";
 import AuthProvider from "./app/components/hooks/useAuth";
+import ApiProvider from "./app/components/hooks/useApi";
 
 function App() {
     useProduct();
     return (
         <div className={styles.wrapperPage}>
             <AuthProvider>
-                <Header />
-                <main className={styles.mainPage}>
-                    <Switch>
-                        <Route exact path="/" component={MainPage} />
-                        <Route
-                            exact
-                            path="/productPage/:cardID?"
-                            component={ProductPage}
-                        />
-                        <Route
-                            exact
-                            path="/cardPage/:id?"
-                            component={CardPage}
-                        />
-                        <Route
-                            exact
-                            path="/basketPage/"
-                            component={BasketPage}
-                        />
-                        <Route exact path="/formPage/" component={FormPage} />
-                        <Redirect to="/" />
-                    </Switch>
-                </main>
-                <Footer />
+                <ApiProvider>
+                    <Header />
+                    <main className={styles.mainPage}>
+                        <Switch>
+                            <Route exact path="/" component={MainPage} />
+                            <Route
+                                exact
+                                path="/productPage/:cardID?"
+                                component={ProductPage}
+                            />
+                            <Route
+                                exact
+                                path="/cardPage/:id?"
+                                component={CardPage}
+                            />
+                            <Route
+                                exact
+                                path="/basketPage/"
+                                component={BasketPage}
+                            />
+                            <Route
+                                exact
+                                path="/formPage/"
+                                component={FormPage}
+                            />
+                            <Redirect to="/" />
+                        </Switch>
+                    </main>
+                    <Footer />
+                </ApiProvider>
             </AuthProvider>
+
             <ToastContainer />
         </div>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./mainPage.module.css";
 import { Link } from "react-router-dom";
+import { useApi } from "../../hooks/useApi";
 
 const ContentMainPage = () => {
     return (
