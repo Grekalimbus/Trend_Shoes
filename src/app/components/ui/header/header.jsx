@@ -30,9 +30,12 @@ const Header = () => {
                 <div className={styles.button}>
                     <h2 className={styles.h2}>История покупок</h2>
                 </div>
-                <div className={styles.button}>
+                <Link to="/basketPage" className={styles.button}>
+                    <h2 className={styles.h2}>Корзина</h2>
+                </Link>
+                <Link to="/login" className={styles.button}>
                     <h2 className={styles.h2}>Вход / Регистрация</h2>
-                </div>
+                </Link>
             </div>
         </header>
     );

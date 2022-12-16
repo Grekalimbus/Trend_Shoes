@@ -13,6 +13,7 @@ import FormPage from "./app/components/page/formPage/formPage";
 import useProduct from "./app/components/hooks/useProduct";
 import AuthProvider, { useAuth } from "./app/components/hooks/useAuth";
 import ApiProvider from "./app/components/hooks/useApi";
+import LoginPage from "./app/components/page/loginPage/loginPage";
 
 function App() {
     // const { signUp } = useAuth();
@@ -37,6 +38,11 @@ function App() {
                             />
                             <Route
                                 exact
+                                path="/login/:exit?"
+                                component={LoginPage}
+                            />
+                            <Route
+                                exact
                                 path="/basketPage/"
                                 component={BasketPage}
                             />
@@ -45,6 +51,7 @@ function App() {
                                 path="/formPage/"
                                 component={FormPage}
                             />
+
                             <Redirect to="/" />
                         </Switch>
                     </main>

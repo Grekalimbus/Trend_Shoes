@@ -23,7 +23,8 @@
     margin-top: 5%;
     height: 10vh;   
     flex: 1 1 auto;
-    overflow: hidden;       
+    overflow: hidden;     
+    margin: 0 auto;   
 }
 .blockCheckBox{
     display: flex;

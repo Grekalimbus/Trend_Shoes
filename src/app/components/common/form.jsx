@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Form = ({ name, value, handleChangeForm, styles, label, error }) => {
+const Form = ({
+    name,
+    value,
+    handleChangeForm,
+    styles,
+    label,
+    error,
+    type
+}) => {
     return (
         <div className={styles.blockForm}>
             <label htmlFor="user" className={styles.label}>
@@ -9,7 +17,7 @@ const Form = ({ name, value, handleChangeForm, styles, label, error }) => {
             </label>
             {error && <p className={styles.error}>{error}</p>}
             <input
-                type="text"
+                type={type}
                 name={name}
                 value={value}
                 className={styles.input}
@@ -20,6 +28,9 @@ const Form = ({ name, value, handleChangeForm, styles, label, error }) => {
         </div>
     );
 };
+Form.defaultProps = {
+    type: "text"
+};
 
 Form.propTypes = {
     name: PropTypes.string,
@@ -27,7 +38,8 @@ Form.propTypes = {
     label: PropTypes.string,
     handleChangeForm: PropTypes.func,
     styles: PropTypes.object,
-    error: PropTypes.string
+    error: PropTypes.string,
+    type: PropTypes.string
 };
 
 export default Form;
