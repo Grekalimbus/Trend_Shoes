@@ -6,8 +6,10 @@ import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
 import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
+import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage = () => {
+    const { signUp } = useAuth();
     const [data, setData] = useState({
         mail: "",
         password: "",
@@ -34,6 +36,7 @@ const LoginPage = () => {
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
+        signUp(data);
         toast.success("Вы зарегались");
     };
 
