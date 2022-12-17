@@ -4,6 +4,7 @@ import Form from "../../common/form";
 import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
 import getFilterProductCart from "../../../utils/filterProductCart";
+import validatorConfig from "../../../utils/validatorConfig";
 
 const FormPage = () => {
     const [data, setData] = useState({
@@ -35,28 +36,6 @@ const FormPage = () => {
         }
         localStorage.setItem("storageBasket", "[]");
         window.location.reload();
-    };
-    const validatorConfig = {
-        user: {
-            isRequired: { message: "ФИО обязательно для заполнения" },
-            isUser: {
-                message: "Введине ФИО полностью"
-            }
-        },
-        phone: {
-            isRequired: { message: "Номер телефона обязателен для заполнения" },
-            isPhone: { message: "Номер должен состоять только из цифр" }
-        },
-        mail: {
-            isRequired: { message: "@mail обязательно для заполнения" },
-            isEmail: { message: "Почта указана не верно" }
-        },
-        telegram: {
-            isRequired: { message: "telegram обязательно для заполнения" }
-        },
-        adress: {
-            isRequired: { message: "Адресс обязательно для заполнения" }
-        }
     };
     return filterProductCart.length === 0 ? (
         <div className={styles.processing}>

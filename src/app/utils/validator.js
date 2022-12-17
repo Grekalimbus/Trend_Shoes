@@ -1,6 +1,6 @@
 function validator(data, config) {
     const errors = {};
-    function validate(validateMethod, data, config) {
+    function validate(validateMethod, data, config, allData) {
         switch (validateMethod) {
             case "isRequired":
                 if (data.trim() === "") return config.message;
@@ -25,6 +25,10 @@ function validator(data, config) {
                 if (valueSpace !== 2) return config.message;
                 break;
             }
+            case "isRepeat": {
+                if (data !== allData.password) return config.message;
+                break;
+            }
             default:
                 break;
         }
@@ -34,7 +38,8 @@ function validator(data, config) {
             const error = validate(
                 validateMethod,
                 data[fieldName],
-                config[fieldName][validateMethod]
+                config[fieldName][validateMethod],
+                data
             );
             if (error && !errors[fieldName]) {
                 errors[fieldName] = error;

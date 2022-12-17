@@ -3,16 +3,17 @@ import Form from "../../common/form";
 import styles from "./index.module.css";
 import stylesForm from "../formPage/index.module.css";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const SignUPForm = ({ data, error, handleChangeForm }) => {
     return (
         <div className={styles.flex}>
             <Form
-                name={"email"}
-                value={data.email}
+                name={"mail"}
+                value={data.mail}
                 handleChangeForm={handleChangeForm}
                 styles={stylesForm}
-                error={error.email}
+                error={error.mail}
                 label={"Электронная почта"}
             />
             <Form
@@ -33,7 +34,14 @@ const SignUPForm = ({ data, error, handleChangeForm }) => {
                 label={"Повторите пароль"}
                 type={"password"}
             />
-            <button className={styles.button}>Зарегистрироваться</button>
+            <div className={styles.flexButtons}>
+                <Link to="/login/exit" className={styles.button}>
+                    <p className={styles.textLink}>У меня уже есть акаунт</p>
+                </Link>
+                <button type="submit" className={styles.button}>
+                    Зарегистрироваться
+                </button>
+            </div>
         </div>
     );
 };

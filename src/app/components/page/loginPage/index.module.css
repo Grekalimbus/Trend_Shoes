@@ -7,17 +7,33 @@
     display: flex;
     flex-direction: column;    
 }
+.flexButtons{
+    display: flex;    
+    justify-content: center;
+}
 .button{
-    display: block;    
-    margin: 0 auto;
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.9%;
+    margin-right: 0.9%;
     overflow: hidden;      
     border-radius: 5px;
     width: 30%;
     height: 3vh;
     font-weight: bold;
     background-color: rgb(189, 187, 187);    
-    margin-top: 5%;  
+    margin-top: 5%;      
     transition: all 1s;  
+}
+.textLink{      
+    color: rgb(7, 7, 7);
+    transition: all 1s;
+}
+.textLink:hover{
+    color: aliceblue;
+    transition: all 1s;
 }
 
 .button:hover{
