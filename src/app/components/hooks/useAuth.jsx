@@ -10,16 +10,16 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-    const signUp = async ({ mail, password }) => {
+    async function signUp({ email, password }) {
         const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
         const { data } = await axios.post(url, {
-            mail,
+            email,
             password,
             returnSecureToken: true
         });
         console.log(data);
-    };
+    }
     return (
         <AuthContext.Provider value={{ signUp }}>
             {children}

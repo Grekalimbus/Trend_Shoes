@@ -11,7 +11,7 @@ import { useAuth } from "../../hooks/useAuth";
 const LoginPage = () => {
     const { signUp } = useAuth();
     const [data, setData] = useState({
-        mail: "",
+        email: "",
         password: "",
         repeatPassword: ""
     });
@@ -37,6 +37,7 @@ const LoginPage = () => {
             return toast.error("Правильно заполните все участки формы");
         }
         signUp(data);
+        console.log(data);
         toast.success("Вы зарегались");
     };
 
