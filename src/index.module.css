@@ -1,0 +1,25 @@
+.wrapperPage {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mainPage {
+    flex: 1 1 auto;
+    background: #3d3d3d;
+    background-image: url('./img/backdrop.png');
+    background-repeat: no-repeat;
+    background-position: 150% 48%;
+    background-size: 80% 150% ;
+}
+
+.img {
+    display: block;
+    width: 75%;
+    height: 125%;
+    position: fixed;
+    /* z-index: 5; */
+    top: -11%;
+    left: 34%;
+}

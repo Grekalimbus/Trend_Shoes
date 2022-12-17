@@ -1,0 +1,83 @@
+.form{
+    width: 50%;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top: 2%;    
+    border-radius: 3px;      
+}
+.divForm{
+    height: 100%;    
+    width: 100%;
+    margin: 0 auto;       
+    display: flex;
+    flex-direction: column;       
+    align-items: center;    
+    border-radius: 3px;        
+}
+.blockForm{
+    display: flex;    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-top: 5%;
+    height: 10vh;   
+    flex: 1 1 auto;
+    overflow: hidden;     
+    margin: 0 auto;   
+}
+.blockCheckBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 5vh;       
+    overflow: hidden;    
+      
+}
+.label{
+    color: azure;    
+    margin-bottom: 1%;    
+}
+.labelCheckBox{
+    margin-left: 5%;
+    color: azure;      
+}
+.input{
+width: 70%;
+height: 50%;
+text-align: center;
+color: #000;
+font-weight: bold;
+background-color: rgb(190, 190, 190);
+border-radius: 5px;
+}
+.inputCheckBox{      
+    width: 5%;
+    height: 5%;    
+    border-radius: 3px;    
+}
+.button{
+    overflow: hidden;      
+    border-radius: 5px;
+    width: 30%;
+    height: 3vh;
+    font-weight: bold;
+    background-color: rgb(189, 187, 187);
+    margin-bottom: 5%;
+    
+}
+.error{    
+    color: rgb(179, 9, 9);    
+}
+
+.processing{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 20%;
+    color: aliceblue;
+}

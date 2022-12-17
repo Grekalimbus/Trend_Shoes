@@ -1,0 +1,244 @@
+.blockBasket{
+    width: 70%;
+    height: 70vh;
+    margin: 0 auto;
+    margin-top: 1%;
+    overflow: auto;    
+    color: rgb(0, 0, 0);
+}
+.blockBasket::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #242424;
+}
+.blockBasket::-webkit-scrollbar-thumb {
+    background-color: #707070;
+    border-radius: 5px;
+}
+
+/* card basket */
+
+.flex{
+    display: flex;    
+    border-radius: 5px;
+    padding: 0.4%;
+    background-color: rgb(146, 146, 146);
+    height: 21.3vh;
+    align-items: center;
+    margin: 0 1% 2% 1%;    
+}
+/* 3 img */
+.flexSmalImg{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;    
+    width: 10%;
+    margin-left: 1%;
+    height: 98%;    
+    overflow: hidden;    
+}
+.smalDivImg{
+    width: 100%;
+    height: 29%;
+    background-color: rgb(29, 29, 29);
+    border-radius: 5px;    
+    cursor: pointer;    
+    transition: all 1s;
+}
+.smalDivImg:hover{    
+    background-color: rgb(75, 75, 75);    
+}
+.smalDivImgActive{
+    width: 100%;
+    height: 29%;
+    background-color: rgb(75, 75, 75);   
+    border-radius: 5px;    
+    cursor: pointer;
+    transition: all 1s;
+    border: 3px solid rgb(12, 12, 12);
+}
+.smalDivImgActive:hover{
+    border: 3px solid rgb(0, 0, 0);
+}
+.smalImg{
+    width: 100%;
+    height: 100%;
+}
+/* 3 img */
+
+/* blocks */
+.blockBasketCard{
+    width: 100%;
+    height: 98%;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;   
+    margin-left: 5%;
+    margin-right: 0.5%;
+    background-color: rgb(29, 29, 29);    
+}
+.elemImage{    
+    width: 35%;
+    height: 90%;
+    margin-left: 2%;
+    border-radius: 10px;
+    background-color: rgb(83, 83, 83);
+}
+.blockButtonChange{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    margin-left: 2%;
+    width: 10%;
+    height: 90%;
+}
+.elemButtonChange{
+    height: 30%;
+    background-color: #9e9d9d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 1s;
+    cursor: pointer;
+}
+.elemButtonChange:hover{
+    background-color: #3d3d3d;
+}
+
+.blockInfo{
+    width: 80%;
+    height: 90%;
+    margin-left: 2%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #9e9d9d;    
+    align-items: center;
+    text-align: center;
+    overflow: hidden;    
+}
+.elemInfo{
+   border-bottom: 2px solid #000;
+   width: 80%;
+}
+.elemSizes{
+    display: flex;    
+    height: 16%;  
+    width: 80%;
+    align-items: center;
+    justify-content: center;    
+}
+.buttondSizes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 1%;
+    background-color: rgb(54, 54, 54);
+    color: #a3a3a3;
+    cursor: pointer;
+    transition: all 1s;
+    border-radius: 3px;
+}
+.buttondSizes:hover{    
+    background-color: rgb(22, 22, 22);
+    transition: all 1s;
+}
+.buttondSizesActive{
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 1%;
+    background-color: rgb(22, 22, 22);
+    color: #a3a3a3;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.blockDelete{
+    width: 10%;
+    height: 30%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 5px;
+    background-color: #9e9d9d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    text-align: center;
+}
+.basketImg{
+    cursor: pointer;
+    width: 50%;
+    height: 50%;
+}
+/* blocks */
+
+/* blockButton */
+
+.blockButton{
+    width: 70%;
+    height: 10vh;
+    margin: 0 auto;
+    margin-top: 0.5%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.buttonClick{    
+    height: 100%;
+    width: 33%;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #cacaca;
+    transition: all 1s;
+    cursor: pointer;
+}
+.buttonClick:hover{
+    background-color: #f7f7f7;
+}
+.title{
+    color: #000;
+}
+
+.amount{
+    height: 100%;
+    width: 33%;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #cacaca;
+}
+
+/* blockButton */
+
+.blockPage{       
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    margin-top: 20%;
+    color: #f7f7f7;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

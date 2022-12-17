@@ -1,25 +1,25 @@
-.footer{        
+.footer {
     width: 100%;
-    color: aliceblue   ;
+    color: aliceblue;
     background: #121212;
     height: 6vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.wrap{
+.wrap {
     height: 100%;
 }
-.flex{
+.flex {
     align-items: center;
     display: flex;
     height: 100%;
 }
-.img{
+.img {
     height: 80%;
     width: 80%;
 }
-.imgLogo{
+.imgLogo {
     height: 80%;
     width: 80%;
 }
