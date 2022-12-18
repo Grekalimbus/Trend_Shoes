@@ -37,7 +37,6 @@ const LoginPage = () => {
             return toast.error("Правильно заполните все участки формы");
         }
         signUp(data);
-        console.log(data);
         toast.success("Вы зарегались");
     };
 
