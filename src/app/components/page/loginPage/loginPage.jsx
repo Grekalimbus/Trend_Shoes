@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import SignInForm from "./signInForm";
 import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage = () => {
-    const { signUp } = useAuth();
+    const history = useHistory();
+    const { signUp, loginIn } = useAuth();
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -24,6 +25,10 @@ const LoginPage = () => {
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
+        if (exit) {
+            delete errors.repeatPassword;
+        }
+
         return Object.keys(errors).length === 0;
     };
 
@@ -36,10 +41,21 @@ const LoginPage = () => {
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
-        try {
-            await signUp(data);
-        } catch (error) {
-            setErrors(error);
+        if (!exit) {
+            try {
+                await signUp(data);
+                history.push("/");
+            } catch (error) {
+                setErrors(error);
+            }
+        }
+        if (exit) {
+            try {
+                await loginIn(data);
+                history.push("/");
+            } catch (error) {
+                setErrors(error);
+            }
         }
     };
 

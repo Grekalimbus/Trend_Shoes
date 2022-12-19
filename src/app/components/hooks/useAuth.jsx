@@ -41,8 +41,28 @@ const AuthProvider = ({ children }) => {
             console.log(error);
         }
     }
+    async function loginIn({ email, password }) {
+        const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
+        try {
+            const { data } = await axios.post(url, {
+                email,
+                password,
+                returnSecureToken: true
+            });
+            setTokens(data);
+        } catch (error) {
+            const { code, message } = error.response.data.error;
+            if (code === 400) {
+                if (message === "INVALID_PASSWORD") {
+                    const errorObject = { password: "Неверный пароль" };
+                    throw errorObject;
+                }
+            }
+        }
+    }
     return (
-        <AuthContext.Provider value={{ signUp }}>
+        <AuthContext.Provider value={{ signUp, loginIn }}>
             {children}
         </AuthContext.Provider>
     );

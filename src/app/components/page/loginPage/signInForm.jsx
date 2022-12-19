@@ -8,11 +8,11 @@ const SignInForm = ({ data, error, handleChangeForm }) => {
     return (
         <div className={styles.flex}>
             <Form
-                name={"mail"}
-                value={data.mail}
+                name={"email"}
+                value={data.email}
                 handleChangeForm={handleChangeForm}
                 styles={stylesForm}
-                error={error.mail}
+                error={error.email}
                 label={"Электронная почта"}
             />
             <Form
