@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import SignInForm from "./signInForm";
 import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage = () => {
+    const { history } = useHistory();
     const { signUp } = useAuth();
     const [data, setData] = useState({
         email: "",
@@ -38,6 +39,7 @@ const LoginPage = () => {
         }
         try {
             await signUp(data);
+            history.push("/");
         } catch (error) {
             setErrors(error);
         }
