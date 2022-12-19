@@ -30,14 +30,17 @@ const LoginPage = () => {
     const handleChangeForm = ({ target }) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
-        signUp(data);
-        toast.success("Вы зарегались");
+        try {
+            await signUp(data);
+        } catch (error) {
+            setErrors(error);
+        }
     };
 
     return (

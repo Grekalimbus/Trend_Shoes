@@ -23,7 +23,15 @@ const AuthProvider = ({ children }) => {
             setTokens(data);
             createUser(data);
         } catch (error) {
-            console.log(error);
+            const { code, message } = error.response.data.error;
+            if (code === 400) {
+                if (message === "EMAIL_EXISTS") {
+                    const errorObject = {
+                        email: "Пользователь с таким email уже зарегестрирован"
+                    };
+                    throw errorObject;
+                }
+            }
         }
     }
     async function createUser(dataUserKey) {
