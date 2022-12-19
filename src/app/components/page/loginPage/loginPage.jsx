@@ -10,7 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage = () => {
     const history = useHistory();
-    const { signUp } = useAuth();
+    const { signUp, loginIn } = useAuth();
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -25,6 +25,10 @@ const LoginPage = () => {
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
+        if (exit) {
+            delete errors.repeatPassword;
+        }
+
         return Object.keys(errors).length === 0;
     };
 
@@ -37,11 +41,21 @@ const LoginPage = () => {
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
-        try {
-            await signUp(data);
-            history.push("/");
-        } catch (error) {
-            setErrors(error);
+        if (!exit) {
+            try {
+                await signUp(data);
+                history.push("/");
+            } catch (error) {
+                setErrors(error);
+            }
+        }
+        if (exit) {
+            try {
+                await loginIn(data);
+                history.push("/");
+            } catch (error) {
+                setErrors(error);
+            }
         }
     };
 
