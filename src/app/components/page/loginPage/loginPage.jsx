@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage = () => {
-    console.log(process.env);
     const history = useHistory();
     const { signUp, loginIn } = useAuth();
     const [data, setData] = useState({
