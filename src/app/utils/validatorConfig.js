@@ -9,7 +9,7 @@ const validatorConfig = {
         isRequired: { message: "Номер телефона обязателен для заполнения" },
         isPhone: { message: "Номер должен состоять только из цифр" }
     },
-    mail: {
+    email: {
         isRequired: { message: "@mail обязательно для заполнения" },
         isEmail: { message: "Почта указана не верно" }
     },

@@ -10,7 +10,7 @@ const FormPage = () => {
     const [data, setData] = useState({
         user: "",
         phone: "",
-        mail: "",
+        email: "",
         telegram: "",
         adress: ""
     });
@@ -61,12 +61,12 @@ const FormPage = () => {
                     error={errors.phone}
                 />
                 <Form
-                    name={"mail"}
-                    value={data.mail}
+                    name={"email"}
+                    value={data.email}
                     label={"Электронная почта"}
                     handleChangeForm={handleChangeForm}
                     styles={styles}
-                    error={errors.mail}
+                    error={errors.email}
                 />
                 <Form
                     name={"telegram"}
