@@ -9,7 +9,7 @@ const userService = {
     },
     create: async (payload) => {
         const { data } = await httpServices.put(
-            `${userEndPoint}/${payload.localId}.json`,
+            `${userEndPoint}${payload.localId}.json`,
             {
                 email: payload.email,
                 _id: payload.localId
