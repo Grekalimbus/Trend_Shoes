@@ -14,13 +14,17 @@ const Footer = () => {
                 <p>@danilimbus</p>
             </div>
             <div>
-                <img
-                    src={imgLogo2}
-                    className={stylesFooter.imgLogo}
-                    alt="imgLogo2"
-                />
+                <div className={stylesFooter.flex}>
+                    <img
+                        src={imgLogo2}
+                        className={stylesFooter.imgLogo}
+                        alt="imgLogo2"
+                    />
+                </div>
             </div>
-            <p>+008312452</p>
+            <div className={stylesFooter.flex}>
+                <p>+008312452</p>
+            </div>
         </footer>
     );
 };
