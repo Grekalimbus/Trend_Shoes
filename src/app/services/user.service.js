@@ -8,19 +8,25 @@ const userService = {
         return data;
     },
     create: async (payload) => {
+        const accessToken = localStorageService.getAccessToken();
         const { data } = await httpServices.put(
-            `${userEndPoint}/${payload.localId}.json`,
+            `${userEndPoint}${payload.localId}.json?auth=${accessToken}`,
             {
                 email: payload.email,
-                _id: payload.localId
+                _id: payload.localId,
+                balance: 10000
             }
         );
         return data;
     },
     getCurrentUser: async () => {
+        const accessToken = localStorageService.getAccessToken();
         const { data } = await httpServices.get(
-            userEndPoint + localStorageService.getUserId() + ".json"
+            userEndPoint +
+                localStorageService.getUserId() +
+                `.json?auth=${accessToken}`
         );
+        console.log(data);
         return data;
     }
 };

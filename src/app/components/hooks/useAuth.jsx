@@ -23,8 +23,8 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            setTokens(data);
-            createUser(data);
+            setTokens({ ...data, balance: 10000 });
+            createUser({ ...data, balance: 10000 });
         } catch (error) {
             const { code, message } = error.response.data.error;
             if (code === 400) {
@@ -55,7 +55,8 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            setTokens(data);
+            console.log(data);
+            setTokens({ ...data, balance: 1000 });
             getUserData();
         } catch (error) {
             const { code, message } = error.response.data.error;
@@ -103,7 +104,7 @@ const AuthProvider = ({ children }) => {
         refreshTokenChek();
     }, []);
     return (
-        <AuthContext.Provider value={{ signUp, loginIn }}>
+        <AuthContext.Provider value={{ signUp, loginIn, user }}>
             {children}
         </AuthContext.Provider>
     );
