@@ -13,7 +13,8 @@ const userService = {
             `${userEndPoint}${payload.localId}.json?auth=${accessToken}`,
             {
                 email: payload.email,
-                _id: payload.localId
+                _id: payload.localId,
+                balance: 10000
             }
         );
         return data;

@@ -50,9 +50,6 @@ const useProduct = () => {
             localStorage.setItem("dataSizes", stringDataCart);
         }
     }
-    if (!localStorage.getItem("balance")) {
-        localStorage.setItem("balance", 10000);
-    }
 };
 
 export default useProduct;

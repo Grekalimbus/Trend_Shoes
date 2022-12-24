@@ -22,6 +22,10 @@
     width: 10%;
     height: 30%;    
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: #a3a3a3;
     color: #000;
     overflow: hidden;
@@ -36,5 +40,12 @@
 .h2{
     margin-top: 3%;
 }
+@media (max-width: 800px) {
+    .button{
+        font-size: 12px;
+        text-align: center;
+        height: 50%;  
+    }
+  } 
 
 
