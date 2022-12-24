@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import localStorageService, {
+    deleteTokens
+} from "../../../services/localStorage.service";
 
 const Header = () => {
     const [color, setColor] = useState(true);
+    const { user } = useAuth();
     setTimeout(() => {
         setColor((pervState) => !pervState);
     }, 5000);
-    const balance = localStorage.getItem("balance");
 
+    const reloadPageAndClearLS = () => {
+        localStorageService.deleteTokens();
+        location.reload();
+    };
     return (
         <header>
             <div
@@ -22,7 +30,9 @@ const Header = () => {
                 </Link>
 
                 <div className={styles.button}>
-                    <h2 className={styles.h2}>₽: {balance}</h2>
+                    <h2 className={styles.h2}>
+                        ₽: {user !== undefined ? user.balance : "----"}
+                    </h2>
                 </div>
                 <Link to="/basketPage" className={styles.button}>
                     <h2 className={styles.h2}>Корзина</h2>
@@ -33,9 +43,20 @@ const Header = () => {
                 <Link to="/basketPage" className={styles.button}>
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
-                <Link to="/login" className={styles.button}>
-                    <h2 className={styles.h2}>Вход / Регистрация</h2>
-                </Link>
+                {user === undefined ? (
+                    <Link to="/login" className={styles.button}>
+                        <h2 className={styles.h2}>Вход / Регистрация</h2>
+                    </Link>
+                ) : (
+                    <div
+                        className={styles.button}
+                        onClick={() => {
+                            reloadPageAndClearLS();
+                        }}
+                    >
+                        <h2 className={styles.h2}>Выйти</h2>
+                    </div>
+                )}
             </div>
         </header>
     );
