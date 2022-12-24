@@ -14,7 +14,7 @@
     border-radius: 5px;
     margin-top: 2.6%;
     margin-left: 3%;
-    overflow: hidden;
+    overflow: hidden;    
 }
 .blockPrice {
     width: 90%;
@@ -23,7 +23,7 @@
     border-radius: 5px;
     margin-top: 3%;
     margin-left: 3%;
-    overflow: hidden;
+    overflow: hidden;    
 }
 /* ============= */
 
@@ -33,7 +33,7 @@
     text-align: center;
 }
 .inputDivName {
-    height: 3.5vh;
+    height: 3.5vh;    
 }
 .inputName {
     font-size: 18px;
@@ -45,7 +45,7 @@
     border-radius: 5px;
     background-color: #9c9c9c;
     text-align: center;
-    cursor: pointer;
+    cursor: pointer;    
 }
 .inputName:focus {
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.72);
@@ -63,7 +63,7 @@
     border-radius: 5px;
     background-color: #9c9c9c;
     text-align: center;
-    cursor: pointer;
+    cursor: pointer;   
 }
 .inputPrice:focus {
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.72);
@@ -71,7 +71,7 @@
 .blockInputPrice {
     display: flex;
     margin-top: 4%;
-    height: 3.5vh;
+    height: 3.5vh;   
 }
 .p {
     font-weight: bold;
@@ -121,6 +121,7 @@
 /* ======== */
 .clearSort {
     overflow: hidden;
+    /* border: 3px solid rgb(202, 11, 11); */
     cursor: pointer;
     width: 100%;
     height: 5vh;
@@ -134,3 +135,17 @@
 .clearSort:hover {
     background-color: #5a5a5a;
 }
+
+@media (max-width: 650px) {   
+    .inputName{
+        height: 80%
+    }
+    .inputPrice{
+        height: 100%;        
+        margin-top: 0%;       
+    }
+    .clearSort{
+        height: 4vh;
+    }
+        
+  } 
