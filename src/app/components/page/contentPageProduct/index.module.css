@@ -1,21 +1,20 @@
 .flex {
     display: flex;
-    height: 85vh;
+    height: 85vh;   
 }
 .flexForms {
     flex: 1 1 auto;
     display: flex;
-    flex-direction: column;
-    /* border: 3px solid rgb(160, 160, 160); */
-    overflow: hidden;
-}
+    flex-direction: column;   
+    overflow: hidden;  
+   }
 
 .blockProduct {
     width: 60%;
     height: 80vh;
     margin-top: 0.9%;
     overflow: auto;
-    z-index: 5;
+    z-index: 5;     
 }
 .blockProduct::-webkit-scrollbar {
     border-radius: 10px;
@@ -33,6 +32,7 @@
     height: 18.9vh;
     background-color: #e9e9e9;
     display: flex;
+    
 }
 
 .imgContent {
@@ -53,8 +53,7 @@
     width: 65%;
     height: 83%;
     margin-top: 2%;
-    margin-left: 2%;
-    /* border: 1px solid rgb(37, 37, 37);      */
+    margin-left: 2%;    
     font-size: 16px;
     display: flex;
     flex-direction: column;
@@ -63,8 +62,7 @@
 .buttonCard {
     width: 40%;
     height: 3vh;
-    border-radius: 5px;
-    /* border: 10px solid rgb(245, 245, 245);            */
+    border-radius: 5px;           
     background-color: #242424;
     display: flex;
     justify-content: center;
@@ -80,3 +78,30 @@
     color: rgb(255, 255, 255);
     font-size: 14px;
 }
+@media (max-width: 900px) {      
+    .buttonCard{
+        width: 70%;
+        height: 4vh;
+    }       
+  } 
+
+@media (max-width: 650px) {   
+    .flex{
+        flex-direction: column;
+        height: 100%
+    }
+    .flexForms{
+        flex: 1 1 5 00px;
+    }
+    .blockProduct{
+        width: 100%;
+    }
+    .buttonCard{
+        width: 80%;
+    height: 4vh;
+    }
+    .buttonTitle{
+        font-size: 10px;
+    }
+    
+  } 
