@@ -55,7 +55,6 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            console.log(data);
             setTokens({ ...data, balance: 1000 });
             getUserData();
         } catch (error) {
@@ -77,6 +76,7 @@ const AuthProvider = ({ children }) => {
         }
     }
     useEffect(() => {
+        console.log(user);
         if (localStorageService.getAccessToken()) {
             getUserData();
         }

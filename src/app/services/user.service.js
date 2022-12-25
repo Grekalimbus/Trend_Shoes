@@ -26,7 +26,6 @@ const userService = {
                 localStorageService.getUserId() +
                 `.json?auth=${accessToken}`
         );
-        console.log(data);
         return data;
     }
 };
