@@ -38,21 +38,6 @@ const Buttons = ({ amount }) => {
             >
                 Оформить заказ
             </div>
-
-            {/* {callAuthFunck === "true" ? (
-                <Link to="/formPage" className={styles.buttonClick}>
-                    <p className={styles.title}>Оформить заказ</p>
-                </Link>
-            ) : (
-                <div
-                    className={styles.buttonClick}
-                    onClick={() => {
-                        needAutn();
-                    }}
-                >
-                    Оформить заказ
-                </div>
-            )} */}
         </div>
     );
 };
