@@ -159,7 +159,8 @@ const ApiProvider = ({ children }) => {
             value={{
                 product: product,
                 dataFirm: dataFirm,
-                handleChangeProduct
+                handleChangeProduct,
+                historyPurchases
             }}
         >
             {children}

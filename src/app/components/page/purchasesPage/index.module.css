@@ -1,0 +1,132 @@
+.mainBlokInfo{
+    width: 98%;
+    margin: 0 auto;
+    margin-top: 1.8%;
+    overflow: auto;
+    height: 80vh;
+    border-radius: 5px;
+    border: 4px solid rgb(245, 189, 67);
+    background-color: #00000059;
+}
+.mainBlokInfo::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #131313;
+}
+.mainBlokInfo::-webkit-scrollbar-thumb {
+    background-color:  rgba(245, 189, 67, 0.966);
+    border-radius: 5px;
+}
+.cardInfo{   
+    height: 35%;
+    margin: 0 auto;
+    margin-top: 1.4%;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    /* border: 3px solid rgb(235, 173, 173); */
+    justify-content: space-around;
+    border-radius: 5px;
+    border: 3px solid rgba(245, 189, 67, 0.863);
+}
+.cardInfo::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #f1ba67;
+}
+.cardInfo::-webkit-scrollbar-thumb {
+    background-color: #020202;
+    border-radius: 5px;
+}
+.elemFlex{
+    /* border: 2px solid rgb(190, 11, 11); */
+    flex: 1 1 55%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.elemFlexTwo{
+    /* border: 2px solid rgb(190, 11, 11); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 17%;   
+    height: 80%;
+    margin-top: 2%;  
+    margin-right: 2%;
+    border-radius: 5px;
+    background-color: rgba(245, 189, 67, 0.411);
+    border: 3px solid rgba(245, 189, 67, 0.863);      
+}
+.wrappImg{
+    width: 100%;
+    height: 100%;    
+}
+.img{width: 100%;
+height: 100%;}
+
+.flexElemInfo{
+    flex: 1 1 40%;    
+    margin-top: 1%;
+}
+.mainTitle{
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(247, 199, 98);
+    text-align: center;
+    margin-top: 1%;
+}
+.inforTitleQuantity{
+    display: flex;
+    margin: 0 auto;
+    margin-top: 1%;
+    width: 90%;
+    text-align: center;
+    background-color: #161616;
+    color: aliceblue;
+    height: 3vh;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+}
+.inforTitle{
+    margin: 0 auto;
+    margin-top: 1%;
+    width: 90%;
+    text-align: center;
+    background-color: #161616;
+    color: aliceblue;
+    height: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 900px) {
+    .flexElemInfo{
+        flex: 1 1 100%;       
+
+    }
+    .elemFlexTwo{       
+        flex: 1 1 50%;
+        height: 100%;        
+        margin: 0 auto;
+        margin: 2% 10% 2% 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 3%;
+    }
+    .wrappImg{
+        width: 70%;
+        height: 100%;
+    }
+  } 
+
+  @media (max-width: 400px) {
+    .mainBlokInfo{
+        font-size: 10px;
+        font-weight: 100;
+    }
+  } 
