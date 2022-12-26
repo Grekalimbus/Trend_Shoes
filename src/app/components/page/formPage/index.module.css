@@ -47,10 +47,16 @@
 width: 70%;
 height: 50%;
 text-align: center;
-color: #000;
+color: rgb(240, 240, 240);
 font-weight: bold;
-background-color: rgb(190, 190, 190);
+background-color: rgb(0, 0, 0);
 border-radius: 5px;
+}
+.input:focus{
+    background-color: #000000ce;
+    color: rgb(252, 166, 36);   ;
+    border-radius: 5px ;
+    border: 3px solid rgb(252, 166, 36);   ;
 }
 .inputCheckBox{      
     width: 5%;
@@ -63,9 +69,15 @@ border-radius: 5px;
     width: 30%;
     height: 3vh;
     font-weight: bold;
-    background-color: rgb(189, 187, 187);
-    margin-bottom: 5%;
-    
+    color: aliceblue;
+    background-color: rgb(0, 0, 0);
+    margin-bottom: 5%;    
+}
+.button:hover{
+    background-color: #000000ce;
+    color: rgb(252, 166, 36);   
+    border-radius: 5px ;
+    border: 3px solid rgb(252, 166, 36);   
 }
 .error{    
     color: rgb(179, 9, 9);    

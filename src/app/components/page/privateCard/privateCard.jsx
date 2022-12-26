@@ -14,7 +14,7 @@ const PrivateCard = ({ data }) => {
     };
     const getMouse = (div) => {
         const { target } = div;
-        target.style.backgroundColor = "rgb(200, 202, 200)";
+        target.style.backgroundColor = "rgba(245, 189, 67, 0.863)";
         setTimeout(() => {
             target.style.backgroundColor = "rgb(0, 0, 0)";
         }, 700);

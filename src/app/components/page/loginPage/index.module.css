@@ -23,20 +23,23 @@
     width: 30%;
     height: 3vh;
     font-weight: bold;
-    background-color: rgb(189, 187, 187);    
+    color: aliceblue;
+    background-color: rgb(34, 34, 34);    
     margin-top: 5%;      
     transition: all 1s;  
 }
 .textLink{      
-    color: rgb(7, 7, 7);
+    color: rgb(247, 247, 247);
     transition: all 1s;
 }
 .textLink:hover{
-    color: aliceblue;
+    color: rgb(252, 163, 30);
     transition: all 1s;
 }
 
 .button:hover{
-    color: aliceblue;
-    background-color: rgb(7, 7, 7);
+    background-color: #000000ce;
+    color: rgb(252, 166, 36);       
+    border-radius: 5px ;
+    border: 3px solid rgb(252, 166, 36);   
 }

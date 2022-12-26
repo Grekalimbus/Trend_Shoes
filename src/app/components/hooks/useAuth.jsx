@@ -23,8 +23,9 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            setTokens({ ...data, balance: 10000 });
+            setTokens({ ...data });
             createUser({ ...data, balance: 10000 });
+            setUser({ ...data, balance: 10000 });
         } catch (error) {
             const { code, message } = error.response.data.error;
             if (code === 400) {
@@ -55,7 +56,7 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            setTokens({ ...data, balance: 1000 });
+            setTokens({ ...data });
             getUserData();
         } catch (error) {
             const { code, message } = error.response.data.error;

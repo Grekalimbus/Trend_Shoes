@@ -8,7 +8,6 @@ const CardPurchases = ({ historyPurchases }) => {
         return item.value !== 0;
     });
 
-    console.log(historyPurchases);
     return historyPurchases === undefined ? (
         <div>Loading</div>
     ) : (
@@ -34,7 +33,7 @@ const CardPurchases = ({ historyPurchases }) => {
                         Адрес: {dataForm.adress}
                     </div>
                     <div className={styles.inforTitle}>
-                        Время оформления заказа: {historyPurchases.time}
+                        Дата оформления заказа: {historyPurchases.date}
                     </div>
                 </div>
                 <div className={styles.flexElemInfo}>

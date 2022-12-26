@@ -45,6 +45,7 @@ const LoginPage = () => {
             try {
                 await signUp(data);
                 history.push("/");
+                location.reload();
             } catch (error) {
                 setErrors(error);
             }
@@ -53,6 +54,7 @@ const LoginPage = () => {
             try {
                 await loginIn(data);
                 history.push("/");
+                location.reload();
             } catch (error) {
                 setErrors(error);
             }

@@ -56,7 +56,8 @@
     margin-right: 2%;
     border-radius: 5px;
     background-color: rgba(245, 189, 67, 0.411);
-    border: 3px solid rgba(245, 189, 67, 0.863);      
+    border: 3px solid rgba(245, 189, 67, 0.863);
+    box-shadow: inset 0px 4px 41px 8px rgba(0, 0, 0, 0.45);      
 }
 .wrappImg{
     width: 100%;
@@ -74,7 +75,7 @@ height: 100%;}
     font-weight: bold;
     color: rgb(247, 199, 98);
     text-align: center;
-    margin-top: 1%;
+    margin-top: 1%;    
 }
 .inforTitleQuantity{
     display: flex;
@@ -87,6 +88,7 @@ height: 100%;}
     height: 3vh;
     display: flex;    
     justify-content: center;
+    
     align-items: center;
 }
 .inforTitle{
@@ -101,6 +103,7 @@ height: 100%;}
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 4px 16px 1px rgba(255, 194, 41, 0.199);
 }
 @media (max-width: 900px) {
     .flexElemInfo{
