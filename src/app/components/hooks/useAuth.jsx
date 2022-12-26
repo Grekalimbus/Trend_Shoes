@@ -76,7 +76,6 @@ const AuthProvider = ({ children }) => {
         }
     }
     useEffect(() => {
-        console.log(user);
         if (localStorageService.getAccessToken()) {
             getUserData();
         }

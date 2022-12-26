@@ -15,16 +15,6 @@ function validator(data, config) {
                 if (phoneRegExp.test(data)) return config.message;
                 break;
             }
-            case "isUser": {
-                let valueSpace = 0;
-                for (let i = 0; i <= data.length; i++) {
-                    if (data[i] === " ") {
-                        valueSpace += 1;
-                    }
-                }
-                if (valueSpace !== 2) return config.message;
-                break;
-            }
             case "isRepeat": {
                 if (data !== allData.password) return config.message;
                 break;

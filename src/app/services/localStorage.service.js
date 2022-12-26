@@ -26,6 +26,9 @@ export function deleteTokens() {
     localStorage.removeItem(EXPIRES_KEY);
     localStorage.removeItem(BALANCE);
 }
+export function changeBalance(newBalance) {
+    localStorage.setItem(BALANCE, newBalance);
+}
 export function getBalance() {
     return localStorage.getItem(BALANCE);
 }
@@ -49,6 +52,7 @@ const localStorageService = {
     getRefreshToken,
     getTokenExpiresDate,
     getBalance,
+    changeBalance,
     getUserId
 };
 export default localStorageService;

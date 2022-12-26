@@ -5,8 +5,10 @@ import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
 import getFilterProductCart from "../../../utils/filterProductCart";
 import validatorConfig from "../../../utils/validatorConfig";
+import { useApi } from "../../hooks/useApi";
 
 const FormPage = () => {
+    const { handleChangeProduct } = useApi();
     const [data, setData] = useState({
         user: "",
         phone: "",
@@ -34,8 +36,13 @@ const FormPage = () => {
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
+        // console.log(filterProductCart);
+        const quantityProduct = filterProductCart.map((item) => {
+            return item.quantity;
+        });
+        handleChangeProduct(filterProductCart, quantityProduct);
         localStorage.setItem("storageBasket", "[]");
-        window.location.reload();
+        // window.location.reload();
     };
     return filterProductCart.length === 0 ? (
         <div className={styles.processing}>

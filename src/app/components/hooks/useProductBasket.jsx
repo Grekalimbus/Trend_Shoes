@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import httpServices from "../../services/http.service";
 
-const useProduct = () => {
+const useProductBasket = () => {
     const [dataCart, setDataCart] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
     useEffect(() => {
@@ -52,4 +52,4 @@ const useProduct = () => {
     }
 };
 
-export default useProduct;
+export default useProductBasket;
