@@ -37,9 +37,9 @@ const Header = () => {
                 <Link to="/basketPage" className={styles.button}>
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
-                <div className={styles.button}>
+                <Link to="/purchases" className={styles.button}>
                     <h2 className={styles.h2}>История покупок</h2>
-                </div>
+                </Link>
                 {user === undefined ? (
                     <Link to="/login" className={styles.button}>
                         <h2 className={styles.h2}>Вход / Регистрация</h2>

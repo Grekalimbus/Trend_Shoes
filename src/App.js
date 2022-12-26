@@ -14,6 +14,7 @@ import useProductBasket from "./app/components/hooks/useProductBasket";
 import AuthProvider from "./app/components/hooks/useAuth";
 import ApiProvider from "./app/components/hooks/useApi";
 import LoginPage from "./app/components/page/loginPage/loginPage";
+import Purchases from "./app/components/page/purchasesPage/purchases";
 
 function App() {
     useProductBasket();
@@ -49,6 +50,11 @@ function App() {
                                 exact
                                 path="/formPage/"
                                 component={FormPage}
+                            />
+                            <Route
+                                exact
+                                path="/purchases/"
+                                component={Purchases}
                             />
 
                             <Redirect to="/" />
