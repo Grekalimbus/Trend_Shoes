@@ -40,7 +40,7 @@ const FormPage = () => {
             return item.quantity;
         });
         try {
-            await handleChangeProduct(filterProductCart, quantityProduct);
+            await handleChangeProduct(filterProductCart, quantityProduct, data);
             localStorage.setItem("storageBasket", "[]");
             location.reload();
         } catch (error) {
