@@ -41,14 +41,36 @@ const ApiProvider = ({ children }) => {
         getDataProductAndFirm();
     }, []);
     // деформация или удаление product с DB
-    const handleChangeProduct = async (filterProduct, quantityProduct) => {
-        console.log(filterProduct);
+    const handleChangeProduct = async (
+        filterProduct,
+        quantityProduct,
+        dataForm
+    ) => {
+        const newDate = new Date();
+        const day = newDate.getDate();
+        const month = newDate.getMonth();
+        const year = newDate.getFullYear();
+        const hour = newDate.getHours();
+        const minute = newDate.getMinutes();
+        const stringDate = `${day}.${month}.${year}`;
+        const timeDate = `${hour}:${minute}`;
+
         const changeArrayProduct = [];
+
+        const transformProductForHistory = filterProduct.map((item) => {
+            return {
+                ...item,
+                dataForm: dataForm,
+                date: stringDate,
+                time: timeDate
+            };
+        });
         const handleChangeHistoryPurchases = () => {
+            console.log(historyPurchases);
             if (historyPurchases === null) {
-                setHistoryPurchases(filterProduct);
+                setHistoryPurchases(transformProductForHistory);
             } else if (historyPurchases !== null) {
-                filterProduct.forEach((item) => {
+                transformProductForHistory.forEach((item) => {
                     setHistoryPurchases((prevState) => prevState.push(item));
                 });
             }
@@ -116,7 +138,9 @@ const ApiProvider = ({ children }) => {
         try {
             const dataHistoryPurchases = await httpServices.put(
                 `historyPurchases/${userID}.json?auth=${accessToken}`,
-                historyPurchases !== null ? historyPurchases : filterProduct
+                historyPurchases !== null
+                    ? historyPurchases
+                    : transformProductForHistory
             );
             const dataPrice = await httpServices.put(
                 `users/${userID}/balance.json?auth=${accessToken}`,
