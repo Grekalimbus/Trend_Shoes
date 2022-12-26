@@ -103,7 +103,7 @@ height: 100%;}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 4px 16px 1px rgba(255, 195, 41, 0.61);
+    box-shadow: 0px 4px 16px 1px rgba(255, 194, 41, 0.199);
 }
 @media (max-width: 900px) {
     .flexElemInfo{

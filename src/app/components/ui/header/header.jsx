@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import localStorageService, {
     deleteTokens
 } from "../../../services/localStorage.service";
+import { useApi } from "../../hooks/useApi";
 
 const Header = () => {
     const [color, setColor] = useState(true);
+    const { historyPurchases } = useApi();
+    const history = useHistory();
     const { user } = useAuth();
     setTimeout(() => {
         setColor((pervState) => !pervState);
@@ -15,6 +18,7 @@ const Header = () => {
 
     const reloadPageAndClearLS = () => {
         localStorageService.deleteTokens();
+        history.push("/");
         location.reload();
     };
     return (
@@ -37,9 +41,14 @@ const Header = () => {
                 <Link to="/basketPage" className={styles.button}>
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
-                <Link to="/purchases" className={styles.button}>
-                    <h2 className={styles.h2}>История покупок</h2>
-                </Link>
+                {historyPurchases === null ? (
+                    <div>Покупки</div>
+                ) : (
+                    <Link to="/purchases" className={styles.button}>
+                        <h2 className={styles.h2}>Покупки</h2>
+                    </Link>
+                )}
+
                 {user === undefined ? (
                     <Link to="/login" className={styles.button}>
                         <h2 className={styles.h2}>Вход / Регистрация</h2>

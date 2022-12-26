@@ -11,7 +11,7 @@
 .blockName {
     width: 90%;
     height: 10vh;
-    background-color: rgba(248, 172, 59, 0.048);     
+    background-color: rgba(10, 7, 1, 0.486);  
     border-radius: 5px;
     margin-top: 2.6%;
     margin-left: 3%;
@@ -21,7 +21,7 @@
 .blockPrice {
     width: 90%;
     height: 20vh;
-    background-color: rgba(248, 172, 59, 0.048);  
+    background-color: rgba(10, 7, 1, 0.486);
     border: 3px solid rgba(245, 189, 67, 0.863);
     border-radius: 5px;
     margin-top: 3%;
@@ -92,7 +92,7 @@
 .blockFirm {
     width: 90%;
     height: 44.3vh;
-    background-color: rgba(248, 172, 59, 0.048);  
+    background-color: rgba(10, 7, 1, 0.486);
     border-radius: 5px;
     margin-top: 3%;
     margin-left: 3%;
