@@ -26,23 +26,25 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: #a3a3a3;
-    color: #000;
+    background-color:rgba(245, 189, 67, 0.685); 
+    color: rgb(247, 247, 247);
     overflow: hidden;
     border-radius: 5px;    
+    font-weight: bold;
     transition: all 1s;
     cursor: pointer;
+    font-size: 16px;
+    border: 2px solid rgb(245, 189, 67);
 }
 .button:hover{
-    background-color: #e6e6e6;
-    color: #030303;
+    background-color: #f5a717ea;    
+    box-shadow: 0px 4px 20px 3px rgba(255, 195, 41, 0.61);
 }
 .h2{
     margin-top: 3%;
 }
 @media (max-width: 800px) {
-    .button{
-        font-size: 12px;
+    .button{       
         text-align: center;
         height: 50%;  
     }
