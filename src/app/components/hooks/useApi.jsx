@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import httpServices from "../../services/http.service";
 import dataBasket from "../../utils/getBasket";
 import localStorageService from "../../services/localStorage.service";
+import { useAuth } from "./useAuth";
 
 const ApiContext = React.createContext();
 
@@ -13,19 +14,27 @@ export const useApi = () => {
 const ApiProvider = ({ children }) => {
     const [product, setProduct] = useState(null);
     const [dataFirm, setDataFirm] = useState(null);
+    const [historyPurchases, setHistoryPurchases] = useState();
+    const { user } = useAuth();
     const basketDataSizes = dataBasket.getBasketSizes();
-
+    const userID = localStorageService.getUserId();
     // пулл данных в состояния product/dataFirm
     useEffect(() => {
         const getDataProductAndFirm = async () => {
             try {
+                const dataHistoryPurchases = await httpServices.get(
+                    `historyPurchases/${userID}.json`
+                );
+                if (dataHistoryPurchases !== null) {
+                    setHistoryPurchases(dataHistoryPurchases.data);
+                }
                 const { data } = await httpServices.get("/product.json");
                 const firm = await httpServices.get("/firm.json");
 
                 setProduct(Object.keys(data).map((item) => data[item]));
                 setDataFirm(firm.data);
             } catch (error) {
-                console.log("expectedErrors");
+                console.log(error);
             }
         };
 
@@ -33,7 +42,19 @@ const ApiProvider = ({ children }) => {
     }, []);
     // деформация или удаление product с DB
     const handleChangeProduct = async (filterProduct, quantityProduct) => {
+        console.log(filterProduct);
         const changeArrayProduct = [];
+        const handleChangeHistoryPurchases = () => {
+            if (historyPurchases === null) {
+                setHistoryPurchases(filterProduct);
+            } else if (historyPurchases !== null) {
+                filterProduct.forEach((item) => {
+                    setHistoryPurchases((prevState) => prevState.push(item));
+                });
+            }
+        };
+        handleChangeHistoryPurchases();
+
         product.forEach((objectProduct) => {
             filterProduct.forEach((itemBasket) => {
                 if (itemBasket._id === objectProduct._id) {
@@ -88,20 +109,23 @@ const ApiProvider = ({ children }) => {
             });
             return product;
         };
-        console.log(transformProduct());
-        // сделать проверку, есть ли в объекте quantity где все value = 0
-        // изменить объекты в базе данных
-        // сделать так, чтобы объект удалялся, если все value 0
-        // сделать счет баланса
-
         const accessToken = localStorageService.getAccessToken();
-        // const newBalance =
+        const amount = localStorage.getItem("amount");
+        const newBalance = user.balance - amount;
+
         try {
+            const dataHistoryPurchases = await httpServices.put(
+                `historyPurchases/${userID}.json?auth=${accessToken}`,
+                historyPurchases !== null ? historyPurchases : filterProduct
+            );
+            const dataPrice = await httpServices.put(
+                `users/${userID}/balance.json?auth=${accessToken}`,
+                newBalance
+            );
             const { data } = await httpServices.put(
                 `/product.json?auth=${accessToken}`,
                 { ...transformProduct() }
             );
-            console.log(data);
         } catch (error) {
             console.log(error);
         }

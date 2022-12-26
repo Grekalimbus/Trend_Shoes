@@ -30,19 +30,22 @@ const FormPage = () => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
-        // console.log(filterProductCart);
         const quantityProduct = filterProductCart.map((item) => {
             return item.quantity;
         });
-        handleChangeProduct(filterProductCart, quantityProduct);
-        localStorage.setItem("storageBasket", "[]");
-        // window.location.reload();
+        try {
+            await handleChangeProduct(filterProductCart, quantityProduct);
+            localStorage.setItem("storageBasket", "[]");
+            location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     };
     return filterProductCart.length === 0 ? (
         <div className={styles.processing}>
