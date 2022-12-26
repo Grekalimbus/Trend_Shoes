@@ -1,36 +1,80 @@
 import React from "react";
 import styles from "./index.module.css";
+import PropTypes from "prop-types";
 
-const CardPurchases = () => {
-    return (
+const CardPurchases = ({ historyPurchases }) => {
+    const { dataForm, quantity } = historyPurchases;
+    const filterQuantity = quantity.filter((item) => {
+        return item.value !== 0;
+    });
+
+    console.log(historyPurchases);
+    return historyPurchases === undefined ? (
+        <div>Loading</div>
+    ) : (
         <div className={styles.cardInfo}>
             <div className={styles.elemFlex}>
                 <div className={styles.flexElemInfo}>
                     <div className={styles.mainTitle}>
                         Данные заполненные в форме
                     </div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
+                    <div className={styles.inforTitle}>
+                        ФИО: {dataForm.user}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Почта: {dataForm.email}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Телефон: {dataForm.phone}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Телеграм: {dataForm.telegram}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Адрес: {dataForm.adress}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Время оформления заказа: {historyPurchases.time}
+                    </div>
                 </div>
                 <div className={styles.flexElemInfo}>
                     <div className={styles.mainTitle}>Данные о товаре</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
-                    <div className={styles.inforTitle}>Фио</div>
+                    <div className={styles.inforTitle}>
+                        {historyPurchases.name}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Цена: {historyPurchases.price}
+                    </div>
+
+                    {filterQuantity.map((item) => {
+                        return (
+                            <div key={item.sizes} className={styles.inforTitle}>
+                                Размер: {`(${item.sizes})`} - кол-во{" "}
+                                {`(${item.value})`}
+                            </div>
+                        );
+                    })}
+
+                    <div className={styles.inforTitle}>
+                        ID Товара: {historyPurchases._id}
+                    </div>
                 </div>
             </div>
             <div className={styles.elemFlexTwo}>
-                <img src="" alt="" />
+                <div className={styles.wrappImg}>
+                    <img
+                        className={styles.img}
+                        src={historyPurchases.imgProduct[0]}
+                        alt="imageProduct"
+                    />
+                </div>
             </div>
         </div>
     );
+};
+
+CardPurchases.propTypes = {
+    historyPurchases: PropTypes.object
 };
 
 export default CardPurchases;

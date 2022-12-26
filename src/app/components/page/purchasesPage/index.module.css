@@ -50,12 +50,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1 1 17%;
-    margin: 1%;
+    flex: 1 1 17%;   
+    height: 80%;
+    margin-top: 2%;  
+    margin-right: 2%;
     border-radius: 5px;
     background-color: rgba(245, 189, 67, 0.411);
-    border: 3px solid rgba(245, 189, 67, 0.863);
+    border: 3px solid rgba(245, 189, 67, 0.863);      
 }
+.wrappImg{
+    width: 100%;
+    height: 100%;    
+}
+.img{width: 100%;
+height: 100%;}
 
 .flexElemInfo{
     flex: 1 1 40%;    
@@ -67,6 +75,19 @@
     color: rgb(247, 199, 98);
     text-align: center;
     margin-top: 1%;
+}
+.inforTitleQuantity{
+    display: flex;
+    margin: 0 auto;
+    margin-top: 1%;
+    width: 90%;
+    text-align: center;
+    background-color: #161616;
+    color: aliceblue;
+    height: 3vh;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
 }
 .inforTitle{
     margin: 0 auto;
@@ -87,11 +108,25 @@
 
     }
     .elemFlexTwo{       
-        flex: 1 0 100%;
+        flex: 1 1 50%;
+        height: 100%;        
         margin: 0 auto;
+        margin: 2% 10% 2% 10%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 3%;
+    }
+    .wrappImg{
+        width: 70%;
+        height: 100%;
+    }
+  } 
+
+  @media (max-width: 400px) {
+    .mainBlokInfo{
+        font-size: 10px;
+        font-weight: 100;
     }
   } 
