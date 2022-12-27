@@ -42,7 +42,7 @@ const Header = () => {
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
                 {historyPurchases === null ? (
-                    <div>Покупки</div>
+                    <div className={styles.button}>Покупки</div>
                 ) : (
                     <Link to="/purchases" className={styles.button}>
                         <h2 className={styles.h2}>Покупки</h2>
