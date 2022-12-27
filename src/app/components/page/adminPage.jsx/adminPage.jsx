@@ -1,0 +1,50 @@
+import React from "react";
+import styles from "./index.module.css";
+import { Link, useHistory, useParams } from "react-router-dom";
+import StatisticPage from "./statisticsPage";
+import { useApi } from "../../hooks/useApi";
+
+const AdminPage = () => {
+    const history = useHistory();
+    const { other } = useParams();
+    console.log(other);
+
+    if (other === undefined) {
+        return (
+            <div className={styles.wrap}>
+                <Link to="/adminPage/statistic" className={styles.flexElem}>
+                    Статистика
+                </Link>
+                <Link to="/adminPage/delete" className={styles.flexElem}>
+                    Удаление товаров
+                </Link>
+                <Link to="/adminPage/edit" className={styles.flexElem}>
+                    Редактирование товаров
+                </Link>
+                <Link to="/adminPage/add" className={styles.flexElem}>
+                    Добавление товаров
+                </Link>
+                <Link to="/adminPage/history" className={styles.flexElem}>
+                    Офомрленные заказы
+                </Link>
+            </div>
+        );
+    }
+    if (other === "statistic") {
+        return <StatisticPage />;
+    }
+    if (other === "delete") {
+        return <StatisticPage />;
+    }
+    if (other === "edit") {
+        return <StatisticPage />;
+    }
+    if (other === "add") {
+        return <StatisticPage />;
+    }
+    if (other === "history") {
+        return <StatisticPage />;
+    }
+};
+
+export default AdminPage;
