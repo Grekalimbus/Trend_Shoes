@@ -14,7 +14,7 @@ import useProductBasket from "./app/components/hooks/useProductBasket";
 import AuthProvider from "./app/components/hooks/useAuth";
 import ApiProvider from "./app/components/hooks/useApi";
 import LoginPage from "./app/components/page/loginPage/loginPage";
-import Purchases from "./app/components/page/purchasesPage/purchases";
+import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";
 import StaticPange from "./app/components/page/adminPage.jsx/statisticsPage";
 

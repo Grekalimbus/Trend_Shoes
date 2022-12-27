@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./index.module.css";
 import { Link, useHistory, useParams } from "react-router-dom";
 import StatisticPage from "./statisticsPage";
+import Purchases from "../../common/purchasesPage/purchases";
 import { useApi } from "../../hooks/useApi";
 
 const AdminPage = () => {
     const history = useHistory();
+    const { allHistoryPurchases } = useApi();
     const { other } = useParams();
-    console.log(other);
 
     if (other === undefined) {
         return (
@@ -43,7 +44,7 @@ const AdminPage = () => {
         return <StatisticPage />;
     }
     if (other === "history") {
-        return <StatisticPage />;
+        return <Purchases allHistory={allHistoryPurchases} />;
     }
 };
 
