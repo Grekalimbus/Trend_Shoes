@@ -15,6 +15,7 @@ const ApiProvider = ({ children }) => {
     const [product, setProduct] = useState(null);
     const [dataFirm, setDataFirm] = useState(null);
     const [historyPurchases, setHistoryPurchases] = useState();
+    const [allHistoryPurchases, setAllHistory] = useState();
     const { user } = useAuth();
     const basketDataSizes = dataBasket.getBasketSizes();
     const userID = localStorageService.getUserId();
@@ -22,9 +23,15 @@ const ApiProvider = ({ children }) => {
     useEffect(() => {
         const getDataProductAndFirm = async () => {
             try {
+                const allHistory = await httpServices.get(
+                    `historyPurchases.json`
+                );
                 const dataHistoryPurchases = await httpServices.get(
                     `historyPurchases/${userID}.json`
                 );
+                if (allHistory !== null) {
+                    setAllHistory(allHistory.data);
+                }
                 if (dataHistoryPurchases !== null) {
                     setHistoryPurchases(dataHistoryPurchases.data);
                 }
@@ -160,7 +167,8 @@ const ApiProvider = ({ children }) => {
                 product: product,
                 dataFirm: dataFirm,
                 handleChangeProduct,
-                historyPurchases
+                historyPurchases,
+                allHistoryPurchases
             }}
         >
             {children}

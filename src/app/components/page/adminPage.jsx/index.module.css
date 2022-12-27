@@ -1,0 +1,75 @@
+.wrap{
+    width: 90;
+    margin: 0 auto;
+    margin-top: 20%;
+    height: 80%;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.wrapStatistic{
+    width: 90%;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top: 2%;    
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;   
+}
+.flexElem{
+    border: 3px solid rgba(245, 185, 55, 0.863);
+    background-color: rgba(10, 7, 1, 0.486);
+    flex: 0 1 16%;    
+    height: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: aliceblue;
+    border-radius: 3px;
+    transition: all 1s;
+    cursor: pointer;
+}
+.flexElem:hover{
+    background-color: rgba(10, 7, 1, 0.747);
+    color: rgb(243, 168, 28);
+    box-shadow: rgba(0, 0, 0, 0.637);
+}
+
+/* ============ */
+.flexElemStatistic{
+    border: 3px solid rgba(245, 169, 55, 0.863);    
+    background-color: rgba(0, 0, 0, 0.205);
+    flex: 0 1 50%;    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: aliceblue;
+    border-radius: 3px;
+    transition: all 1s;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+}
+.flexElemStatisticHide{
+    flex: 0 1 50%;
+}
+
+@media (max-width: 800px) {
+    .flexElem{       
+        flex: 0 1 80%;   
+        margin-top: 3%; 
+    }
+    .flexElemStatistic{
+        flex: 1 1 100%;
+    }
+    .flexElemStatisticHide{
+        flex:  1 1 100%;
+    }
+  } 
+
+  /* Cтили для страницы с историей покупок */

@@ -42,13 +42,15 @@ const Header = () => {
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
                 {historyPurchases === null ? (
-                    <div>Покупки</div>
+                    <div className={styles.button}>Покупки</div>
                 ) : (
                     <Link to="/purchases" className={styles.button}>
                         <h2 className={styles.h2}>Покупки</h2>
                     </Link>
                 )}
-
+                <Link to="/adminPage" className={styles.button}>
+                    <h2 className={styles.h2}>Админка</h2>
+                </Link>
                 {user === undefined ? (
                     <Link to="/login" className={styles.button}>
                         <h2 className={styles.h2}>Вход / Регистрация</h2>
