@@ -6,6 +6,7 @@ import Purchases from "../../common/purchasesPage/purchases";
 import { useApi } from "../../hooks/useApi";
 import EditProduct from "./editProduct";
 import DeleteProduct from "./deleteProduct";
+import AddProductPage from "./addProductPage";
 
 const AdminPage = () => {
     const history = useHistory();
@@ -43,7 +44,7 @@ const AdminPage = () => {
         return <EditProduct />;
     }
     if (other === "add") {
-        return <StatisticPage />;
+        return <AddProductPage />;
     }
     if (other === "history") {
         return <Purchases allHistory={allHistoryPurchases} />;

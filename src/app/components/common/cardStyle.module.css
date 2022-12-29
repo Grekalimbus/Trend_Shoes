@@ -1,30 +1,4 @@
-.flex {
-    display: flex;
-    height: 85vh;   
-}
-.flexForms {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;   
-    overflow: hidden;  
-   }
-
-.blockProduct {
-    width: 60%;
-    height: 80vh;
-    margin-top: 0.9%;
-    overflow: auto;
-    z-index: 5;      
-}
-.blockProduct::-webkit-scrollbar {
-    border-radius: 10px;
-    background-color: #131313;
-}
-.blockProduct::-webkit-scrollbar-thumb {
-    background-color:  rgba(245, 189, 67, 0.966);
-    border-radius: 5px;
-}
-/* .cardProduct {
+.cardProduct {
     margin-left: 8%;
     border-radius: 5px;
     margin-bottom: 1%;
@@ -87,31 +61,11 @@
     text-align: center;
     color: rgb(255, 255, 255);
     font-size: 14px;
-} */
+}
+
 @media (max-width: 900px) {      
     .buttonCard{
         width: 70%;
         height: 4vh;
     }       
-  } 
-
-@media (max-width: 650px) {   
-    .flex{
-        flex-direction: column;
-        height: 100%
-    }
-    .flexForms{
-        flex: 1 1 5 00px;
-    }
-    .blockProduct{
-        width: 100%;
-    }
-    .buttonCard{
-        width: 80%;
-    height: 4vh;
-    }
-    .buttonTitle{
-        font-size: 10px;
-    }
-    
   } 

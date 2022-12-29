@@ -7,10 +7,7 @@ import { useParams } from "react-router-dom";
 const Purchases = () => {
     const { other } = useParams();
     const { historyPurchases, allHistoryPurchases } = useApi();
-    const reverseArray =
-        historyPurchases !== undefined
-            ? historyPurchases.reverse()
-            : historyPurchases;
+
     const keyUsers =
         allHistoryPurchases !== undefined
             ? Object.keys(allHistoryPurchases)
@@ -51,10 +48,10 @@ const Purchases = () => {
     } else if (other === undefined) {
         return (
             <div className={styles.mainBlokInfo}>
-                {reverseArray === undefined ? (
+                {historyPurchases === null || historyPurchases === null ? (
                     <div>Loadnig</div>
                 ) : (
-                    reverseArray.map((item) => {
+                    historyPurchases.reverse().map((item) => {
                         return (
                             <CardPurchases
                                 key={item._id}
