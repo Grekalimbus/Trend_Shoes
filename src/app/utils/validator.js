@@ -10,7 +10,7 @@ function validator(data, config) {
                 if (!emailRegExp.test(data)) return config.message;
                 break;
             }
-            case "isPhone": {
+            case "isNumbers": {
                 const phoneRegExp = /^\S+\D/g;
                 if (phoneRegExp.test(data)) return config.message;
                 break;

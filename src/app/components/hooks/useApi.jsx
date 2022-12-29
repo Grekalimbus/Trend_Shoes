@@ -47,6 +47,14 @@ const ApiProvider = ({ children }) => {
 
         getDataProductAndFirm();
     }, []);
+    // изменения product
+    const handleChangeProductID = async (id, object) => {
+        try {
+            const data = await httpServices.put(`product/${id}.json`, object);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     // деформация или удаление product с DB
     const handleChangeProduct = async (
         filterProduct,
@@ -168,7 +176,8 @@ const ApiProvider = ({ children }) => {
                 dataFirm: dataFirm,
                 handleChangeProduct,
                 historyPurchases,
-                allHistoryPurchases
+                allHistoryPurchases,
+                handleChangeProductID
             }}
         >
             {children}

@@ -4,6 +4,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import StatisticPage from "./statisticsPage";
 import Purchases from "../../common/purchasesPage/purchases";
 import { useApi } from "../../hooks/useApi";
+import EditProduct from "./editProduct";
 
 const AdminPage = () => {
     const history = useHistory();
@@ -38,7 +39,7 @@ const AdminPage = () => {
         return <StatisticPage />;
     }
     if (other === "edit") {
-        return <StatisticPage />;
+        return <EditProduct />;
     }
     if (other === "add") {
         return <StatisticPage />;

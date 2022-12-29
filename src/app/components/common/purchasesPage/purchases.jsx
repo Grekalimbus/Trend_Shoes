@@ -30,7 +30,6 @@ const Purchases = () => {
     const arrayAllHistory = createArrayHistory();
     const reserveAllHistory =
         arrayAllHistory !== undefined ? arrayAllHistory.reverse() : null;
-    console.log(reverseArray);
 
     if (other !== undefined) {
         return (

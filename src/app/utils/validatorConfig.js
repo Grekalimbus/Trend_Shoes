@@ -7,7 +7,7 @@ const validatorConfig = {
     },
     phone: {
         isRequired: { message: "Номер телефона обязателен для заполнения" },
-        isPhone: { message: "Номер должен состоять только из цифр" }
+        isNumbers: { message: "Номер должен состоять только из цифр" }
     },
     email: {
         isRequired: { message: "@mail обязательно для заполнения" },
@@ -31,6 +31,22 @@ const validatorConfig = {
         isRepeat: {
             message: "Пороли должны совподать"
         }
+    },
+    name: {
+        isRequired: {
+            message: "Обязательно для заполнения"
+        }
+    },
+    url1: {
+        isRequired: {
+            message: "Обязателено для заполнения"
+        }
+    },
+    price: {
+        isRequired: {
+            message: "Цена обязательна для заполнения"
+        },
+        isNumbers: { message: "Только из цифр" }
     }
 };
 
