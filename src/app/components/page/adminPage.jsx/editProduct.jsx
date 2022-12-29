@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 
 const EditProduct = () => {
     const { product } = useApi();
+    const [activeProduct, setProduct] = useState(null);
+    const [errors, setErrors] = useState({});
     const [data, setData] = useState({
         name: "",
         url1: "",
@@ -15,9 +17,22 @@ const EditProduct = () => {
         url3: "",
         price: ""
     });
-    const [errors, setErrors] = useState({});
+    const changeActiveProduct = (idProduct) => {
+        const filterProduct = product.filter((item) => {
+            return item._id === idProduct;
+        });
+        const objectProduct = filterProduct[0];
+        setProduct(objectProduct);
+        setData((prevState) => ({
+            ...prevState,
+            name: objectProduct.name,
+            url1: objectProduct.imgProduct[0],
+            price: String(objectProduct.price)
+        }));
+    };
     const handleChangeForm = ({ target }) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+        console.log(target.value);
     };
     const validate = () => {
         const errors = validator(data, validatorConfig);
@@ -30,9 +45,22 @@ const EditProduct = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const filterProduct =
+            activeProduct === null
+                ? null
+                : product.filter((item) => {
+                      return item._id === activeProduct._id;
+                  });
+        const objectProduct = filterProduct === null ? null : filterProduct[0];
         const isValid = validate();
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
+        } else if (
+            data.name === objectProduct.name &&
+            data.url1 === objectProduct.imgProduct[0] &&
+            Number(data.price) === objectProduct.price
+        ) {
+            return toast.error("Изменений не было");
         }
         return toast.success("четко");
     };
@@ -53,7 +81,12 @@ const EditProduct = () => {
                                 />
                             </div>
 
-                            <button className={styles.buttonPick}>
+                            <button
+                                className={styles.buttonPick}
+                                onClick={() => {
+                                    changeActiveProduct(item._id);
+                                }}
+                            >
                                 Выбрать
                             </button>
                         </div>
@@ -79,7 +112,7 @@ const EditProduct = () => {
                     error={errors.url1}
                 />
                 <Form
-                    name={"url3"}
+                    name={"url2"}
                     value={data.url2}
                     label={"Ссылка на фото"}
                     handleChangeForm={handleChangeForm}
