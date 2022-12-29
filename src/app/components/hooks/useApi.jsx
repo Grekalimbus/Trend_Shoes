@@ -59,6 +59,7 @@ const ApiProvider = ({ children }) => {
     const handleDeleteProduct = async (object) => {
         try {
             const data = await httpServices.put(`product.json`, object);
+            console.log(data);
         } catch (error) {
             console.log(error);
         }

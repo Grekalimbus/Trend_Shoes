@@ -7,8 +7,12 @@ const DeleteProduct = () => {
     const { product, handleDeleteProduct } = useApi();
     const handleDeletProduct = async (id) => {
         const filterProduct = product.filter((item) => item._id !== id);
+        const updatedDataProduct = {};
+        filterProduct.forEach((item) => {
+            updatedDataProduct[item._id] = item;
+        });
         try {
-            await handleDeleteProduct(filterProduct);
+            await handleDeleteProduct(updatedDataProduct);
             window.location.reload();
         } catch (error) {
             console.log(error);
