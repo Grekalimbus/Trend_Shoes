@@ -83,6 +83,7 @@ const ContentProductPage = () => {
                                     name={item.name}
                                     price={item.price}
                                     imgUrl={item.imgProduct[0]}
+                                    buttonTitle={"Открыть карточку"}
                                 />
                             );
                         })}
