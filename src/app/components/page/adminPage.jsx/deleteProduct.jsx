@@ -4,10 +4,15 @@ import { useApi } from "../../hooks/useApi";
 import CardProduct from "../contentPageProduct/cardProduct";
 
 const DeleteProduct = () => {
-    const { product } = useApi();
-    const handleDeletProduct = (id) => {
+    const { product, handleDeleteProduct } = useApi();
+    const handleDeletProduct = async (id) => {
         const filterProduct = product.filter((item) => item._id !== id);
-        return filterProduct;
+        try {
+            await handleDeleteProduct(filterProduct);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     };
     return product === null ? (
         <div>Loading</div>
