@@ -3,7 +3,7 @@ import FilterFirm from "../../ui/forms/filterFirm";
 import FilterName from "../../ui/forms/filterName";
 import FilterPrice from "../../ui/forms/filterPrice";
 import styles from "./index.module.css";
-import CardProduct from "./cardProduct";
+import CardProduct from "../../common/cardProduct";
 import { useParams } from "react-router-dom";
 import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";

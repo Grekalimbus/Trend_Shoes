@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import { useApi } from "../../hooks/useApi";
-import CardProduct from "../contentPageProduct/cardProduct";
+import CardProduct from "../../common/cardProduct";
 
 const DeleteProduct = () => {
     const { product, handleDeleteProduct } = useApi();

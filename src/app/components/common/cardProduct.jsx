@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./cardStyle.module.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
