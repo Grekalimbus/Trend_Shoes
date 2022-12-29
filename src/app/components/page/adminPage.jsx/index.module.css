@@ -1,12 +1,12 @@
 .wrap{
-    width: 90;
+    width: 90%;
     margin: 0 auto;
     margin-top: 20%;
     height: 80%;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around;    
 }
 .wrapStatistic{
     width: 90%;
@@ -21,6 +21,7 @@
 .flexElem{
     border: 3px solid rgba(245, 185, 55, 0.863);
     background-color: rgba(10, 7, 1, 0.486);
+    text-align: center;
     flex: 0 1 16%;    
     height: 4vh;
     display: flex;
@@ -39,6 +40,7 @@
 }
 
 /* ============ */
+/* Statistic */
 .flexElemStatistic{
     border: 3px solid rgba(245, 169, 55, 0.863);    
     background-color: rgba(0, 0, 0, 0.205);
@@ -58,7 +60,96 @@
 .flexElemStatisticHide{
     flex: 0 1 50%;
 }
+/* Statistic */
 
+/* ========== */
+/* Edit Product */
+.wrapPageEdit{
+    width: 90%;
+    margin: 0 auto;    
+    height: 80%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2%;    
+    /* border: 3px solid rgba(245, 185, 55, 0.863); */
+    height: 80vh;
+}
+.flexElemProduct{
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    overflow: auto;
+    flex: 0 1 30%;    
+    height: 100%;
+    border: 3px solid rgba(245, 185, 55, 0.863);
+}
+.flexElemProduct::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #131313;
+}
+.flexElemProduct::-webkit-scrollbar-thumb {
+    background-color:  rgba(245, 189, 67, 0.966);
+    border-radius: 5px;
+}
+.elemProduct{    
+    width: 95%;    
+    height: 100%;
+    margin-top: 3%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.363);   
+    color: aliceblue;    
+    border-radius: 5px;    
+}
+.titleName{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+.wrapImg{
+    width: 90%;
+    height: 60%;    
+    margin: 0 auto;
+}
+.img{    
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.39);
+}
+.buttonPick{
+    display: block;
+    text-align: center;
+    border-radius: 3px;
+    color: rgba(5, 5, 5, 0.788);
+    background-color: rgb(206, 206, 206);
+    width: 90%;
+    height: 3vh;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    transition: all 1s;
+}
+.buttonPick:hover{
+    color: #fc9f25;
+    background-color: #131313;
+}
+.flexElemForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 0 1 68%; 
+    border: 3px solid rgba(245, 185, 55, 0.863);
+}
+/* Edit Product */
+/* ========== */
 @media (max-width: 800px) {
     .flexElem{       
         flex: 0 1 80%;   
@@ -70,6 +161,34 @@
     .flexElemStatisticHide{
         flex:  1 1 100%;
     }
+    /* ============= */
+   
+    .flexElemProduct{
+        flex: 0 0 100%;
+        height: 30vh;     
+        flex-wrap: wrap;           
+    }
+    .elemProduct{
+        width: 30%;   
+        height: 90%;    
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+        margin: 0 auto;
+        margin-top: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
+        font-size: 10px;
+    }
+    .flexElemForm{
+        flex: 0 0 100%;
+        height: 60%;
+    }
   } 
+  @media (max-width: 450px) {
+    .flexElemProduct{
+        height: 20vh;
+    }
+  }
 
   /* Cтили для страницы с историей покупок */
