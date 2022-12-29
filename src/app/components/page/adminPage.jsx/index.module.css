@@ -199,6 +199,30 @@
 }
 /* FORM */
 /* ========== */
+
+/* ========== */
+/* delete page */
+.wrapDeletePage{
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 90%;
+    height: 80vh;
+    border: 3px solid rgb(250, 163, 31);
+    border-radius: 5px;
+    padding-top: 1%;
+    overflow: auto;
+    padding-bottom: 1%;
+}
+.wrapDeletePage::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #131313;
+}
+.wrapDeletePage::-webkit-scrollbar-thumb {
+    background-color:  rgba(245, 189, 67, 0.966);
+    border-radius: 5px;
+}
+/* delete page */
+/* ========== */
 @media (max-width: 800px) {
     .flexElem{       
         flex: 0 1 80%;   

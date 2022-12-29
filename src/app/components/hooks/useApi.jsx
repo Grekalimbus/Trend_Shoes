@@ -47,10 +47,18 @@ const ApiProvider = ({ children }) => {
 
         getDataProductAndFirm();
     }, []);
-    // изменения product
+    // изменение product/id
     const handleChangeProductID = async (id, object) => {
         try {
             const data = await httpServices.put(`product/${id}.json`, object);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    // Удаление product
+    const handleDeleteProduct = async (object) => {
+        try {
+            const data = await httpServices.put(`product.json`, object);
         } catch (error) {
             console.log(error);
         }
@@ -177,7 +185,8 @@ const ApiProvider = ({ children }) => {
                 handleChangeProduct,
                 historyPurchases,
                 allHistoryPurchases,
-                handleChangeProductID
+                handleChangeProductID,
+                handleDeleteProduct
             }}
         >
             {children}

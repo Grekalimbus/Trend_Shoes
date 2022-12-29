@@ -3,7 +3,14 @@ import styles from "./index.module.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const CardProduct = ({ name, imgUrl, price, idCard }) => {
+const CardProduct = ({
+    name,
+    imgUrl,
+    price,
+    idCard,
+    buttonTitle,
+    handleDeletProduct
+}) => {
     return (
         <div className={styles.cardProduct}>
             <div className={styles.imgContent}>
@@ -13,11 +20,22 @@ const CardProduct = ({ name, imgUrl, price, idCard }) => {
             <div className={styles.contentTitle}>
                 <h3>{name}</h3>
                 <h3>Стоимость: {price} ₽</h3>
-                <Link to={`/productPage/${idCard}`}>
-                    <button className={styles.buttonCard}>
-                        Открыть карточку
+                {buttonTitle === "Открыть карточку" ? (
+                    <Link to={`/productPage/${idCard}`}>
+                        <button className={styles.buttonCard}>
+                            {buttonTitle}
+                        </button>
+                    </Link>
+                ) : (
+                    <button
+                        className={styles.buttonCard}
+                        onClick={() => {
+                            handleDeletProduct(idCard);
+                        }}
+                    >
+                        {buttonTitle}
                     </button>
-                </Link>
+                )}
             </div>
         </div>
     );
@@ -27,7 +45,9 @@ CardProduct.propTypes = {
     name: PropTypes.string,
     imgUrl: PropTypes.string,
     price: PropTypes.number,
-    idCard: PropTypes.string
+    idCard: PropTypes.string,
+    buttonTitle: PropTypes.string,
+    handleDeletProduct: PropTypes.func
 };
 
 export default CardProduct;
