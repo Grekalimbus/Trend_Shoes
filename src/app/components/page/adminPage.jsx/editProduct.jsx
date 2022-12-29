@@ -7,7 +7,7 @@ import validatorConfig from "../../../utils/validatorConfig";
 import { toast } from "react-toastify";
 
 const EditProduct = () => {
-    const { product } = useApi();
+    const { product, handleChangeProductID } = useApi();
     const [activeProduct, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [data, setData] = useState({
@@ -63,13 +63,10 @@ const EditProduct = () => {
             price: Number(data.price),
             imgProduct: filterArrayImg
         };
-        const newAllProductObject = product.map((item) => {
-            if (item._id === newObject._id) return newObject;
-            return item;
-        });
-        return newAllProductObject;
+
+        return newObject;
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const filterProduct =
             activeProduct === null
@@ -93,8 +90,12 @@ const EditProduct = () => {
             return toast.error("Изменений не было");
         }
         const newDataProduct = changeObjectProduct(objectProduct);
-        console.log(newDataProduct);
-        return toast.success("четко");
+        try {
+            await handleChangeProductID(newDataProduct._id, newDataProduct);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     };
     return product === null ? (
         <div>Loading</div>
