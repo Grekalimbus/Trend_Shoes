@@ -27,12 +27,15 @@ const EditProduct = () => {
             ...prevState,
             name: objectProduct.name,
             url1: objectProduct.imgProduct[0],
+            url2: objectProduct.imgProduct[1],
+            url3: objectProduct.imgProduct[2]
+                ? objectProduct.imgProduct[2]
+                : "",
             price: String(objectProduct.price)
         }));
     };
     const handleChangeForm = ({ target }) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
-        console.log(target.value);
     };
     const validate = () => {
         const errors = validator(data, validatorConfig);
@@ -42,7 +45,30 @@ const EditProduct = () => {
     useEffect(() => {
         validate();
     }, [data]);
-
+    const changeObjectProduct = (object) => {
+        const arrayImg = [];
+        object.imgProduct.forEach((item, index) => {
+            if (index === 0) {
+                arrayImg.push(data.url1);
+            } else if (index === 1) {
+                arrayImg.push(data.url2);
+            } else if (index === 2) {
+                arrayImg.push(data.url3);
+            }
+        });
+        const filterArrayImg = arrayImg.filter((item) => item !== "");
+        const newObject = {
+            ...object,
+            name: data.name,
+            price: Number(data.price),
+            imgProduct: filterArrayImg
+        };
+        const newAllProductObject = product.map((item) => {
+            if (item._id === newObject._id) return newObject;
+            return item;
+        });
+        return newAllProductObject;
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
         const filterProduct =
@@ -53,15 +79,21 @@ const EditProduct = () => {
                   });
         const objectProduct = filterProduct === null ? null : filterProduct[0];
         const isValid = validate();
-        if (!isValid) {
+        if (activeProduct === null) {
+            return toast.error("Выберите товар");
+        } else if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         } else if (
             data.name === objectProduct.name &&
             data.url1 === objectProduct.imgProduct[0] &&
+            data.url2 === objectProduct.imgProduct[1] &&
+            data.url3 === objectProduct.imgProduct[2] &&
             Number(data.price) === objectProduct.price
         ) {
             return toast.error("Изменений не было");
         }
+        const newDataProduct = changeObjectProduct(objectProduct);
+        console.log(newDataProduct);
         return toast.success("четко");
     };
     return product === null ? (
