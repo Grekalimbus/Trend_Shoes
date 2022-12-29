@@ -31,6 +31,21 @@ const validatorConfig = {
         isRepeat: {
             message: "Пороли должны совподать"
         }
+    },
+    name: {
+        isRequired: {
+            message: "Обязательно для заполнения"
+        }
+    },
+    url1: {
+        isRequired: {
+            message: "Обязателено для заполнения"
+        }
+    },
+    price: {
+        isRequired: {
+            message: "Цена обязательна для заполнения"
+        }
     }
 };
 

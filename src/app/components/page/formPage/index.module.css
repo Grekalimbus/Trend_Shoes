@@ -75,7 +75,7 @@ border-radius: 5px;
 }
 .button:hover{
     background-color: #000000ce;
-    color: rgb(252, 166, 36);   
+    color: rgb(252, 166, 36);       
     border-radius: 5px ;
     border: 3px solid rgb(252, 166, 36);   
 }
