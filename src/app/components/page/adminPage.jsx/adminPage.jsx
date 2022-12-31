@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./index.module.css";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StatisticPage from "./statisticsPage";
 import Purchases from "../../common/purchasesPage/purchases";
 import { useApi } from "../../hooks/useApi";
 import EditProduct from "./editProduct";
 import DeleteProduct from "./deleteProduct";
 import AddProductPage from "./addProductPage";
+import AddHaveProduct from "./addedProduct/addHaveProduct";
+import AddFirm from "./addedProduct/addFirm";
+import AddNewProduct from "./addedProduct/addNewProduct";
 
 const AdminPage = () => {
-    const history = useHistory();
     const { allHistoryPurchases } = useApi();
     const { other } = useParams();
 
@@ -48,6 +50,15 @@ const AdminPage = () => {
     }
     if (other === "history") {
         return <Purchases allHistory={allHistoryPurchases} />;
+    }
+    if (other === "addHaveProduct") {
+        return <AddHaveProduct />;
+    }
+    if (other === "addFirm") {
+        return <AddFirm />;
+    }
+    if (other === "addNewProduct") {
+        return <AddNewProduct />;
     }
 };
 
