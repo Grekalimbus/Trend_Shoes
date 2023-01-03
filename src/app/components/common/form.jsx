@@ -38,7 +38,7 @@ Form.propTypes = {
     label: PropTypes.string,
     handleChangeForm: PropTypes.func,
     styles: PropTypes.object,
-    error: PropTypes.string,
+    error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     type: PropTypes.string
 };
 

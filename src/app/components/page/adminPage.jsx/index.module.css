@@ -223,6 +223,54 @@
 }
 /* delete page */
 /* ========== */
+
+/* ========== */
+/* add page */
+.wrappAddProductPage{
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 90%;
+    height: 80vh;    
+    border-radius: 5px;
+    padding-top: 1%;
+    overflow: auto;
+    padding-bottom: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.buttonPickAdd{
+    flex: 0 0 30%;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 5px;
+    height: 5%;
+    transition: all 1s;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.buttonPickAdd:hover{
+    box-shadow: 3px 3px 10px 1px #000;
+    color: #fc9f25;
+    border: 3px solid rgb(250, 163, 31);
+}
+/* === */
+.addFirmPage{
+    height: 80vh;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 1%;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* add page */
+/* ========== */
 @media (max-width: 800px) {
     .flexElem{       
         flex: 0 1 80%;   
@@ -258,6 +306,9 @@
     .flexElemForm{
         flex: 0 0 100%;
         height: 62%;
+    }
+    .buttonPickAdd{
+        flex: 0 0 90%;
     }
   } 
   @media (max-width: 450px) {

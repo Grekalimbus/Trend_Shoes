@@ -42,11 +42,21 @@ const validatorConfig = {
             message: "Обязателено для заполнения"
         }
     },
+    url2: {
+        isRequired: {
+            message: "Обязателено для заполнения"
+        }
+    },
     price: {
         isRequired: {
             message: "Цена обязательна для заполнения"
         },
         isNumbers: { message: "Только из цифр" }
+    },
+    id: {
+        isRequired: {
+            message: "Обязательно для заполнения"
+        }
     }
 };
 
