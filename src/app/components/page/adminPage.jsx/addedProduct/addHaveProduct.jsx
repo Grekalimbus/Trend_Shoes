@@ -1,10 +1,14 @@
 import React from "react";
+import styles from "./index.module.css";
+import CardHaveProduct from "./cardHaveProduct";
 
 const AddHaveProduct = () => {
     return (
-        <div>
-            AddHaveProduct
-            <button>ff</button>
+        <div className={styles.wrapAddHaveProduct}>
+            <CardHaveProduct />
+            <CardHaveProduct />
+            <CardHaveProduct />
+            <CardHaveProduct />
         </div>
     );
 };

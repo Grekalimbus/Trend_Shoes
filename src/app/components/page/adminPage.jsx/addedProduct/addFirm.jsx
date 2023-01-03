@@ -3,7 +3,6 @@ import styles from "../index.module.css";
 import Form from "../../../common/form";
 import validator from "../../../../utils/validator";
 import validatorConfig from "../../../../utils/validatorConfig";
-import { toast } from "react-toastify";
 
 const AddFirm = () => {
     const [data, setData] = useState({ id: "", firm: "" });
