@@ -19,6 +19,7 @@ const ApiProvider = ({ children }) => {
     const { user } = useAuth();
     const basketDataSizes = dataBasket.getBasketSizes();
     const userID = localStorageService.getUserId();
+
     // пулл данных в состояния product/dataFirm
     useEffect(() => {
         const getDataProductAndFirm = async () => {
