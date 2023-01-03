@@ -9,6 +9,7 @@ import BlockSizesValue from "./blockSizeValue";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
+    const [quantity, setQuantity] = useState([]);
     const [data, setData] = useState({
         firm: "",
         id: "",
@@ -45,6 +46,42 @@ const AddNewProduct = () => {
         { sizes: 47, value: 0 },
         { sizes: 48, value: 0 }
     ];
+    const handleChangeQuantity = (object, { target }) => {
+        // setQuantity(quantity);
+        const action = target.innerText;
+
+        if (action === "+") {
+            if (quantity.length <= 0) {
+                setQuantity([
+                    {
+                        sizes: object.sizes,
+                        value: (object.value += 1)
+                    }
+                ]);
+            } else if (quantity.length > 0) {
+                // const mapQuantity = quantity.map((item) => {
+                //     if (item.sizes === object.sizes) {
+                //         return {
+                //             sizes: object.sizes,
+                //             value: (object.value += 1)
+                //         };
+                //     } else if (item.sizes !== object.sizes) {
+                //         setQuantity((prevState) =>
+                //             prevState.push({
+                //                 sizes: object.sizes,
+                //                 value: (object.value += 1)
+                //             })
+                //         );
+                //     }
+                //     return item;
+                // });
+                // setQuantity(mapQuantity);
+                // console.log(mapQuantity);
+            }
+        } else if (action === "-") {
+            console.log("-");
+        }
+    };
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
@@ -63,7 +100,13 @@ const AddNewProduct = () => {
     const handleSubmit = () => {
         const isValid = validate();
         if (!isValid) {
+            if (!data.firm) {
+                return toast.error("Выберите фирму товара");
+            }
             return toast.error("Правильно заполните все участки формы");
+        }
+        if (!quantity) {
+            return toast.error("Выберите размеры");
         }
         console.log(data);
     };
@@ -110,7 +153,11 @@ const AddNewProduct = () => {
                 <div className={styles.flexElemSizesForForm}>
                     {sizesObject.map((item) => {
                         return (
-                            <BlockSizesValue key={item.sizes} object={item} />
+                            <BlockSizesValue
+                                key={item.sizes}
+                                object={item}
+                                handleChangeQuantity={handleChangeQuantity}
+                            />
                         );
                     })}
                 </div>
