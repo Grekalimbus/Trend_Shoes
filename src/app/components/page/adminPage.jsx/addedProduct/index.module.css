@@ -141,20 +141,42 @@
 }
 
 @media (max-width: 1000px) {
+    .cardWrapp{
+        flex: 0 0 100%;
+        flex-direction: column;
+        margin-bottom: 5%;
+        height: 55vh;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
     .flexElemInfo{
-        flex: 0 0 55%;
+        flex: 0 0 50%;
+        width: 100%;
     }
     .flexElemBlockImg{
-        flex: 0 0 40%;
+        flex: 0 0 45%;
+        height: 40%;
+        width: 80%;
     }
   }
 
   @media (max-width: 500px) {
+    .cardWrapp{
+        flex: 0 0 100%;
+        flex-direction: column;
+        margin-bottom: 5%;
+        height: 55vh;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
     .flexElemInfo{
         flex: 0 0 50%;
+        width: 100%;
     }
     .flexElemBlockImg{
         flex: 0 0 45%;
+        height: 40%;
+        width: 100%;
     }
   }
 

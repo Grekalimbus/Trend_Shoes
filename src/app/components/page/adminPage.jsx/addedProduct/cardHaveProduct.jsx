@@ -41,7 +41,6 @@ const CardHaveProduct = ({ quantity, image }) => {
             return newArraySizes;
         }
     };
-    console.log(getNewModifiedSizesValueObject());
     const newSizeValueObject = getNewModifiedSizesValueObject();
     return (
         <div className={styles.cardWrapp}>
