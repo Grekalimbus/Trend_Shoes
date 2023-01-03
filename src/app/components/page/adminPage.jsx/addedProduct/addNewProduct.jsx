@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import { useApi } from "../../../hooks/useApi";
 import Form from "../../../common/form";
-
-// добавить селект
-// инпут id
-// инпут 3 фото (2 с ошибкой isRequired)
-// name
-// price
-// button sizes (component blockSizeValue)
-// button create product
+import validatorConfig from "../../../../utils/validatorConfig";
+import validator from "../../../../utils/validator";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
@@ -49,6 +43,14 @@ const AddNewProduct = () => {
         { sizes: 47, value: 0 },
         { sizes: 48, value: 0 }
     ];
+    const validate = () => {
+        const errors = validator(data, validatorConfig);
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+    useEffect(() => {
+        validate();
+    }, [data]);
 
     const handleChangeForm = ({ target }) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));

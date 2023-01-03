@@ -150,7 +150,7 @@ const EditProduct = () => {
                     label={"Ссылка на фото"}
                     handleChangeForm={handleChangeForm}
                     styles={styles}
-                    error={""}
+                    error={errors.url2}
                 />
                 <Form
                     name={"url3"}
