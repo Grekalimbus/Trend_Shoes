@@ -19,6 +19,10 @@ function validator(data, config) {
                 if (data !== allData.password) return config.message;
                 break;
             }
+            case "isID": {
+                if (data.length < 8) return config.message;
+                break;
+            }
             default:
                 break;
         }

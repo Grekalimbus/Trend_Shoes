@@ -4,6 +4,8 @@ import { useApi } from "../../../hooks/useApi";
 import Form from "../../../common/form";
 import validatorConfig from "../../../../utils/validatorConfig";
 import validator from "../../../../utils/validator";
+import { toast } from "react-toastify";
+import BlockSizesValue from "./blockSizeValue";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
@@ -19,8 +21,8 @@ const AddNewProduct = () => {
     const arrayLabelForm = [
         "Уникальный ID из 8 символов",
         "Имя товара",
-        "2-я ссылка на фото товара",
         "1-я ссылка на фото товара",
+        "2-я ссылка на фото товара",
         "3-я ссылка на фото товара",
         "Стоимость товара"
     ];
@@ -56,6 +58,12 @@ const AddNewProduct = () => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
         if (target.value === "Выбрать фирму") {
             setData((prevState) => ({ ...prevState, [target.name]: "" }));
+        }
+    };
+    const handleSubmit = () => {
+        const isValid = validate();
+        if (!isValid) {
+            return toast.error("Правильно заполните все участки формы");
         }
         console.log(data);
     };
@@ -99,7 +107,18 @@ const AddNewProduct = () => {
                         />
                     );
                 })}
-                <button className={styles.buttonAddProduct}>
+                <div className={styles.flexElemSizesForForm}>
+                    {sizesObject.map((item) => {
+                        return (
+                            <BlockSizesValue key={item.sizes} object={item} />
+                        );
+                    })}
+                </div>
+
+                <button
+                    className={styles.buttonAddProduct}
+                    onClick={handleSubmit}
+                >
                     Добавить товар
                 </button>
             </div>

@@ -56,6 +56,14 @@ const validatorConfig = {
     id: {
         isRequired: {
             message: "Обязательно для заполнения"
+        },
+        isID: {
+            message: "ID должен состояить минимум из 8 символов"
+        }
+    },
+    firm: {
+        isRequired: {
+            message: "Обязательно для заполнения"
         }
     }
 };
