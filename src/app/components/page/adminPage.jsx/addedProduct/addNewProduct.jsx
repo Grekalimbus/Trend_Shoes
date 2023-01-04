@@ -56,34 +56,6 @@ const AddNewProduct = () => {
             setQuantityObject,
             quantityObject
         );
-        // const action = target.innerText;
-        // if (action === "+") {
-        //     const newArr = quantityObject.map((item) => {
-        //         if (item.sizes === object.sizes) {
-        //             const newObject = {
-        //                 sizes: item.sizes,
-        //                 value: (item.value += 1)
-        //             };
-        //             return newObject;
-        //         }
-        //         return item;
-        //     });
-        //     setQuantityObject(newArr);
-        // } else if (action === "-") {
-        //     const newArr = quantityObject.map((item) => {
-        //         if (item.sizes === object.sizes) {
-        //             if (item.value !== 0) {
-        //                 const newObject = {
-        //                     sizes: item.sizes,
-        //                     value: (item.value -= 1)
-        //                 };
-        //                 return newObject;
-        //             }
-        //         }
-        //         return item;
-        //     });
-        //     setQuantityObject(newArr);
-        // }
     };
     const validate = () => {
         const errors = validator(data, validatorConfig);
@@ -111,7 +83,19 @@ const AddNewProduct = () => {
         if (!quantity) {
             return toast.error("Выберите размеры");
         }
-        console.log(data);
+        const filterArraySizes = quantityObject.filter(
+            (item) => item.value !== 0
+        );
+        const arrayUrl = [data.url1, data.url2, data.url3];
+        const filterArrayUrl = arrayUrl.filter((item) => item !== "");
+        const newObjectForDataBase = {
+            _id: data.id,
+            name: data.name,
+            firm: data.firm,
+            price: Number(data.price),
+            quantity: filterArraySizes,
+            imgProduct: filterArrayUrl
+        };
     };
     if (!dataFirm) {
         return <div>Loading</div>;
