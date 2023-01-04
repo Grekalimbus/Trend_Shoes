@@ -3,8 +3,11 @@ import styles from "../index.module.css";
 import Form from "../../../common/form";
 import validator from "../../../../utils/validator";
 import validatorConfig from "../../../../utils/validatorConfig";
+import { useAuth } from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const AddFirm = () => {
+    const { addFirmDataBase } = useAuth();
     const [data, setData] = useState({ id: "", firm: "" });
     const [errors, setErrors] = useState({});
     const handleChangeForm = ({ target }) => {
@@ -19,6 +22,20 @@ const AddFirm = () => {
         validate();
     }, [data]);
 
+    const submitFirm = async () => {
+        try {
+            if (data.id.length >= 8 && data.firm !== "") {
+                const object = { _id: data.id, name: data.firm };
+                await addFirmDataBase(data.id, object);
+                window.location.reload();
+            }
+            if (data.id.length < 8 && data.firm !== "") {
+                toast.error("Заполните правильно участки");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div className={styles.addFirmPage}>
             <Form
@@ -37,6 +54,9 @@ const AddFirm = () => {
                 label="Название фирмы"
                 error={errors.firm}
             />
+            <button className={styles.button} onClick={submitFirm}>
+                Добавить
+            </button>
         </div>
     );
 };

@@ -56,6 +56,13 @@ const AuthProvider = ({ children }) => {
             console.log(error);
         }
     }
+    async function addFirmDataBase(id, object) {
+        try {
+            const data = await httpServices.put(`firm/${id}.json`, object);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async function createUser(dataUserKey) {
         try {
             const data = userService
@@ -123,7 +130,14 @@ const AuthProvider = ({ children }) => {
     }, []);
     return (
         <AuthContext.Provider
-            value={{ signUp, loginIn, user, addProduct, changeObjectQuantity }}
+            value={{
+                signUp,
+                loginIn,
+                user,
+                addProduct,
+                changeObjectQuantity,
+                addFirmDataBase
+            }}
         >
             {children}
         </AuthContext.Provider>
