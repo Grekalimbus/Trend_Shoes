@@ -6,10 +6,11 @@ import validatorConfig from "../../../../utils/validatorConfig";
 import validator from "../../../../utils/validator";
 import { toast } from "react-toastify";
 import BlockSizesValue from "./blockSizeValue";
+import handleChangeQuantityFunc from "../../../../utils/changeSizes";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
-    const [quantity, setQuantity] = useState([
+    const [quantityObject, setQuantityObject] = useState([
         { sizes: 37, value: 0 },
         { sizes: 38, value: 0 },
         { sizes: 39, value: 0 },
@@ -23,6 +24,9 @@ const AddNewProduct = () => {
         { sizes: 47, value: 0 },
         { sizes: 48, value: 0 }
     ]);
+    const quantity = quantityObject.some((item) => {
+        return item.value !== 0;
+    });
     const [data, setData] = useState({
         firm: "",
         id: "",
@@ -44,52 +48,42 @@ const AddNewProduct = () => {
         return item !== "firm";
     });
     const [errors, setErrors] = useState({ id: "" });
-    // console.log(arrayData);
-    const sizesObject = [
-        { sizes: 37, value: 0 },
-        { sizes: 38, value: 0 },
-        { sizes: 39, value: 0 },
-        { sizes: 40, value: 0 },
-        { sizes: 41, value: 0 },
-        { sizes: 42, value: 0 },
-        { sizes: 43, value: 0 },
-        { sizes: 44, value: 0 },
-        { sizes: 45, value: 0 },
-        { sizes: 46, value: 0 },
-        { sizes: 47, value: 0 },
-        { sizes: 48, value: 0 }
-    ];
+
     const handleChangeQuantity = (object, { target }) => {
-        // setQuantity(quantity);
-        const action = target.innerText;
-        // console.log(quantity, "quantity");
-        if (action === "+") {
-            const newArr = quantity.map((item) => {
-                if (item.sizes === object.sizes) {
-                    const newObject = {
-                        sizes: item.sizes,
-                        value: (item.value += 1)
-                    };
-                    return newObject;
-                }
-                return item;
-            });
-            setQuantity(newArr);
-        } else if (action === "-") {
-            const newArr = quantity.map((item) => {
-                if (item.sizes === object.sizes) {
-                    if (item.value !== 0) {
-                        const newObject = {
-                            sizes: item.sizes,
-                            value: (item.value -= 1)
-                        };
-                        return newObject;
-                    }
-                }
-                return item;
-            });
-            setQuantity(newArr);
-        }
+        handleChangeQuantityFunc(
+            object,
+            target,
+            setQuantityObject,
+            quantityObject
+        );
+        // const action = target.innerText;
+        // if (action === "+") {
+        //     const newArr = quantityObject.map((item) => {
+        //         if (item.sizes === object.sizes) {
+        //             const newObject = {
+        //                 sizes: item.sizes,
+        //                 value: (item.value += 1)
+        //             };
+        //             return newObject;
+        //         }
+        //         return item;
+        //     });
+        //     setQuantityObject(newArr);
+        // } else if (action === "-") {
+        //     const newArr = quantityObject.map((item) => {
+        //         if (item.sizes === object.sizes) {
+        //             if (item.value !== 0) {
+        //                 const newObject = {
+        //                     sizes: item.sizes,
+        //                     value: (item.value -= 1)
+        //                 };
+        //                 return newObject;
+        //             }
+        //         }
+        //         return item;
+        //     });
+        //     setQuantityObject(newArr);
+        // }
     };
     const validate = () => {
         const errors = validator(data, validatorConfig);
@@ -160,7 +154,7 @@ const AddNewProduct = () => {
                     );
                 })}
                 <div className={styles.flexElemSizesForForm}>
-                    {sizesObject.map((item) => {
+                    {quantityObject.map((item) => {
                         return (
                             <BlockSizesValue
                                 key={item.sizes}
