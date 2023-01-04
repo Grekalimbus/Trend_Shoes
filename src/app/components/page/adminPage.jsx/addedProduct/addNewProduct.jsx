@@ -9,7 +9,20 @@ import BlockSizesValue from "./blockSizeValue";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
-    const [quantity, setQuantity] = useState([]);
+    const [quantity, setQuantity] = useState([
+        { sizes: 37, value: 0 },
+        { sizes: 38, value: 0 },
+        { sizes: 39, value: 0 },
+        { sizes: 40, value: 0 },
+        { sizes: 41, value: 0 },
+        { sizes: 42, value: 0 },
+        { sizes: 43, value: 0 },
+        { sizes: 44, value: 0 },
+        { sizes: 45, value: 0 },
+        { sizes: 46, value: 0 },
+        { sizes: 47, value: 0 },
+        { sizes: 48, value: 0 }
+    ]);
     const [data, setData] = useState({
         firm: "",
         id: "",
@@ -49,37 +62,33 @@ const AddNewProduct = () => {
     const handleChangeQuantity = (object, { target }) => {
         // setQuantity(quantity);
         const action = target.innerText;
-
+        // console.log(quantity, "quantity");
         if (action === "+") {
-            if (quantity.length <= 0) {
-                setQuantity([
-                    {
-                        sizes: object.sizes,
-                        value: (object.value += 1)
-                    }
-                ]);
-            } else if (quantity.length > 0) {
-                // const mapQuantity = quantity.map((item) => {
-                //     if (item.sizes === object.sizes) {
-                //         return {
-                //             sizes: object.sizes,
-                //             value: (object.value += 1)
-                //         };
-                //     } else if (item.sizes !== object.sizes) {
-                //         setQuantity((prevState) =>
-                //             prevState.push({
-                //                 sizes: object.sizes,
-                //                 value: (object.value += 1)
-                //             })
-                //         );
-                //     }
-                //     return item;
-                // });
-                // setQuantity(mapQuantity);
-                // console.log(mapQuantity);
-            }
+            const newArr = quantity.map((item) => {
+                if (item.sizes === object.sizes) {
+                    const newObject = {
+                        sizes: item.sizes,
+                        value: (item.value += 1)
+                    };
+                    return newObject;
+                }
+                return item;
+            });
+            setQuantity(newArr);
         } else if (action === "-") {
-            console.log("-");
+            const newArr = quantity.map((item) => {
+                if (item.sizes === object.sizes) {
+                    if (item.value !== 0) {
+                        const newObject = {
+                            sizes: item.sizes,
+                            value: (item.value -= 1)
+                        };
+                        return newObject;
+                    }
+                }
+                return item;
+            });
+            setQuantity(newArr);
         }
     };
     const validate = () => {
