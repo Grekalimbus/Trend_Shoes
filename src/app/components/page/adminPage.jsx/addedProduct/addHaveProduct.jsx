@@ -25,6 +25,7 @@ const AddHaveProduct = () => {
                             key={String(index) + "01"}
                             quantity={item}
                             image={product[index].imgProduct[0]}
+                            id={product[index]._id}
                         />
                     );
                 })}

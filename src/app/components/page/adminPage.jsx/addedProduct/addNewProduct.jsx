@@ -6,10 +6,29 @@ import validatorConfig from "../../../../utils/validatorConfig";
 import validator from "../../../../utils/validator";
 import { toast } from "react-toastify";
 import BlockSizesValue from "./blockSizeValue";
+import handleChangeQuantityFunc from "../../../../utils/changeSizes";
+import { useAuth } from "../../../hooks/useAuth";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
-    const [quantity, setQuantity] = useState([]);
+    const { addProduct } = useAuth();
+    const [quantityObject, setQuantityObject] = useState([
+        { sizes: 37, value: 0 },
+        { sizes: 38, value: 0 },
+        { sizes: 39, value: 0 },
+        { sizes: 40, value: 0 },
+        { sizes: 41, value: 0 },
+        { sizes: 42, value: 0 },
+        { sizes: 43, value: 0 },
+        { sizes: 44, value: 0 },
+        { sizes: 45, value: 0 },
+        { sizes: 46, value: 0 },
+        { sizes: 47, value: 0 },
+        { sizes: 48, value: 0 }
+    ]);
+    const quantity = quantityObject.some((item) => {
+        return item.value !== 0;
+    });
     const [data, setData] = useState({
         firm: "",
         id: "",
@@ -31,56 +50,14 @@ const AddNewProduct = () => {
         return item !== "firm";
     });
     const [errors, setErrors] = useState({ id: "" });
-    // console.log(arrayData);
-    const sizesObject = [
-        { sizes: 37, value: 0 },
-        { sizes: 38, value: 0 },
-        { sizes: 39, value: 0 },
-        { sizes: 40, value: 0 },
-        { sizes: 41, value: 0 },
-        { sizes: 42, value: 0 },
-        { sizes: 43, value: 0 },
-        { sizes: 44, value: 0 },
-        { sizes: 45, value: 0 },
-        { sizes: 46, value: 0 },
-        { sizes: 47, value: 0 },
-        { sizes: 48, value: 0 }
-    ];
-    const handleChangeQuantity = (object, { target }) => {
-        // setQuantity(quantity);
-        const action = target.innerText;
 
-        if (action === "+") {
-            if (quantity.length <= 0) {
-                setQuantity([
-                    {
-                        sizes: object.sizes,
-                        value: (object.value += 1)
-                    }
-                ]);
-            } else if (quantity.length > 0) {
-                // const mapQuantity = quantity.map((item) => {
-                //     if (item.sizes === object.sizes) {
-                //         return {
-                //             sizes: object.sizes,
-                //             value: (object.value += 1)
-                //         };
-                //     } else if (item.sizes !== object.sizes) {
-                //         setQuantity((prevState) =>
-                //             prevState.push({
-                //                 sizes: object.sizes,
-                //                 value: (object.value += 1)
-                //             })
-                //         );
-                //     }
-                //     return item;
-                // });
-                // setQuantity(mapQuantity);
-                // console.log(mapQuantity);
-            }
-        } else if (action === "-") {
-            console.log("-");
-        }
+    const handleChangeQuantity = (object, { target }) => {
+        handleChangeQuantityFunc(
+            object,
+            target,
+            setQuantityObject,
+            quantityObject
+        );
     };
     const validate = () => {
         const errors = validator(data, validatorConfig);
@@ -97,7 +74,7 @@ const AddNewProduct = () => {
             setData((prevState) => ({ ...prevState, [target.name]: "" }));
         }
     };
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const isValid = validate();
         if (!isValid) {
             if (!data.firm) {
@@ -108,7 +85,29 @@ const AddNewProduct = () => {
         if (!quantity) {
             return toast.error("Выберите размеры");
         }
-        console.log(data);
+        const filterArraySizes = quantityObject.filter(
+            (item) => item.value !== 0
+        );
+
+        const arrayUrl = [data.url1, data.url2, data.url3];
+        const filterArrayUrl = arrayUrl.filter((item) => item !== "");
+
+        const newObjectForDataBase = {
+            _id: data.id,
+            name: data.name,
+            firm: data.firm,
+            price: Number(data.price),
+            quantity: filterArraySizes,
+            imgProduct: filterArrayUrl
+        };
+        try {
+            await addProduct(data.id, newObjectForDataBase);
+            localStorage.removeItem("storageBasket");
+            localStorage.removeItem("dataSizes");
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     };
     if (!dataFirm) {
         return <div>Loading</div>;
@@ -151,7 +150,7 @@ const AddNewProduct = () => {
                     );
                 })}
                 <div className={styles.flexElemSizesForForm}>
-                    {sizesObject.map((item) => {
+                    {quantityObject.map((item) => {
                         return (
                             <BlockSizesValue
                                 key={item.sizes}
