@@ -7,9 +7,11 @@ import validator from "../../../../utils/validator";
 import { toast } from "react-toastify";
 import BlockSizesValue from "./blockSizeValue";
 import handleChangeQuantityFunc from "../../../../utils/changeSizes";
+import { useAuth } from "../../../hooks/useAuth";
 
 const AddNewProduct = () => {
     const { dataFirm } = useApi();
+    const { addProduct } = useAuth();
     const [quantityObject, setQuantityObject] = useState([
         { sizes: 37, value: 0 },
         { sizes: 38, value: 0 },
@@ -72,7 +74,7 @@ const AddNewProduct = () => {
             setData((prevState) => ({ ...prevState, [target.name]: "" }));
         }
     };
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const isValid = validate();
         if (!isValid) {
             if (!data.firm) {
@@ -86,8 +88,10 @@ const AddNewProduct = () => {
         const filterArraySizes = quantityObject.filter(
             (item) => item.value !== 0
         );
+
         const arrayUrl = [data.url1, data.url2, data.url3];
         const filterArrayUrl = arrayUrl.filter((item) => item !== "");
+
         const newObjectForDataBase = {
             _id: data.id,
             name: data.name,
@@ -96,6 +100,14 @@ const AddNewProduct = () => {
             quantity: filterArraySizes,
             imgProduct: filterArrayUrl
         };
+        try {
+            await addProduct(data.id, newObjectForDataBase);
+            localStorage.removeItem("storageBasket");
+            localStorage.removeItem("dataSizes");
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     };
     if (!dataFirm) {
         return <div>Loading</div>;

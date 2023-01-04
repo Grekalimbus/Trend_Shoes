@@ -5,6 +5,7 @@ import userService from "../../services/user.service";
 import localStorageService, {
     setTokens
 } from "../../services/localStorage.service";
+import httpServices from "../../services/http.service";
 
 const AuthContext = React.createContext();
 
@@ -36,6 +37,13 @@ const AuthProvider = ({ children }) => {
                     throw errorObject;
                 }
             }
+        }
+    }
+    async function addProduct(id, object) {
+        try {
+            const data = await httpServices.put(`product/${id}.json`, object);
+        } catch (error) {
+            console.log(error);
         }
     }
     async function createUser(dataUserKey) {
@@ -104,7 +112,7 @@ const AuthProvider = ({ children }) => {
         refreshTokenChek();
     }, []);
     return (
-        <AuthContext.Provider value={{ signUp, loginIn, user }}>
+        <AuthContext.Provider value={{ signUp, loginIn, user, addProduct }}>
             {children}
         </AuthContext.Provider>
     );
