@@ -38,7 +38,6 @@ const ApiProvider = ({ children }) => {
                 }
                 const { data } = await httpServices.get("/product.json");
                 const firm = await httpServices.get("/firm.json");
-
                 setProduct(Object.keys(data).map((item) => data[item]));
                 setDataFirm(firm.data);
             } catch (error) {
