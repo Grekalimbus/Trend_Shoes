@@ -13,6 +13,8 @@ const DeleteProduct = () => {
         });
         try {
             await handleDeleteProduct(updatedDataProduct);
+            localStorage.removeItem("storageBasket");
+            localStorage.removeItem("dataSizes");
             window.location.reload();
         } catch (error) {
             console.log(error);
