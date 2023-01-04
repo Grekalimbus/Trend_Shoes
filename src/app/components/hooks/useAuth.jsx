@@ -46,6 +46,16 @@ const AuthProvider = ({ children }) => {
             console.log(error);
         }
     }
+    async function changeObjectQuantity(id, array) {
+        try {
+            const data = await httpServices.put(
+                `product/${id}/quantity.json`,
+                array
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async function createUser(dataUserKey) {
         try {
             const data = userService
@@ -112,7 +122,9 @@ const AuthProvider = ({ children }) => {
         refreshTokenChek();
     }, []);
     return (
-        <AuthContext.Provider value={{ signUp, loginIn, user, addProduct }}>
+        <AuthContext.Provider
+            value={{ signUp, loginIn, user, addProduct, changeObjectQuantity }}
+        >
             {children}
         </AuthContext.Provider>
     );

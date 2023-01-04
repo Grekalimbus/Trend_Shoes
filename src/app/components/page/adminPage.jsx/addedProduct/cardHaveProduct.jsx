@@ -3,8 +3,11 @@ import styles from "./index.module.css";
 import BlockSizesValue from "./blockSizeValue";
 import PropTypes from "prop-types";
 import handleChangeQuantityFunc from "../../../../utils/changeSizes";
+import { useAuth } from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
 
-const CardHaveProduct = ({ quantity, image }) => {
+const CardHaveProduct = ({ quantity, image, id }) => {
+    const { changeObjectQuantity } = useAuth();
     const [quantityObject, setQuantityObject] = useState([
         { sizes: 37, value: 0 },
         { sizes: 38, value: 0 },
@@ -55,6 +58,25 @@ const CardHaveProduct = ({ quantity, image }) => {
             quantityObject
         );
     };
+    const submitDataQuantity = async () => {
+        const filterSizesArray = quantityObject.filter(
+            (item) => item.value !== 0
+        );
+        try {
+            if (filterSizesArray.length !== 0) {
+                await changeObjectQuantity(id, filterSizesArray);
+                localStorage.removeItem("storageBasket");
+                localStorage.removeItem("dataSizes");
+                window.location.reload();
+            }
+            if (filterSizesArray.length === 0) {
+                toast.error("Удалите товар в другой вкладке");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        console.log(filterSizesArray);
+    };
 
     return !quantity ? (
         <div>Loading</div>
@@ -80,14 +102,17 @@ const CardHaveProduct = ({ quantity, image }) => {
                         );
                     })}
                 </div>
-                <button className={styles.button}>Принять</button>
+                <button className={styles.button} onClick={submitDataQuantity}>
+                    Принять
+                </button>
             </div>
         </div>
     );
 };
 CardHaveProduct.propTypes = {
     quantity: PropTypes.array,
-    image: PropTypes.string
+    image: PropTypes.string,
+    id: PropTypes.string
 };
 
 export default CardHaveProduct;
