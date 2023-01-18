@@ -36,4 +36,7 @@ export const loadFirmList = () => async (dispatch) => {
     }
 };
 
+export const getFirm = () => (state) => state.firm.entities;
+export const getIsLoadingFirmStatus = () => (state) => state.firm.isLoading;
+
 export default firmReducer;

@@ -8,16 +8,20 @@ import { useParams } from "react-router-dom";
 import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
 import { useApi } from "../../hooks/useApi";
+import { useSelector } from "react-redux";
+import { getFirm, getIsLoadingFirmStatus } from "../../../store/firm";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
-    const { product, dataFirm } = useApi();
+    const { product } = useApi();
     const [data, setData] = useState({
         name: "",
         from: "",
         before: "",
         firm: ""
     });
+    const dataFirm = useSelector(getFirm());
+    const isLoadingFirm = useSelector(getIsLoadingFirmStatus());
 
     // функция переданная в формы, которая меняет состояние data
     const handleChangeForm = (target) => {

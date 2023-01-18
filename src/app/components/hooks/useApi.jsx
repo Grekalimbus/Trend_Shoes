@@ -13,14 +13,12 @@ export const useApi = () => {
 
 const ApiProvider = ({ children }) => {
     const [product, setProduct] = useState(null);
-    const [dataFirm, setDataFirm] = useState(null);
     const [historyPurchases, setHistoryPurchases] = useState();
     const [allHistoryPurchases, setAllHistory] = useState();
     const { user } = useAuth();
     const basketDataSizes = dataBasket.getBasketSizes();
     const userID = localStorageService.getUserId();
 
-    // пулл данных в состояния product/dataFirm
     useEffect(() => {
         const getDataProductAndFirm = async () => {
             try {
@@ -37,9 +35,7 @@ const ApiProvider = ({ children }) => {
                     setHistoryPurchases(dataHistoryPurchases.data);
                 }
                 const { data } = await httpServices.get("/product.json");
-                const firm = await httpServices.get("/firm.json");
                 setProduct(Object.keys(data).map((item) => data[item]));
-                setDataFirm(firm.data);
             } catch (error) {
                 console.log(error);
             }
@@ -182,7 +178,6 @@ const ApiProvider = ({ children }) => {
         <ApiContext.Provider
             value={{
                 product: product,
-                dataFirm: dataFirm,
                 handleChangeProduct,
                 historyPurchases,
                 allHistoryPurchases,
