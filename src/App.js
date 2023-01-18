@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./index.module.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import MainPage from "./app/layouts/mainPage";
@@ -16,9 +16,14 @@ import ApiProvider from "./app/components/hooks/useApi";
 import LoginPage from "./app/components/page/loginPage/loginPage";
 import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";
-import StaticPange from "./app/components/page/adminPage.jsx/statisticsPage";
+import { useDispatch } from "react-redux";
+import { loadFirmList } from "./app/store/firm";
 
 function App() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(loadFirmList());
+    }, []);
     useProductBasket();
     return (
         <div className={styles.wrapperPage}>
