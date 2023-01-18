@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import localStorageService, {
     deleteTokens
 } from "../../../services/localStorage.service";
 import { useApi } from "../../hooks/useApi";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../store/user";
 
 const Header = () => {
     const [color, setColor] = useState(true);
     const { historyPurchases } = useApi();
     const history = useHistory();
-    const { user } = useAuth();
+    const user = useSelector(getUser());
     setTimeout(() => {
         setColor((pervState) => !pervState);
     }, 5000);
     function isAdminStatus() {
-        if (user !== undefined) {
+        if (user !== undefined && user !== null) {
             if (user.email === "grechkin-danil@mail.ru") {
                 return true;
             }
@@ -24,8 +25,8 @@ const Header = () => {
         return false;
     }
 
-    const reloadPageAndClearLS = () => {
-        localStorageService.deleteTokens();
+    const handleGoOut = () => {
+        deleteTokens();
         history.push("/");
         location.reload();
     };
@@ -65,7 +66,7 @@ const Header = () => {
                     </Link>
                 )}
 
-                {user === undefined ? (
+                {user === null ? (
                     <Link to="/login" className={styles.button}>
                         <h2 className={styles.h2}>Вход / Регистрация</h2>
                     </Link>
@@ -73,7 +74,7 @@ const Header = () => {
                     <div
                         className={styles.button}
                         onClick={() => {
-                            reloadPageAndClearLS();
+                            handleGoOut();
                         }}
                     >
                         <h2 className={styles.h2}>Выйти</h2>

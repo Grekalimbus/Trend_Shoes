@@ -18,11 +18,15 @@ import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";
 import { useDispatch } from "react-redux";
 import { loadFirmList } from "./app/store/firm";
-
+import { loadUser } from "./app/store/user";
+import localStorageService from "./app/services/localStorage.service";
 function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadFirmList());
+        if (localStorageService.getAccessToken()) {
+            dispatch(loadUser());
+        }
     }, []);
     useProductBasket();
     return (
