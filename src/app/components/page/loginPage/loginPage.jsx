@@ -7,15 +7,19 @@ import validatorConfig from "../../../utils/validatorConfig";
 import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser, loginIn } from "../../../store/user";
 
 const LoginPage = () => {
     const history = useHistory();
-    const { signUp, loginIn } = useAuth();
+    const { signUp } = useAuth();
     const [data, setData] = useState({
         email: "",
         password: "",
         repeatPassword: ""
     });
+    const user = useSelector(getUser());
+    const dispatch = useDispatch();
 
     const [errors, setErrors] = useState({});
     const { exit } = useParams();
@@ -51,13 +55,7 @@ const LoginPage = () => {
             }
         }
         if (exit) {
-            try {
-                await loginIn(data);
-                history.push("/");
-                location.reload();
-            } catch (error) {
-                setErrors(error);
-            }
+            dispatch(loginIn(data));
         }
     };
 
