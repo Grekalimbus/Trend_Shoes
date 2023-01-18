@@ -6,7 +6,8 @@ const firmSlice = createSlice({
     initialState: {
         entities: null,
         isLoading: true,
-        error: null
+        error: null,
+        lastFeatch: null
     },
     reducers: {
         firmRequested(state) {
@@ -15,6 +16,7 @@ const firmSlice = createSlice({
         firmReceved(state, actions) {
             state.entities = actions.payload;
             state.isLoading = false;
+            state.lastFeatch = Date.now();
         },
         firmRequestFiled(state, actions) {
             state.error = actions.payload;
@@ -26,13 +28,22 @@ const firmSlice = createSlice({
 const { reducer: firmReducer, actions } = firmSlice;
 const { firmRequested, firmReceved, firmRequestFiled } = actions;
 
-export const loadFirmList = () => async (dispatch) => {
-    dispatch(firmRequested());
-    try {
-        const { data } = await httpServices.get("firm/.json");
-        dispatch(firmReceved(data));
-    } catch (error) {
-        dispatch(firmRequestFiled(error.message));
+function isOutDate(date) {
+    if (date !== null || Date.now() - date > 5 * 60 * 1000) {
+        return true;
+    }
+    return false;
+}
+export const loadFirmList = () => async (dispatch, getState) => {
+    const { lastFeatch } = getState().firm;
+    if (isOutDate(lastFeatch)) {
+        dispatch(firmRequested());
+        try {
+            const { data } = await httpServices.get("firm/.json");
+            dispatch(firmReceved(data));
+        } catch (error) {
+            dispatch(firmRequestFiled(error.message));
+        }
     }
 };
 
