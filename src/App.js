@@ -16,11 +16,12 @@ import ApiProvider from "./app/components/hooks/useApi";
 import LoginPage from "./app/components/page/loginPage/loginPage";
 import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadFirmList } from "./app/store/firm";
-import { loadUser } from "./app/store/user";
+import { getUser, loadUser } from "./app/store/user";
 import localStorageService from "./app/services/localStorage.service";
 function App() {
+    const user = useSelector(getUser());
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadFirmList());
