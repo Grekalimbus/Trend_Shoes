@@ -15,6 +15,14 @@ const Header = () => {
     setTimeout(() => {
         setColor((pervState) => !pervState);
     }, 5000);
+    function isAdminStatus() {
+        if (user !== undefined) {
+            if (user.email === "grechkin-danil@mail.ru") {
+                return true;
+            }
+        }
+        return false;
+    }
 
     const reloadPageAndClearLS = () => {
         localStorageService.deleteTokens();
@@ -35,7 +43,10 @@ const Header = () => {
 
                 <div className={styles.button}>
                     <h2 className={styles.h2}>
-                        ₽: {user !== undefined ? user.balance : "----"}
+                        ₽:{" "}
+                        {user !== undefined && user !== null
+                            ? user.balance
+                            : "----"}
                     </h2>
                 </div>
                 <Link to="/basketPage" className={styles.button}>
@@ -48,9 +59,12 @@ const Header = () => {
                         <h2 className={styles.h2}>Покупки</h2>
                     </Link>
                 )}
-                <Link to="/adminPage" className={styles.button}>
-                    <h2 className={styles.h2}>Админка</h2>
-                </Link>
+                {isAdminStatus() && (
+                    <Link to="/adminPage" className={styles.button}>
+                        <h2 className={styles.h2}>Админка</h2>
+                    </Link>
+                )}
+
                 {user === undefined ? (
                     <Link to="/login" className={styles.button}>
                         <h2 className={styles.h2}>Вход / Регистрация</h2>

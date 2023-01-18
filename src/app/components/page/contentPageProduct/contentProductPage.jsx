@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FilterFirm from "../../ui/forms/filterFirm";
 import FilterName from "../../ui/forms/filterName";
 import FilterPrice from "../../ui/forms/filterPrice";
@@ -8,8 +8,12 @@ import { useParams } from "react-router-dom";
 import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
 import { useApi } from "../../hooks/useApi";
-import { useSelector } from "react-redux";
-import { getFirm, getIsLoadingFirmStatus } from "../../../store/firm";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    getFirm,
+    getIsLoadingFirmStatus,
+    loadFirmList
+} from "../../../store/firm";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
@@ -20,8 +24,12 @@ const ContentProductPage = () => {
         before: "",
         firm: ""
     });
+    const dispatch = useDispatch();
     const dataFirm = useSelector(getFirm());
     const isLoadingFirm = useSelector(getIsLoadingFirmStatus());
+    useEffect(() => {
+        dispatch(loadFirmList());
+    }, []);
 
     // функция переданная в формы, которая меняет состояние data
     const handleChangeForm = (target) => {

@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            setTokens({ ...data });
+            setTokens({ ...data, balance: 10000 });
             createUser({ ...data, balance: 10000 });
             setUser({ ...data, balance: 10000 });
         } catch (error) {
