@@ -14,40 +14,40 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState();
-    async function signUp({ email, password }) {
-        const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
-        try {
-            const { data } = await axios.post(url, {
-                email,
-                password,
-                returnSecureToken: true
-            });
-            setTokens({ ...data, balance: 10000 });
-            createUser({ ...data, balance: 10000 });
-            setUser({ ...data, balance: 10000 });
-        } catch (error) {
-            const { code, message } = error.response.data.error;
-            if (code === 400) {
-                if (message === "EMAIL_EXISTS") {
-                    const errorObject = {
-                        email: "Пользователь с таким email уже зарегестрирован"
-                    };
-                    throw errorObject;
-                }
-            }
-        }
-    }
-    async function createUser(dataUserKey) {
-        try {
-            const data = userService
-                .create(dataUserKey)
-                .then((res) => setUser(res));
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const [user] = useState();
+    // async function signUp({ email, password }) {
+    //     const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
+    //     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
+    //     try {
+    //         const { data } = await axios.post(url, {
+    //             email,
+    //             password,
+    //             returnSecureToken: true
+    //         });
+    //         setTokens({ ...data, balance: 10000 });
+    //         createUser({ ...data, balance: 10000 });
+    //         setUser({ ...data, balance: 10000 });
+    //     } catch (error) {
+    //         const { code, message } = error.response.data.error;
+    //         if (code === 400) {
+    //             if (message === "EMAIL_EXISTS") {
+    //                 const errorObject = {
+    //                     email: "Пользователь с таким email уже зарегестрирован"
+    //                 };
+    //                 throw errorObject;
+    //             }
+    //         }
+    //     }
+    // }
+    // async function createUser(dataUserKey) {
+    //     try {
+    //         const data = userService
+    //             .create(dataUserKey)
+    //             .then((res) => setUser(res));
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     // async function loginIn({ email, password }) {
     //     const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
@@ -135,8 +135,6 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
-                signUp,
-                user,
                 addProduct,
                 changeObjectQuantity,
                 addFirmDataBase

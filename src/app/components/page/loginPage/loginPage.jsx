@@ -6,21 +6,26 @@ import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
 import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, loginIn } from "../../../store/user";
+import {
+    getErrorPassword,
+    getUser,
+    loginIn,
+    signUp
+} from "../../../store/user";
 
 const LoginPage = () => {
-    const history = useHistory();
-    const { signUp } = useAuth();
+    // const history = useHistory();
+    // const { signUp } = useAuth();
     const [data, setData] = useState({
         email: "",
         password: "",
         repeatPassword: ""
     });
     const user = useSelector(getUser());
+    const error = useSelector(getErrorPassword());
     const dispatch = useDispatch();
-
     const [errors, setErrors] = useState({});
     const { exit } = useParams();
     useEffect(() => {
@@ -46,12 +51,10 @@ const LoginPage = () => {
             return toast.error("Правильно заполните все участки формы");
         }
         if (!exit) {
-            try {
-                await signUp(data);
-                history.push("/");
-                location.reload();
-            } catch (error) {
-                setErrors(error);
+            dispatch(signUp(data));
+            if (error) {
+                validate();
+                setErrors({ ...error });
             }
         }
         if (exit) {
