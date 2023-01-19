@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SignInForm from "./signInForm";
 import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
 import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
-// import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getErrorPassword,
@@ -16,8 +15,6 @@ import {
 } from "../../../store/user";
 
 const LoginPage = () => {
-    // const history = useHistory();
-    // const { signUp } = useAuth();
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -61,26 +58,29 @@ const LoginPage = () => {
             dispatch(loginIn(data));
         }
     };
-
-    return (
-        <div className={styles.wrapperForm}>
-            <form onSubmit={handleSubmit}>
-                {exit ? (
-                    <SignInForm
-                        data={data}
-                        error={errors}
-                        handleChangeForm={handleChangeForm}
-                    />
-                ) : (
-                    <SignUPForm
-                        data={data}
-                        error={errors}
-                        handleChangeForm={handleChangeForm}
-                    />
-                )}
-            </form>
-        </div>
-    );
+    if (user) {
+        return <div className={styles.trueUp}>Вы успешно зарегестрированы</div>;
+    } else {
+        return (
+            <div className={styles.wrapperForm}>
+                <form onSubmit={handleSubmit}>
+                    {exit ? (
+                        <SignInForm
+                            data={data}
+                            error={errors}
+                            handleChangeForm={handleChangeForm}
+                        />
+                    ) : (
+                        <SignUPForm
+                            data={data}
+                            error={errors}
+                            handleChangeForm={handleChangeForm}
+                        />
+                    )}
+                </form>
+            </div>
+        );
+    }
 };
 
 export default LoginPage;
