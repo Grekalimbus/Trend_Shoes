@@ -59,7 +59,7 @@ const LoginPage = () => {
         }
     };
     if (user) {
-        return <div className={styles.trueUp}>Вы успешно зарегестрированы</div>;
+        return <div className={styles.trueUp}>Вы вошли в акаунт</div>;
     } else {
         return (
             <div className={styles.wrapperForm}>

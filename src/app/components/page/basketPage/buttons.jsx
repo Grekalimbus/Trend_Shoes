@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
-import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import localStorageService from "../../../services/localStorage.service";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../store/user";
 
 const Buttons = ({ amount }) => {
     const history = useHistory();
-    const { user } = useAuth();
+    const user = useSelector(getUser());
     const clearBasket = () => {
         localStorage.setItem("storageBasket", "[]");
         location.reload();

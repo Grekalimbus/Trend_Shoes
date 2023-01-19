@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import httpServices from "../../services/http.service";
 import dataBasket from "../../utils/getBasket";
 import localStorageService from "../../services/localStorage.service";
-import { useAuth } from "./useAuth";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/user";
 
 const ApiContext = React.createContext();
 
@@ -15,7 +16,7 @@ const ApiProvider = ({ children }) => {
     const [product, setProduct] = useState(null);
     const [historyPurchases, setHistoryPurchases] = useState();
     const [allHistoryPurchases, setAllHistory] = useState();
-    const { user } = useAuth();
+    const user = useSelector(getUser());
     const basketDataSizes = dataBasket.getBasketSizes();
     const userID = localStorageService.getUserId();
 

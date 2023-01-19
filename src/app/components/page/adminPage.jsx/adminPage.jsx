@@ -10,14 +10,15 @@ import AddProductPage from "./addProductPage";
 import AddHaveProduct from "./addedProduct/addHaveProduct";
 import AddFirm from "./addedProduct/addFirm";
 import AddNewProduct from "./addedProduct/addNewProduct";
-import { useAuth } from "../../hooks/useAuth";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../store/user";
 
 const AdminPage = () => {
     const { allHistoryPurchases } = useApi();
     const { other } = useParams();
-    const { user } = useAuth();
+    const user = useSelector(getUser());
     function isAdminStatus() {
-        if (user !== undefined) {
+        if (user !== null) {
             if (user.email === "grechkin-danil@mail.ru") {
                 return true;
             }
