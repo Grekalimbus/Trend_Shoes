@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import localStorageService, {
-    setTokens
+    setTokens,
+    getTokenExpiresDate,
+    getRefreshToken
 } from "../services/localStorage.service";
 import userService from "../services/user.service";
 
@@ -97,6 +99,29 @@ export const signUp = (dataUserKey) => async (dispatch) => {
         }
     }
 };
+
+export const refreshTokenChek = async () => {
+    const url = "https://securetoken.googleapis.com/v1/token?key=";
+    const expiresDate = getTokenExpiresDate();
+    const refreshToken = getRefreshToken();
+    if (refreshToken && expiresDate < Date.now()) {
+        try {
+            const { data } = await axios.post(url + key, {
+                grant_type: "refresh_token",
+                refresh_token: refreshToken
+            });
+            localStorageService.setTokens({
+                refreshToken: data.refresh_token,
+                idToken: data.id_token,
+                localId: data.user_id,
+                expiresIn: data.expires_in
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+// ==========
 
 export const getUser = () => (state) => state.user.entities;
 export const getErrorPassword = () => (state) => state.user.error;
