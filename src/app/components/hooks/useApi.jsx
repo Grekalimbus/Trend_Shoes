@@ -44,23 +44,6 @@ const ApiProvider = ({ children }) => {
 
         getDataProductAndFirm();
     }, []);
-    // изменение product/id
-    const handleChangeProductID = async (id, object) => {
-        try {
-            const data = await httpServices.put(`product/${id}.json`, object);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    // Удаление product
-    const handleDeleteProduct = async (object) => {
-        try {
-            const data = await httpServices.put(`product.json`, object);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
     // деформация или удаление product с DB
     const handleChangeProduct = async (
         filterProduct,
@@ -87,7 +70,6 @@ const ApiProvider = ({ children }) => {
             };
         });
         const handleChangeHistoryPurchases = () => {
-            console.log(historyPurchases);
             if (historyPurchases === null) {
                 setHistoryPurchases(transformProductForHistory);
             } else if (historyPurchases !== null) {
@@ -179,11 +161,8 @@ const ApiProvider = ({ children }) => {
         <ApiContext.Provider
             value={{
                 product: product,
-                handleChangeProduct,
                 historyPurchases,
-                allHistoryPurchases,
-                handleChangeProductID,
-                handleDeleteProduct
+                allHistoryPurchases
             }}
         >
             {children}

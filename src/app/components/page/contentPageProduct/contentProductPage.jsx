@@ -9,11 +9,7 @@ import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
 import { useApi } from "../../hooks/useApi";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    getFirm,
-    getIsLoadingFirmStatus,
-    loadFirmList
-} from "../../../store/firm";
+import { getFirm, getIsLoadingFirmStatus } from "../../../store/firm";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
@@ -27,9 +23,6 @@ const ContentProductPage = () => {
     const dispatch = useDispatch();
     const dataFirm = useSelector(getFirm());
     const isLoadingFirm = useSelector(getIsLoadingFirmStatus());
-    useEffect(() => {
-        dispatch(loadFirmList());
-    }, []);
 
     // функция переданная в формы, которая меняет состояние data
     const handleChangeForm = (target) => {

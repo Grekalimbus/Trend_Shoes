@@ -5,9 +5,11 @@ import Form from "../../common/form";
 import validator from "../../../utils/validator";
 import validatorConfig from "../../../utils/validatorConfig";
 import { toast } from "react-toastify";
+import productService from "../../../services/product.service";
 
 const EditProduct = () => {
-    const { product, handleChangeProductID } = useApi();
+    const { changeProduct } = productService;
+    const { product } = useApi();
     const [activeProduct, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [data, setData] = useState({
@@ -91,7 +93,7 @@ const EditProduct = () => {
         }
         const newDataProduct = changeObjectProduct(objectProduct);
         try {
-            await handleChangeProductID(newDataProduct._id, newDataProduct);
+            await changeProduct(newDataProduct._id, newDataProduct);
             window.location.reload();
         } catch (error) {
             console.log(error);

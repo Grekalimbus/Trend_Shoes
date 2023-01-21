@@ -2,9 +2,11 @@ import React from "react";
 import styles from "./index.module.css";
 import { useApi } from "../../hooks/useApi";
 import CardProduct from "../../common/cardProduct";
+import productService from "../../../services/product.service";
 
 const DeleteProduct = () => {
-    const { product, handleDeleteProduct } = useApi();
+    const { product } = useApi();
+    const { remove } = productService;
     const handleDeletProduct = async (id) => {
         const filterProduct = product.filter((item) => item._id !== id);
         const updatedDataProduct = {};
@@ -12,7 +14,7 @@ const DeleteProduct = () => {
             updatedDataProduct[item._id] = item;
         });
         try {
-            await handleDeleteProduct(updatedDataProduct);
+            await remove(updatedDataProduct);
             localStorage.removeItem("storageBasket");
             localStorage.removeItem("dataSizes");
             window.location.reload();
