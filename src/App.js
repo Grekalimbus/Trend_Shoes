@@ -77,7 +77,6 @@ function App() {
                 </main>
                 <Footer />
             </ApiProvider>
-
             <ToastContainer />
         </div>
     );

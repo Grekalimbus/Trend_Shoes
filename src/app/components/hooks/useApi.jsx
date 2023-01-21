@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import httpServices from "../../services/http.service";
 import dataBasket from "../../utils/getBasket";
@@ -13,42 +13,18 @@ export const useApi = () => {
 };
 
 const ApiProvider = ({ children }) => {
-    const [product, setProduct] = useState(null);
-    const [historyPurchases, setHistoryPurchases] = useState();
-    const [allHistoryPurchases, setAllHistory] = useState();
     const user = useSelector(getUser());
     const basketDataSizes = dataBasket.getBasketSizes();
     const userID = localStorageService.getUserId();
 
-    useEffect(() => {
-        const getDataProductAndFirm = async () => {
-            try {
-                const allHistory = await httpServices.get(
-                    `historyPurchases.json`
-                );
-                const dataHistoryPurchases = await httpServices.get(
-                    `historyPurchases/${userID}.json`
-                );
-                if (allHistory !== null) {
-                    setAllHistory(allHistory.data);
-                }
-                if (dataHistoryPurchases !== null) {
-                    setHistoryPurchases(dataHistoryPurchases.data);
-                }
-                const { data } = await httpServices.get("/product.json");
-                setProduct(Object.keys(data).map((item) => data[item]));
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        getDataProductAndFirm();
-    }, []);
     // деформация или удаление product с DB
     const handleChangeProduct = async (
         filterProduct,
         quantityProduct,
-        dataForm
+        dataForm,
+        user,
+        product,
+        historyPurchases
     ) => {
         const newDate = new Date();
         const day = newDate.getDate();
@@ -69,16 +45,16 @@ const ApiProvider = ({ children }) => {
                 time: timeDate
             };
         });
-        const handleChangeHistoryPurchases = () => {
-            if (historyPurchases === null) {
-                setHistoryPurchases(transformProductForHistory);
-            } else if (historyPurchases !== null) {
-                transformProductForHistory.forEach((item) => {
-                    setHistoryPurchases((prevState) => prevState.push(item));
-                });
-            }
-        };
-        handleChangeHistoryPurchases();
+        // const handleChangeHistoryPurchases = () => {
+        //     if (historyPurchases === null) {
+        //         setHistoryPurchases(transformProductForHistory);
+        //     } else if (historyPurchases !== null) {
+        //         transformProductForHistory.forEach((item) => {
+        //             setHistoryPurchases((prevState) => prevState.push(item));
+        //         });
+        //     }
+        // };
+        // handleChangeHistoryPurchases();
 
         product.forEach((objectProduct) => {
             filterProduct.forEach((itemBasket) => {
@@ -139,20 +115,21 @@ const ApiProvider = ({ children }) => {
         const newBalance = user.balance - amount;
 
         try {
-            const dataHistoryPurchases = await httpServices.put(
-                `historyPurchases/${userID}.json?auth=${accessToken}`,
-                historyPurchases !== null
-                    ? historyPurchases
-                    : transformProductForHistory
-            );
-            const dataPrice = await httpServices.put(
-                `users/${userID}/balance.json?auth=${accessToken}`,
-                newBalance
-            );
-            const { data } = await httpServices.put(
-                `/product.json?auth=${accessToken}`,
-                { ...transformProduct() }
-            );
+            console.log("try");
+            // const dataHistoryPurchases = await httpServices.put(
+            //     `historyPurchases/${userID}.json?auth=${accessToken}`,
+            //     historyPurchases !== null
+            //         ? historyPurchases
+            //         : transformProductForHistory
+            // );
+            // const dataPrice = await httpServices.put(
+            //     `users/${userID}/balance.json?auth=${accessToken}`,
+            //     newBalance
+            // );
+            // const { data } = await httpServices.put(
+            //     `/product.json?auth=${accessToken}`,
+            //     { ...transformProduct() }
+            // );
         } catch (error) {
             console.log(error);
         }
@@ -160,7 +137,7 @@ const ApiProvider = ({ children }) => {
     return (
         <ApiContext.Provider
             value={{
-                product: product
+                handleChangeProduct
             }}
         >
             {children}

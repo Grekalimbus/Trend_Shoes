@@ -5,10 +5,18 @@ import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
 import getFilterProductCart from "../../../utils/filterProductCart";
 import validatorConfig from "../../../utils/validatorConfig";
+// import handleChangeProduct from "../../../services/purchases.service";
+import { useSelector } from "react-redux";
+import { getPurchases } from "../../../store/userPurchases";
+import { getProduct } from "../../../store/product";
+import { getUser } from "../../../store/user";
 import { useApi } from "../../hooks/useApi";
 
 const FormPage = () => {
     const { handleChangeProduct } = useApi();
+    const historyPurchases = useSelector(getPurchases());
+    const product = useSelector(getProduct());
+    const user = useSelector(getUser());
     const [data, setData] = useState({
         user: "",
         phone: "",
@@ -40,9 +48,16 @@ const FormPage = () => {
             return item.quantity;
         });
         try {
-            await handleChangeProduct(filterProductCart, quantityProduct, data);
-            localStorage.setItem("storageBasket", "[]");
-            location.reload();
+            await handleChangeProduct(
+                filterProductCart,
+                quantityProduct,
+                data,
+                user,
+                product,
+                historyPurchases
+            );
+            // localStorage.setItem("storageBasket", "[]");
+            // location.reload();
         } catch (error) {
             console.log(error);
         }
