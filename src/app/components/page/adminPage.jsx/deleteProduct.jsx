@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./index.module.css";
-import { useApi } from "../../hooks/useApi";
 import CardProduct from "../../common/cardProduct";
 import productService from "../../../services/product.service";
+import { useSelector } from "react-redux";
+import { getProduct } from "../../../store/product";
 
 const DeleteProduct = () => {
-    const { product } = useApi();
+    const product = useSelector(getProduct());
     const { remove } = productService;
     const handleDeletProduct = async (id) => {
         const filterProduct = product.filter((item) => item._id !== id);

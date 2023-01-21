@@ -7,13 +7,13 @@ import CardProduct from "../../common/cardProduct";
 import { useParams } from "react-router-dom";
 import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
-import { useApi } from "../../hooks/useApi";
 import { useDispatch, useSelector } from "react-redux";
 import { getFirm, getIsLoadingFirmStatus } from "../../../store/firm";
+import { getProduct } from "../../../store/product";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
-    const { product } = useApi();
+    const product = useSelector(getProduct());
     const [data, setData] = useState({
         name: "",
         from: "",

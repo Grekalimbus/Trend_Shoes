@@ -3,7 +3,6 @@ import styles from "./index.module.css";
 import { Link, useParams } from "react-router-dom";
 import StatisticPage from "./statisticsPage";
 import Purchases from "../../common/purchasesPage/purchases";
-import { useApi } from "../../hooks/useApi";
 import EditProduct from "./editProduct";
 import DeleteProduct from "./deleteProduct";
 import AddProductPage from "./addProductPage";
@@ -14,7 +13,6 @@ import { useSelector } from "react-redux";
 import { getUser } from "../../../store/user";
 
 const AdminPage = () => {
-    const { allHistoryPurchases } = useApi();
     const { other } = useParams();
     const user = useSelector(getUser());
     function isAdminStatus() {
@@ -60,7 +58,7 @@ const AdminPage = () => {
             return <AddProductPage />;
         }
         if (other === "history") {
-            return <Purchases allHistory={allHistoryPurchases} />;
+            return <Purchases />;
         }
         if (other === "addHaveProduct") {
             return <AddHaveProduct />;

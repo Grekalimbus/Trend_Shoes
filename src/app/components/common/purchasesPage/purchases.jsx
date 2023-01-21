@@ -1,37 +1,52 @@
 import React from "react";
 import styles from "./index.module.css";
 import CardPurchases from "./cardPurchases";
-import { useApi } from "../../hooks/useApi";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getPurchases } from "../../../store/userPurchases";
+import { getAllPurchases } from "../../../store/allPurchases";
 
 const Purchases = () => {
     const { other } = useParams();
-    const { historyPurchases, allHistoryPurchases } = useApi();
+    const historyPurchases = useSelector(getPurchases());
+    const allHistoryPurchases = useSelector(getAllPurchases());
 
     const keyUsers =
-        allHistoryPurchases !== undefined
-            ? Object.keys(allHistoryPurchases)
-            : null;
+        allHistoryPurchases !== null ? Object.keys(allHistoryPurchases) : null;
 
     const createArrayHistory = () => {
         const allHistory = [];
-        if (keyUsers !== null && allHistoryPurchases !== undefined) {
+        if (keyUsers !== null && allHistoryPurchases !== null) {
             keyUsers.forEach((key) => {
                 allHistoryPurchases[key].forEach((item) => {
                     allHistory.push(item);
                 });
             });
             return allHistory;
+        } else {
+            return null;
         }
     };
     const arrayAllHistory = createArrayHistory();
     const reserveAllHistory =
-        arrayAllHistory !== undefined ? arrayAllHistory.reverse() : null;
+        arrayAllHistory !== null ? arrayAllHistory.reverse() : null;
+    const reversehistoryPurchases = () => {
+        const reversehistoryPurchases = [];
+        if (historyPurchases) {
+            const index = historyPurchases.map((el, index) => index);
+            const reverseIndex = index.reverse();
+            reverseIndex.forEach((item) =>
+                reversehistoryPurchases.push(historyPurchases[item])
+            );
+            return reversehistoryPurchases;
+        }
+    };
+    reversehistoryPurchases();
 
     if (other !== undefined) {
         return (
             <div className={styles.mainBlokInfo}>
-                {reserveAllHistory === null ? (
+                {!historyPurchases && !allHistoryPurchases ? (
                     <div>Loading</div>
                 ) : (
                     reserveAllHistory.map((item) => {
@@ -48,10 +63,10 @@ const Purchases = () => {
     } else if (other === undefined) {
         return (
             <div className={styles.mainBlokInfo}>
-                {historyPurchases === null || historyPurchases === null ? (
+                {!historyPurchases && !allHistoryPurchases ? (
                     <div>Loadnig</div>
                 ) : (
-                    historyPurchases.reverse().map((item) => {
+                    reversehistoryPurchases().map((item) => {
                         return (
                             <CardPurchases
                                 key={item._id}

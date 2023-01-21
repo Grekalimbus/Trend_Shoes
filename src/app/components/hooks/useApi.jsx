@@ -160,9 +160,7 @@ const ApiProvider = ({ children }) => {
     return (
         <ApiContext.Provider
             value={{
-                product: product,
-                historyPurchases,
-                allHistoryPurchases
+                product: product
             }}
         >
             {children}

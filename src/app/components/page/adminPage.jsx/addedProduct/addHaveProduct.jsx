@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import CardHaveProduct from "./cardHaveProduct";
-import { useApi } from "../../../hooks/useApi";
+import { useSelector } from "react-redux";
+import { getProduct } from "../../../../store/product";
 const AddHaveProduct = () => {
-    const { product } = useApi();
+    const product = useSelector(getProduct());
     const [quantity, setQuantity] = useState(null);
 
     useEffect(() => {
