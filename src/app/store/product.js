@@ -35,7 +35,7 @@ function isOutDate(date) {
 }
 
 export const loadProduct = () => async (dispatch, getState) => {
-    const { lastFeatch } = getState().firm;
+    const { lastFeatch } = getState().product;
     if (isOutDate(lastFeatch)) {
         dispatch(productRequested());
         try {
@@ -49,6 +49,6 @@ export const loadProduct = () => async (dispatch, getState) => {
     }
 };
 
-export const getProduct = () => (state) => state.product.entities.product;
+export const getProduct = () => (state) => state.product.entities;
 
 export default productReducer;

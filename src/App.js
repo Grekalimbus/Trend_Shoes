@@ -20,12 +20,16 @@ import { loadFirmList } from "./app/store/firm";
 import { getUser, loadUser, refreshTokenChek } from "./app/store/user";
 import localStorageService from "./app/services/localStorage.service";
 import { getProduct, loadProduct } from "./app/store/product";
+import { loadUserPurchases } from "./app/store/userPurchases";
+import { loadAllPurchases } from "./app/store/allPurchases";
 function App() {
     // const user = useSelector(getUser());
-    const product = useSelector(getProduct);
+    // const product = useSelector(getProduct());
     const dispatch = useDispatch();
     useEffect(() => {
         refreshTokenChek();
+        dispatch(loadAllPurchases());
+        dispatch(loadUserPurchases());
         dispatch(loadFirmList());
         dispatch(loadProduct());
         if (localStorageService.getAccessToken()) {
