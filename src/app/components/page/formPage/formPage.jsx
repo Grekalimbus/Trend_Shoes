@@ -5,15 +5,14 @@ import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
 import getFilterProductCart from "../../../utils/filterProductCart";
 import validatorConfig from "../../../utils/validatorConfig";
-// import handleChangeProduct from "../../../services/purchases.service";
+import handleChangeProduct from "../../../services/purchases.service";
 import { useSelector } from "react-redux";
 import { getPurchases } from "../../../store/userPurchases";
 import { getProduct } from "../../../store/product";
 import { getUser } from "../../../store/user";
-import { useApi } from "../../hooks/useApi";
+// import { useApi } from "../../hooks/useApi";
 
 const FormPage = () => {
-    const { handleChangeProduct } = useApi();
     const historyPurchases = useSelector(getPurchases());
     const product = useSelector(getProduct());
     const user = useSelector(getUser());

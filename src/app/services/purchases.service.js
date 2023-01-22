@@ -32,6 +32,18 @@ const handleChangeProduct = async (
             time: timeDate
         };
     });
+    const handleChangeHistoryPurchases = () => {
+        if (historyPurchases === null) {
+            return transformProductForHistory;
+        } else if (historyPurchases !== null) {
+            const newArr = historyPurchases
+                .concat(transformProductForHistory)
+                .reverse();
+            return newArr;
+        }
+    };
+    const newHistoryArr = handleChangeHistoryPurchases();
+
     if (product) {
         product.forEach((objectProduct) => {
             filterProduct.forEach((itemBasket) => {
@@ -44,20 +56,35 @@ const handleChangeProduct = async (
     const arrayQuantityProduct = changeArrayProduct.map(
         (item) => item.quantity
     );
-    const changeQuantity = arrayQuantityProduct[0].map((item, index) => {
-        const indexQuantityProduct = quantityProduct[index];
-        // const changeItem = item.map((item, indexQuantity) => {
-        //     return {
-        //         sizes: item.sizes,
-        //         value: (item.value -= indexQuantityProduct[indexQuantity].value)
-        //     };
-        // });
 
-        return item;
+    const changeQuantity = arrayQuantityProduct.map((item, index) => {
+        const indexQuantityProduct = quantityProduct[index];
+        const changeItem = item.map((item, indexQuantity) => {
+            return {
+                sizes: item.sizes,
+                value: (item.value -= indexQuantityProduct[indexQuantity].value)
+            };
+        });
+        return changeItem;
     });
-    console.log("changeArrayProduct", changeArrayProduct);
-    console.log("arrayQuantityProduct", arrayQuantityProduct);
+    // arrayQuantityProduct.forEach((item, index) => {
+    //     const indexQuantityProduct = quantityProduct[index];
+    //     item.forEach((itemQuantity, indexQuantity) => {
+    //         console.log({
+    //             sizes: itemQuantity.sizes,
+    //             value: (itemQuantity.value -=
+    //                 indexQuantityProduct[indexQuantity].value)
+    //         });
+    //     });
+    //     // return changeItem;
+    //     // console.log("item", item);
+    // });
     console.log("changeQuantity", changeQuantity);
+    // console.log("arrayQuantityProduct", arrayQuantityProduct);
+    // console.log("quantityProduct", quantityProduct);
+    // console.log("changeArrayProduct", changeArrayProduct);
+    // console.log("arrayQuantityProduct", arrayQuantityProduct);
+    // console.log("changeQuantity", changeQuantity);
     // const finishChangeProduct = changeArrayProduct.map((item, index) => {
     //     return { ...item, quantity: changeQuantity[index] };
     // });
