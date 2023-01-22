@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useApi } from "../../hooks/useApi";
 import Form from "../../common/form";
 import validator from "../../../utils/validator";
 import validatorConfig from "../../../utils/validatorConfig";
 import { toast } from "react-toastify";
+import productService from "../../../services/product.service";
+import { useSelector } from "react-redux";
+import { getProduct } from "../../../store/product";
 
 const EditProduct = () => {
-    const { product, handleChangeProductID } = useApi();
+    const { changeProduct } = productService;
+    const product = useSelector(getProduct());
     const [activeProduct, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [data, setData] = useState({
@@ -91,7 +94,7 @@ const EditProduct = () => {
         }
         const newDataProduct = changeObjectProduct(objectProduct);
         try {
-            await handleChangeProductID(newDataProduct._id, newDataProduct);
+            await changeProduct(newDataProduct._id, newDataProduct);
             window.location.reload();
         } catch (error) {
             console.log(error);

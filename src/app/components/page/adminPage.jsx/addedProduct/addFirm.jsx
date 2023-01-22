@@ -3,11 +3,11 @@ import styles from "../index.module.css";
 import Form from "../../../common/form";
 import validator from "../../../../utils/validator";
 import validatorConfig from "../../../../utils/validatorConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import productService from "../../../../services/product.service";
 
 const AddFirm = () => {
-    const { addFirmDataBase } = useAuth();
+    const { addFirm } = productService;
     const [data, setData] = useState({ id: "", firm: "" });
     const [errors, setErrors] = useState({});
     const handleChangeForm = ({ target }) => {
@@ -26,7 +26,7 @@ const AddFirm = () => {
         try {
             if (data.id.length >= 8 && data.firm !== "") {
                 const object = { _id: data.id, name: data.firm };
-                await addFirmDataBase(data.id, object);
+                await addFirm(data.id, object);
                 window.location.reload();
             }
             if (data.id.length < 8 && data.firm !== "") {

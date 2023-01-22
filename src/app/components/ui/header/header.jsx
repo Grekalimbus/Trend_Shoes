@@ -4,13 +4,13 @@ import { Link, useHistory } from "react-router-dom";
 import localStorageService, {
     deleteTokens
 } from "../../../services/localStorage.service";
-import { useApi } from "../../hooks/useApi";
 import { useSelector } from "react-redux";
 import { getUser } from "../../../store/user";
+import { getAllPurchases } from "../../../store/allPurchases";
 
 const Header = () => {
     const [color, setColor] = useState(true);
-    const { historyPurchases } = useApi();
+    const historyPurchases = useSelector(getAllPurchases());
     const history = useHistory();
     const user = useSelector(getUser());
     setTimeout(() => {

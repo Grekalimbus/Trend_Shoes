@@ -11,8 +11,6 @@ import Footer from "./app/components/ui/footer/footer";
 import BasketPage from "./app/components/page/basketPage/basketPage";
 import FormPage from "./app/components/page/formPage/formPage";
 import useProductBasket from "./app/components/hooks/useProductBasket";
-import AuthProvider from "./app/components/hooks/useAuth";
-import ApiProvider from "./app/components/hooks/useApi";
 import LoginPage from "./app/components/page/loginPage/loginPage";
 import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";
@@ -20,12 +18,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadFirmList } from "./app/store/firm";
 import { getUser, loadUser, refreshTokenChek } from "./app/store/user";
 import localStorageService from "./app/services/localStorage.service";
+import { getProduct, loadProduct } from "./app/store/product";
+import { loadUserPurchases } from "./app/store/userPurchases";
+import { loadAllPurchases } from "./app/store/allPurchases";
 function App() {
-    const user = useSelector(getUser());
+    // const user = useSelector(getUser());
+    // const product = useSelector(getProduct());
     const dispatch = useDispatch();
     useEffect(() => {
         refreshTokenChek();
+        dispatch(loadAllPurchases());
+        dispatch(loadUserPurchases());
         dispatch(loadFirmList());
+        dispatch(loadProduct());
         if (localStorageService.getAccessToken()) {
             dispatch(loadUser());
         }
@@ -33,54 +38,30 @@ function App() {
     useProductBasket();
     return (
         <div className={styles.wrapperPage}>
-            <AuthProvider>
-                <ApiProvider>
-                    <Header />
-                    <main className={styles.mainPage}>
-                        <Switch>
-                            <Route exact path="/" component={MainPage} />
-                            <Route
-                                exact
-                                path="/productPage/:cardID?"
-                                component={ProductPage}
-                            />
-                            <Route
-                                exact
-                                path="/cardPage/:id?"
-                                component={CardPage}
-                            />
-                            <Route
-                                exact
-                                path="/login/:exit?"
-                                component={LoginPage}
-                            />
-                            <Route
-                                exact
-                                path="/basketPage/"
-                                component={BasketPage}
-                            />
-                            <Route
-                                exact
-                                path="/formPage/"
-                                component={FormPage}
-                            />
-                            <Route
-                                exact
-                                path="/purchases/"
-                                component={Purchases}
-                            />
-                            <Route
-                                exact
-                                path="/adminPage/:other?"
-                                component={AdminPage}
-                            />
+            <Header />
+            <main className={styles.mainPage}>
+                <Switch>
+                    <Route exact path="/" component={MainPage} />
+                    <Route
+                        exact
+                        path="/productPage/:cardID?"
+                        component={ProductPage}
+                    />
+                    <Route exact path="/cardPage/:id?" component={CardPage} />
+                    <Route exact path="/login/:exit?" component={LoginPage} />
+                    <Route exact path="/basketPage/" component={BasketPage} />
+                    <Route exact path="/formPage/" component={FormPage} />
+                    <Route exact path="/purchases/" component={Purchases} />
+                    <Route
+                        exact
+                        path="/adminPage/:other?"
+                        component={AdminPage}
+                    />
 
-                            <Redirect to="/" />
-                        </Switch>
-                    </main>
-                    <Footer />
-                </ApiProvider>
-            </AuthProvider>
+                    <Redirect to="/" />
+                </Switch>
+            </main>
+            <Footer />
 
             <ToastContainer />
         </div>
