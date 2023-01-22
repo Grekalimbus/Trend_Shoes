@@ -69,77 +69,57 @@ const handleChangeProduct = async (
         });
         return changeItem;
     });
-    // arrayQuantityProduct.forEach((item, index) => {
-    //     const indexQuantityProduct = quantityProduct[index];
-    //     item.forEach((itemQuantity, indexQuantity) => {
-    //         console.log({
-    //             sizes: itemQuantity.sizes,
-    //             value: (itemQuantity.value -=
-    //                 indexQuantityProduct[indexQuantity].value)
-    //         });
-    //     });
-    //     // return changeItem;
-    //     // console.log("item", item);
-    // });
-    console.log("changeQuantity", changeQuantity);
-    // console.log("arrayQuantityProduct", arrayQuantityProduct);
-    // console.log("quantityProduct", quantityProduct);
-    // console.log("changeArrayProduct", changeArrayProduct);
-    // console.log("arrayQuantityProduct", arrayQuantityProduct);
-    // console.log("changeQuantity", changeQuantity);
-    // const finishChangeProduct = changeArrayProduct.map((item, index) => {
-    //     return { ...item, quantity: changeQuantity[index] };
-    // });
-    // const handleGetProduct = (item) => {
-    //     let newObject = {};
-    //     finishChangeProduct.forEach((itemProduct) => {
-    //         if (itemProduct._id === item._id) {
-    //             newObject = itemProduct;
-    //         } else {
-    //             newObject = item;
-    //         }
-    //     });
-    //     return newObject;
-    // };
-    // const newDataProduct = product.map((item) => {
-    //     if (handleGetProduct(item)._id === item._id) {
-    //         return handleGetProduct(item);
-    //     }
-    //     return item;
-    // });
-    // const deleteProdct = newDataProduct.filter((item, index) => {
-    //     return (
-    //         JSON.stringify(item.quantity) !==
-    //         JSON.stringify(basketDataSizes[index])
-    //     );
-    // });
-    // const transformProduct = () => {
-    //     const product = {};
-    //     deleteProdct.forEach((item) => {
-    //         product[item._id] = item;
-    //     });
-    //     return product;
-    // };
-    // const accessToken = localStorageService.getAccessToken();
-    // const amount = localStorage.getItem("amount");
-    // const newBalance = user.balance - amount;
 
+    const finishChangeProduct = changeArrayProduct.map((item, index) => {
+        return { ...item, quantity: changeQuantity[index] };
+    });
+    const handleGetProduct = (item) => {
+        let newObject = {};
+        finishChangeProduct.forEach((itemProduct) => {
+            if (itemProduct._id === item._id) {
+                newObject = itemProduct;
+            } else {
+                newObject = item;
+            }
+        });
+        return newObject;
+    };
+
+    const newDataProduct = product.map((item) => {
+        if (handleGetProduct(item)._id === item._id) {
+            return handleGetProduct(item);
+        }
+        return item;
+    });
+    const deleteProdct = newDataProduct.filter((item, index) => {
+        return (
+            JSON.stringify(item.quantity) !==
+            JSON.stringify(basketDataSizes[index])
+        );
+    });
+    const transformProduct = () => {
+        const product = {};
+        deleteProdct.forEach((item) => {
+            product[item._id] = item;
+        });
+        return product;
+    };
+    const accessToken = localStorageService.getAccessToken();
+    const amount = localStorage.getItem("amount");
+    const newBalance = user.balance - amount;
     try {
-        console.log("try");
-        // const dataHistoryPurchases = await httpServices.put(
-        //     `historyPurchases/${userID}.json?auth=${accessToken}`,
-        //     historyPurchases !== null
-        //         ? historyPurchases
-        //         : transformProductForHistory
-        // );
-        // const dataPrice = await httpServices.put(
-        //     `users/${userID}/balance.json?auth=${accessToken}`,
-        //     newBalance
-        // );
-        // const { data } = await httpServices.put(
-        //     `/product.json?auth=${accessToken}`,
-        //     { ...transformProduct() }
-        // );
+        const dataHistoryPurchases = await httpServices.put(
+            `historyPurchases/${userID}.json?auth=${accessToken}`,
+            newHistoryArr
+        );
+        const dataPrice = await httpServices.put(
+            `users/${userID}/balance.json?auth=${accessToken}`,
+            newBalance
+        );
+        const { data } = await httpServices.put(
+            `/product.json?auth=${accessToken}`,
+            { ...transformProduct() }
+        );
     } catch (error) {
         toast.error(error.message);
         console.log(error);

@@ -11,7 +11,6 @@ import Footer from "./app/components/ui/footer/footer";
 import BasketPage from "./app/components/page/basketPage/basketPage";
 import FormPage from "./app/components/page/formPage/formPage";
 import useProductBasket from "./app/components/hooks/useProductBasket";
-// import ApiProvider from "./app/components/hooks/useApi";
 import LoginPage from "./app/components/page/loginPage/loginPage";
 import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";

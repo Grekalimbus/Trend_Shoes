@@ -42,6 +42,10 @@ const Purchases = () => {
         }
     };
     reversehistoryPurchases();
+    function randomIntFromInterval(min, max) {
+        // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 
     if (other !== undefined) {
         return (
@@ -52,7 +56,7 @@ const Purchases = () => {
                     reserveAllHistory.map((item) => {
                         return (
                             <CardPurchases
-                                key={item._id}
+                                key={item._id + randomIntFromInterval(1, 500)}
                                 historyPurchases={item}
                             />
                         );
