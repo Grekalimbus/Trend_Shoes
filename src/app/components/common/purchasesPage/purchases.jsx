@@ -56,7 +56,7 @@ const Purchases = () => {
                     reserveAllHistory.map((item) => {
                         return (
                             <CardPurchases
-                                key={item._id + randomIntFromInterval(1, 500)}
+                                key={item._id + randomIntFromInterval(1, 1500)}
                                 historyPurchases={item}
                             />
                         );
@@ -73,7 +73,7 @@ const Purchases = () => {
                     reversehistoryPurchases().map((item) => {
                         return (
                             <CardPurchases
-                                key={item._id}
+                                key={item._id + randomIntFromInterval(1, 1500)}
                                 historyPurchases={item}
                             />
                         );
