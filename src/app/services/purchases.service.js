@@ -60,9 +60,11 @@ const handleChangeProduct = async (
     const changeQuantity = arrayQuantityProduct.map((item, index) => {
         const indexQuantityProduct = quantityProduct[index];
         const changeItem = item.map((item, indexQuantity) => {
+            const newOb = { ...item };
             return {
-                sizes: item.sizes,
-                value: (item.value -= indexQuantityProduct[indexQuantity].value)
+                ...newOb,
+                value: (newOb.value -=
+                    indexQuantityProduct[indexQuantity].value)
             };
         });
         return changeItem;
