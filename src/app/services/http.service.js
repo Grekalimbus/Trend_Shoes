@@ -14,7 +14,14 @@ axios.interceptors.response.use(
             if (error.message === "Network Error") {
                 toast.info("Попробуйте включить VPN");
             }
-            toast.warning(error.message);
+            if (
+                error.message === "Request failed with status code 400" ||
+                error.code === 400
+            ) {
+                toast.error("Пользователь с таким email уже зарегестрирован");
+            } else {
+                toast.warning(error.message);
+            }
         }
         return Promise.reject(error);
     }

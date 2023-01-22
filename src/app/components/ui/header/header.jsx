@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import localStorageService, {
     deleteTokens
 } from "../../../services/localStorage.service";
-import { useApi } from "../../hooks/useApi";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../store/user";
+import { getAllPurchases } from "../../../store/allPurchases";
 
 const Header = () => {
     const [color, setColor] = useState(true);
-    const { historyPurchases } = useApi();
+    const historyPurchases = useSelector(getAllPurchases());
     const history = useHistory();
-    const { user } = useAuth();
+    const user = useSelector(getUser());
     setTimeout(() => {
         setColor((pervState) => !pervState);
     }, 5000);
+    function isAdminStatus() {
+        if (user !== undefined && user !== null) {
+            if (user.email === "grechkin-danil@mail.ru") {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    const reloadPageAndClearLS = () => {
-        localStorageService.deleteTokens();
+    const handleGoOut = () => {
+        deleteTokens();
         history.push("/");
         location.reload();
     };
@@ -35,7 +44,10 @@ const Header = () => {
 
                 <div className={styles.button}>
                     <h2 className={styles.h2}>
-                        ₽: {user !== undefined ? user.balance : "----"}
+                        ₽:{" "}
+                        {user !== undefined && user !== null
+                            ? user.balance
+                            : "----"}
                     </h2>
                 </div>
                 <Link to="/basketPage" className={styles.button}>
@@ -48,10 +60,13 @@ const Header = () => {
                         <h2 className={styles.h2}>Покупки</h2>
                     </Link>
                 )}
-                <Link to="/adminPage" className={styles.button}>
-                    <h2 className={styles.h2}>Админка</h2>
-                </Link>
-                {user === undefined ? (
+                {isAdminStatus() && (
+                    <Link to="/adminPage" className={styles.button}>
+                        <h2 className={styles.h2}>Админка</h2>
+                    </Link>
+                )}
+
+                {user === null ? (
                     <Link to="/login" className={styles.button}>
                         <h2 className={styles.h2}>Вход / Регистрация</h2>
                     </Link>
@@ -59,7 +74,7 @@ const Header = () => {
                     <div
                         className={styles.button}
                         onClick={() => {
-                            reloadPageAndClearLS();
+                            handleGoOut();
                         }}
                     >
                         <h2 className={styles.h2}>Выйти</h2>

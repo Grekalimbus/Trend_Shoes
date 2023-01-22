@@ -7,7 +7,10 @@ const CardPurchases = ({ historyPurchases }) => {
     const filterQuantity = quantity.filter((item) => {
         return item.value !== 0;
     });
-
+    function randomIntFromInterval(min, max) {
+        // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
     return historyPurchases === undefined ? (
         <div>Loading</div>
     ) : (
@@ -47,7 +50,14 @@ const CardPurchases = ({ historyPurchases }) => {
 
                     {filterQuantity.map((item) => {
                         return (
-                            <div key={item.sizes} className={styles.inforTitle}>
+                            <div
+                                key={
+                                    item.sizes +
+                                    randomIntFromInterval(1, 500) +
+                                    historyPurchases.date
+                                }
+                                className={styles.inforTitle}
+                            >
                                 Размер: {`(${item.sizes})`} - кол-во{" "}
                                 {`(${item.value})`}
                             </div>

@@ -3,11 +3,11 @@ import styles from "./index.module.css";
 import BlockSizesValue from "./blockSizeValue";
 import PropTypes from "prop-types";
 import handleChangeQuantityFunc from "../../../../utils/changeSizes";
-import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import productService from "../../../../services/product.service";
 
 const CardHaveProduct = ({ quantity, image, id }) => {
-    const { changeObjectQuantity } = useAuth();
+    const { changeQuantity } = productService;
     const [quantityObject, setQuantityObject] = useState([
         { sizes: 37, value: 0 },
         { sizes: 38, value: 0 },
@@ -64,7 +64,7 @@ const CardHaveProduct = ({ quantity, image, id }) => {
         );
         try {
             if (filterSizesArray.length !== 0) {
-                await changeObjectQuantity(id, filterSizesArray);
+                await changeQuantity(id, filterSizesArray);
                 localStorage.removeItem("storageBasket");
                 localStorage.removeItem("dataSizes");
                 window.location.reload();

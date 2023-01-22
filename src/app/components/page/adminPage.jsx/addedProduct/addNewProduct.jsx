@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useApi } from "../../../hooks/useApi";
 import Form from "../../../common/form";
 import validatorConfig from "../../../../utils/validatorConfig";
 import validator from "../../../../utils/validator";
 import { toast } from "react-toastify";
 import BlockSizesValue from "./blockSizeValue";
 import handleChangeQuantityFunc from "../../../../utils/changeSizes";
-import { useAuth } from "../../../hooks/useAuth";
+import { useSelector } from "react-redux";
+import { getFirm, getIsLoadingFirmStatus } from "../../../../store/firm";
+import productService from "../../../../services/product.service";
 
 const AddNewProduct = () => {
-    const { dataFirm } = useApi();
-    const { addProduct } = useAuth();
+    const dataFirm = useSelector(getFirm());
+    const isLoading = useSelector(getIsLoadingFirmStatus());
+    const { add } = productService;
     const [quantityObject, setQuantityObject] = useState([
         { sizes: 37, value: 0 },
         { sizes: 38, value: 0 },
@@ -101,7 +103,7 @@ const AddNewProduct = () => {
             imgProduct: filterArrayUrl
         };
         try {
-            await addProduct(data.id, newObjectForDataBase);
+            await add(data.id, newObjectForDataBase);
             localStorage.removeItem("storageBasket");
             localStorage.removeItem("dataSizes");
             window.location.reload();
@@ -109,9 +111,9 @@ const AddNewProduct = () => {
             console.log(error);
         }
     };
-    if (!dataFirm) {
+    if (isLoading) {
         return <div>Loading</div>;
-    } else if (dataFirm) {
+    } else if (!isLoading) {
         return (
             <div className={styles.wrappNewProduct}>
                 <select
