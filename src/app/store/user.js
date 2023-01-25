@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import authServices from "../services/auth.service";
 import localStorageService, {
-    setTokens,
     getTokenExpiresDate,
     getRefreshToken
 } from "../services/localStorage.service";
@@ -45,16 +44,10 @@ export const loadUser = () => async (dispatch) => {
 
 const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
 export const loginIn = (dataForm) => async (dispatch) => {
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
     dispatch(userRequested());
     const { email, password } = dataForm;
     try {
-        const { data } = await axios.post(url, {
-            email,
-            password,
-            returnSecureToken: true
-        });
-        setTokens({ ...data });
+        const data = await authServices.loginIn({ email, password });
         dispatch(loadUser());
         location.reload();
     } catch (error) {
@@ -66,7 +59,6 @@ const createUser = (dataUserKey) => (dispatch) => {
     try {
         const data = userService.create(dataUserKey);
         dispatch(loadUser());
-        console.log(data);
         console.log(dataUserKey);
         location.reload();
     } catch (error) {
@@ -76,14 +68,8 @@ const createUser = (dataUserKey) => (dispatch) => {
 
 export const signUp = (dataUserKey) => async (dispatch) => {
     const { email, password } = dataUserKey;
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
     try {
-        const { data } = await axios.post(url, {
-            email,
-            password,
-            returnSecureToken: true
-        });
-        setTokens({ ...data, balance: 10000 });
+        const data = await authServices.signUp({ email, password });
         dispatch(createUser({ ...data, balance: 10000 }));
     } catch (error) {
         const { code, message } = error.response.data.error;
@@ -106,16 +92,7 @@ export const refreshTokenChek = async () => {
     const refreshToken = getRefreshToken();
     if (refreshToken && expiresDate < Date.now()) {
         try {
-            const { data } = await axios.post(url + key, {
-                grant_type: "refresh_token",
-                refresh_token: refreshToken
-            });
-            localStorageService.setTokens({
-                refreshToken: data.refresh_token,
-                idToken: data.id_token,
-                localId: data.user_id,
-                expiresIn: data.expires_in
-            });
+            const data = await authServices.refreshToken();
         } catch (error) {
             console.log(error);
         }
