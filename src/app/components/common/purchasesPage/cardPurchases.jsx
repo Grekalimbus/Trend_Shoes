@@ -15,6 +15,15 @@ const CardPurchases = ({ historyPurchases }) => {
         <div>Loading</div>
     ) : (
         <div className={styles.cardInfo}>
+            <div className={styles.elemFlexTwo}>
+                <div className={styles.wrappImg}>
+                    <img
+                        className={styles.img}
+                        src={historyPurchases.imgProduct[0]}
+                        alt="imageProduct"
+                    />
+                </div>
+            </div>
             <div className={styles.elemFlex}>
                 <div className={styles.flexElemInfo}>
                     <div className={styles.mainTitle}>
@@ -67,15 +76,6 @@ const CardPurchases = ({ historyPurchases }) => {
                     <div className={styles.inforTitle}>
                         ID Товара: {historyPurchases._id}
                     </div>
-                </div>
-            </div>
-            <div className={styles.elemFlexTwo}>
-                <div className={styles.wrappImg}>
-                    <img
-                        className={styles.img}
-                        src={historyPurchases.imgProduct[0]}
-                        alt="imageProduct"
-                    />
                 </div>
             </div>
         </div>
