@@ -9,13 +9,13 @@ import { getUser } from "../../../store/user";
 import { getAllPurchases } from "../../../store/allPurchases";
 
 const Header = () => {
-    const [color, setColor] = useState(true);
+    const [statusMenu, setStatusMenu] = useState(false);
+    const [styleMenu, setStyleMenu] = useState(styles.buttonMenu);
+    const [styleHeader, setStyleHeader] = useState(styles.header);
+    const [styleButton, setStyleButton] = useState(styles.button);
     const historyPurchases = useSelector(getAllPurchases());
     const history = useHistory();
     const user = useSelector(getUser());
-    setTimeout(() => {
-        setColor((pervState) => !pervState);
-    }, 5000);
     function isAdminStatus() {
         if (user !== undefined && user !== null) {
             if (user.email === "grechkin-danil@mail.ru") {
@@ -30,19 +30,37 @@ const Header = () => {
         history.push("/");
         location.reload();
     };
+    const handleClickMenu = () => {
+        setStatusMenu((prevState) => (prevState = !prevState));
+        if (!statusMenu) {
+            setStyleMenu(styles.buttonMenuActive);
+            setStyleHeader(styles.headerActive);
+            setStyleButton(styles.buttonActive);
+        }
+        if (statusMenu) {
+            setStyleMenu(styles.buttonMenu);
+            setStyleHeader(styles.header);
+            setStyleButton(styles.button);
+        }
+    };
     return (
         <header>
-            <div
-                className={color === true ? styles.header : styles.headerChange}
-            >
-                <Link to="/" className={styles.button}>
+            <div className={styleHeader}>
+                <div onClick={handleClickMenu} className={styleMenu}>
+                    MENU
+                </div>
+                <Link to="/" className={styleButton} onClick={handleClickMenu}>
                     <h2 className={styles.h2}>Главная</h2>
                 </Link>
-                <Link to="/productPage" className={styles.button}>
+                <Link
+                    to="/productPage"
+                    className={styleButton}
+                    onClick={handleClickMenu}
+                >
                     <h2 className={styles.h2}>Каталог</h2>
                 </Link>
 
-                <div className={styles.button}>
+                <div className={styleButton}>
                     <h2 className={styles.h2}>
                         ₽:{" "}
                         {user !== undefined && user !== null
@@ -50,29 +68,45 @@ const Header = () => {
                             : "----"}
                     </h2>
                 </div>
-                <Link to="/basketPage" className={styles.button}>
+                <Link
+                    to="/basketPage"
+                    className={styleButton}
+                    onClick={handleClickMenu}
+                >
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
                 {historyPurchases === null ? (
-                    <div className={styles.button}>Покупки</div>
+                    <div className={styleButton}>Покупки</div>
                 ) : (
-                    <Link to="/purchases" className={styles.button}>
+                    <Link
+                        to="/purchases"
+                        className={styleButton}
+                        onClick={handleClickMenu}
+                    >
                         <h2 className={styles.h2}>Покупки</h2>
                     </Link>
                 )}
                 {isAdminStatus() && (
-                    <Link to="/adminPage" className={styles.button}>
+                    <Link
+                        to="/adminPage"
+                        className={styleButton}
+                        onClick={handleClickMenu}
+                    >
                         <h2 className={styles.h2}>Админка</h2>
                     </Link>
                 )}
 
                 {user === null ? (
-                    <Link to="/login" className={styles.button}>
+                    <Link
+                        to="/login"
+                        className={styleButton}
+                        onClick={handleClickMenu}
+                    >
                         <h2 className={styles.h2}>Вход / Регистрация</h2>
                     </Link>
                 ) : (
                     <div
-                        className={styles.button}
+                        className={styleButton}
                         onClick={() => {
                             handleGoOut();
                         }}
