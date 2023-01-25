@@ -12,7 +12,7 @@ axios.interceptors.response.use(
             error.response < 500;
         if (!expectedErrors) {
             if (error.message === "Network Error") {
-                toast.info("Попробуйте включить VPN");
+                console.log(error);
             }
             if (
                 error.message === "Request failed with status code 400" ||

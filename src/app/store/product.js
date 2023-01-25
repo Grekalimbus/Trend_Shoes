@@ -19,7 +19,7 @@ const productSlice = createSlice({
             state.lastFeatch = Date.now();
         },
         productRequestFiled(state, actions) {
-            console.log(actions);
+            state.error = actions.payload;
         }
     }
 });
@@ -50,5 +50,6 @@ export const loadProduct = () => async (dispatch, getState) => {
 };
 
 export const getProduct = () => (state) => state.product.entities;
+export const getErrorProduct = () => (state) => state.product.error;
 
 export default productReducer;
