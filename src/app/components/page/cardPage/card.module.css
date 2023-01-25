@@ -207,3 +207,21 @@
     border-radius: 7px;    
     font-size: 22px;
 }
+
+@media (max-width: 920px) {
+    .flex{
+        display: flex;
+        flex-direction: column;
+    }
+    .blockImg{
+        width: 90%;
+    }
+    .blockInfo{
+        width: 90%;
+        height: 60vh;
+    }
+    .basket{       
+        margin: 0 auto;
+        margin-top: 5%;
+    }    
+  } 

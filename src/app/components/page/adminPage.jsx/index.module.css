@@ -121,6 +121,8 @@
     height: 100%;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.39);
+    object-fit: scale-down;
+    object-position: center center; 
 }
 .buttonPick{
     display: block;
