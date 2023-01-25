@@ -30,7 +30,7 @@ const Header = () => {
         history.push("/");
         location.reload();
     };
-    const handleClickMenu = () => {
+    const handleMenu = () => {
         setStatusMenu((prevState) => (prevState = !prevState));
         if (!statusMenu) {
             setStyleMenu(styles.buttonMenuActive);
@@ -43,19 +43,25 @@ const Header = () => {
             setStyleButton(styles.button);
         }
     };
+    const handleHideMenu = () => {
+        setStatusMenu(false);
+        setStyleMenu(styles.buttonMenu);
+        setStyleHeader(styles.header);
+        setStyleButton(styles.button);
+    };
     return (
         <header>
             <div className={styleHeader}>
-                <div onClick={handleClickMenu} className={styleMenu}>
+                <div onClick={handleMenu} className={styleMenu}>
                     MENU
                 </div>
-                <Link to="/" className={styleButton} onClick={handleClickMenu}>
+                <Link to="/" className={styleButton} onClick={handleHideMenu}>
                     <h2 className={styles.h2}>Главная</h2>
                 </Link>
                 <Link
                     to="/productPage"
                     className={styleButton}
-                    onClick={handleClickMenu}
+                    onClick={handleHideMenu}
                 >
                     <h2 className={styles.h2}>Каталог</h2>
                 </Link>
@@ -71,7 +77,7 @@ const Header = () => {
                 <Link
                     to="/basketPage"
                     className={styleButton}
-                    onClick={handleClickMenu}
+                    onClick={handleHideMenu}
                 >
                     <h2 className={styles.h2}>Корзина</h2>
                 </Link>
@@ -81,7 +87,7 @@ const Header = () => {
                     <Link
                         to="/purchases"
                         className={styleButton}
-                        onClick={handleClickMenu}
+                        onClick={handleHideMenu}
                     >
                         <h2 className={styles.h2}>Покупки</h2>
                     </Link>
@@ -90,7 +96,7 @@ const Header = () => {
                     <Link
                         to="/adminPage"
                         className={styleButton}
-                        onClick={handleClickMenu}
+                        onClick={handleHideMenu}
                     >
                         <h2 className={styles.h2}>Админка</h2>
                     </Link>
@@ -100,7 +106,7 @@ const Header = () => {
                     <Link
                         to="/login"
                         className={styleButton}
-                        onClick={handleClickMenu}
+                        onClick={handleHideMenu}
                     >
                         <h2 className={styles.h2}>Вход / Регистрация</h2>
                     </Link>
