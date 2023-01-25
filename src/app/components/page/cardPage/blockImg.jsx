@@ -10,7 +10,6 @@ const BlockImg = ({ image }) => {
     const getUrlImage = ({ target }) => {
         setDataImage(target.src);
     };
-
     return dataImage === null ? (
         <h1>loading...</h1>
     ) : (

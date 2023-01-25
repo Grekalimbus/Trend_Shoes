@@ -34,13 +34,13 @@
 @media (max-width: 650px) {   
     .flex{
         flex-direction: column;
-        height: 100%
+        height: 100%;              
     }
     .flexForms{
-        flex: 1 1 5 00px;
+        flex: 1 1 500px;        
     }
     .blockProduct{
-        width: 100%;
+        width: 100%;        
     }
     .buttonCard{
         width: 80%;

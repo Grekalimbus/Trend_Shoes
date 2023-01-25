@@ -18,12 +18,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadFirmList } from "./app/store/firm";
 import { getUser, loadUser, refreshTokenChek } from "./app/store/user";
 import localStorageService from "./app/services/localStorage.service";
-import { getProduct, loadProduct } from "./app/store/product";
+import { getErrorProduct, getProduct, loadProduct } from "./app/store/product";
 import { loadUserPurchases } from "./app/store/userPurchases";
 import { loadAllPurchases } from "./app/store/allPurchases";
 function App() {
     // const user = useSelector(getUser());
-    // const product = useSelector(getProduct());
+    const error = useSelector(getErrorProduct());
+    const product = useSelector(getProduct());
     const dispatch = useDispatch();
     useEffect(() => {
         refreshTokenChek();
@@ -36,36 +37,64 @@ function App() {
         }
     }, []);
     useProductBasket();
-    return (
-        <div className={styles.wrapperPage}>
-            <Header />
-            <main className={styles.mainPage}>
-                <Switch>
-                    <Route exact path="/" component={MainPage} />
-                    <Route
-                        exact
-                        path="/productPage/:cardID?"
-                        component={ProductPage}
-                    />
-                    <Route exact path="/cardPage/:id?" component={CardPage} />
-                    <Route exact path="/login/:exit?" component={LoginPage} />
-                    <Route exact path="/basketPage/" component={BasketPage} />
-                    <Route exact path="/formPage/" component={FormPage} />
-                    <Route exact path="/purchases/" component={Purchases} />
-                    <Route
-                        exact
-                        path="/adminPage/:other?"
-                        component={AdminPage}
-                    />
 
-                    <Redirect to="/" />
-                </Switch>
-            </main>
-            <Footer />
+    if (error) {
+        if (error === "Network Error") {
+            return (
+                <div>
+                    <h1>Network Error</h1>
+                    <h2>Попробуйте включить VPN или зайти позже</h2>
+                </div>
+            );
+        }
+        return <h1>{error}</h1>;
+    }
+    if (!product) {
+        return <h1>Loading</h1>;
+    } else {
+        return (
+            <div className={styles.wrapperPage}>
+                <Header />
+                <main className={styles.mainPage}>
+                    <Switch>
+                        <Route exact path="/" component={MainPage} />
+                        <Route
+                            exact
+                            path="/productPage/:cardID?"
+                            component={ProductPage}
+                        />
+                        <Route
+                            exact
+                            path="/cardPage/:id?"
+                            component={CardPage}
+                        />
+                        <Route
+                            exact
+                            path="/login/:exit?"
+                            component={LoginPage}
+                        />
+                        <Route
+                            exact
+                            path="/basketPage/"
+                            component={BasketPage}
+                        />
+                        <Route exact path="/formPage/" component={FormPage} />
+                        <Route exact path="/purchases/" component={Purchases} />
+                        <Route
+                            exact
+                            path="/adminPage/:other?"
+                            component={AdminPage}
+                        />
 
-            <ToastContainer />
-        </div>
-    );
+                        <Redirect to="/" />
+                    </Switch>
+                </main>
+                <Footer />
+
+                <ToastContainer />
+            </div>
+        );
+    }
 }
 
 export default App;

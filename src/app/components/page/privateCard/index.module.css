@@ -56,7 +56,7 @@
     width: 100%;
     height: 100%;
     z-index: 2;    
-    overflow: hidden;    
+    overflow: hidden;        
 }
 .cube {
     z-index: 2;
@@ -80,6 +80,8 @@
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.37);
     border: 10px solid rgba(243, 176, 32, 0.945);
+    object-fit: scale-down;
+    object-position: center center; 
 }
 
 @media (max-width: 900px) {      

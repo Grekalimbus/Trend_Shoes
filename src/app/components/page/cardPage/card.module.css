@@ -53,7 +53,9 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;   
+    object-fit: cover;
+    object-position: center center;        
     
 }
 .divImageActive{
@@ -68,11 +70,13 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;        
 }
 .image{
     width: 100%;
-    height: 90%;
+    height: 100%;  
+    object-fit: scale-down;
+    object-position: center center;        
 }
 /* ================= */
 /* Block info Product */
@@ -203,3 +207,21 @@
     border-radius: 7px;    
     font-size: 22px;
 }
+
+@media (max-width: 920px) {
+    .flex{
+        display: flex;
+        flex-direction: column;
+    }
+    .blockImg{
+        width: 90%;
+    }
+    .blockInfo{
+        width: 90%;
+        height: 60vh;
+    }
+    .basket{       
+        margin: 0 auto;
+        margin-top: 5%;
+    }    
+  } 
