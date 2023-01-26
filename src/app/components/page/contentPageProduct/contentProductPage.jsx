@@ -10,6 +10,7 @@ import filtersMethod from "../../../utils/filterProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getFirm, getIsLoadingFirmStatus } from "../../../store/firm";
 import { getProduct } from "../../../store/product";
+import formClearServices from "../../../services/formClear.service";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
@@ -31,24 +32,11 @@ const ContentProductPage = () => {
             setData((prevState) => ({ ...prevState, [target.name]: "" }));
         }
     };
+    const clearName = () => formClearServices.clearName(setData);
+    const clearPrice = () => formClearServices.clearPrice(setData);
+    const clearFirm = () => formClearServices.clearFirm(setData);
+    const clearAll = () => formClearServices.clearAll(setData);
 
-    const clearName = () => {
-        setData((prevState) => ({ ...prevState, name: "" }));
-    };
-    const clearPrice = () => {
-        setData((prevState) => ({ ...prevState, from: "", before: "" }));
-    };
-    const clearFirm = () => {
-        setData((prevState) => ({ ...prevState, firm: "" }));
-    };
-    const clearAll = () => {
-        setData({
-            name: "",
-            from: "",
-            before: "",
-            firm: ""
-        });
-    };
     const clear = {
         clearName,
         clearPrice,
