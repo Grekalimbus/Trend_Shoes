@@ -71,6 +71,7 @@ export const signUp = (dataUserKey) => async (dispatch) => {
     try {
         const data = await authServices.signUp({ email, password });
         dispatch(createUser({ ...data, balance: 10000 }));
+        dispatch(loadUser());
     } catch (error) {
         const { code, message } = error.response.data.error;
         if (code === 400) {

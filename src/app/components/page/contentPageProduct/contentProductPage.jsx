@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FilterFirm from "../../ui/forms/filterFirm";
 import FilterName from "../../ui/forms/filterName";
 import FilterPrice from "../../ui/forms/filterPrice";
@@ -7,9 +7,10 @@ import CardProduct from "../../common/cardProduct";
 import { useParams } from "react-router-dom";
 import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
-import { useDispatch, useSelector } from "react-redux";
-import { getFirm, getIsLoadingFirmStatus } from "../../../store/firm";
+import { useSelector } from "react-redux";
+import { getFirm } from "../../../store/firm";
 import { getProduct } from "../../../store/product";
+import formClearServices from "../../../services/formClear.service";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
@@ -20,11 +21,8 @@ const ContentProductPage = () => {
         before: "",
         firm: ""
     });
-    const dispatch = useDispatch();
     const dataFirm = useSelector(getFirm());
-    const isLoadingFirm = useSelector(getIsLoadingFirmStatus());
 
-    // функция переданная в формы, которая меняет состояние data
     const handleChangeForm = (target) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
         if (target.value === "Сортировка по бренду") {
@@ -32,23 +30,10 @@ const ContentProductPage = () => {
         }
     };
 
-    const clearName = () => {
-        setData((prevState) => ({ ...prevState, name: "" }));
-    };
-    const clearPrice = () => {
-        setData((prevState) => ({ ...prevState, from: "", before: "" }));
-    };
-    const clearFirm = () => {
-        setData((prevState) => ({ ...prevState, firm: "" }));
-    };
-    const clearAll = () => {
-        setData({
-            name: "",
-            from: "",
-            before: "",
-            firm: ""
-        });
-    };
+    const clearName = () => formClearServices.clearName(setData);
+    const clearPrice = () => formClearServices.clearPrice(setData);
+    const clearFirm = () => formClearServices.clearFirm(setData);
+    const clearAll = () => formClearServices.clearAll(setData);
     const clear = {
         clearName,
         clearPrice,
