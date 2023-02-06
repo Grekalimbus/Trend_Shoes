@@ -102,13 +102,13 @@ const Header = () => {
                     </Link>
                 )}
 
-                {user === null ? (
+                {!user ? (
                     <Link
                         to="/login"
                         className={styleButton}
                         onClick={handleHideMenu}
                     >
-                        <h2 className={styles.h2}>Вход / Регистрация</h2>
+                        <h2 className={styles.h2}>Вход</h2>
                     </Link>
                 ) : (
                     <div
