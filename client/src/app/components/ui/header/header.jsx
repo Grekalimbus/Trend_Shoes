@@ -28,7 +28,7 @@ const Header = () => {
     const handleGoOut = () => {
         deleteTokens();
         history.push("/");
-        location.reload();
+        window.location.reload();
     };
     const handleMenu = () => {
         setStatusMenu((prevState) => (prevState = !prevState));

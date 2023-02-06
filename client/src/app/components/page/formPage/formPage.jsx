@@ -56,7 +56,7 @@ const FormPage = () => {
                 historyPurchases
             );
             localStorage.setItem("storageBasket", "[]");
-            location.reload();
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }

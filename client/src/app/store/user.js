@@ -49,7 +49,7 @@ export const loginIn = (dataForm) => async (dispatch) => {
     try {
         const data = await authServices.loginIn({ email, password });
         dispatch(loadUser());
-        location.reload();
+        window.location.reload();
     } catch (error) {
         dispatch(userRequestFiled(error.message));
     }
@@ -59,8 +59,7 @@ const createUser = (dataUserKey) => (dispatch) => {
     try {
         const data = userService.create(dataUserKey);
         dispatch(loadUser());
-        console.log(dataUserKey);
-        location.reload();
+        window.location.reload();
     } catch (error) {
         dispatch(userRequestFiled(error.message));
     }
