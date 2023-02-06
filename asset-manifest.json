@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/Trend_Shoes/static/css/main.6382dd2d.css",
-    "main.js": "/Trend_Shoes/static/js/main.bdb8feca.js",
+    "main.js": "/Trend_Shoes/static/js/main.7ec0c318.js",
     "static/js/787.94301fda.chunk.js": "/Trend_Shoes/static/js/787.94301fda.chunk.js",
     "static/media/backdrop.png": "/Trend_Shoes/static/media/backdrop.5c2aa1cf91a1b111de99.png",
     "static/media/inst.svg": "/Trend_Shoes/static/media/inst.20836b689b74d6477d6d8638a3c80358.svg",
     "static/media/logoFooter.svg": "/Trend_Shoes/static/media/logoFooter.bb3f213ccafaed352cb5bed2b5c4cf20.svg",
     "index.html": "/Trend_Shoes/index.html",
     "main.6382dd2d.css.map": "/Trend_Shoes/static/css/main.6382dd2d.css.map",
-    "main.bdb8feca.js.map": "/Trend_Shoes/static/js/main.bdb8feca.js.map",
+    "main.7ec0c318.js.map": "/Trend_Shoes/static/js/main.7ec0c318.js.map",
     "787.94301fda.chunk.js.map": "/Trend_Shoes/static/js/787.94301fda.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6382dd2d.css",
-    "static/js/main.bdb8feca.js"
+    "static/js/main.7ec0c318.js"
   ]
 }
