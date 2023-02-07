@@ -3,12 +3,12 @@ const app = express();
 const config = require('config');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
-const initDatabase = require('./startUp/initDatabase.');
+const initDatabase = require('./startUp/initDatabase');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const PORT = config.get('port') ?? 8080;
+const PORT = config.get('port') ?? 8000;
 
 async function start() {
   try {

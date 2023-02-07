@@ -3,17 +3,18 @@
 // 2. Они равны mock данным
 
 // MockData
-const productMock = require('../mock/product.json');
-const firmMock = require('../mock/firm.json');
+const productMock = require('../mock/products.json');
+const firmMock = require('../mock/firms.json');
 
 // Models
 const Product = require('../models/Product');
 const Firm = require('../models/Firm');
 
+const chalk = require('chalk');
 module.exports = async () => {
   const firms = await Firm.find();
-  Object.keys(firms).length;
-  if (Object.keys(firms).length !== Object.keys(firmMock).length) {
+  console.log(chalk.blue('firms', firms));
+  if (firms.length !== Object.keys(firmMock).length) {
     await createInitialEntity(Firm, firmMock);
   }
 };
@@ -21,9 +22,10 @@ module.exports = async () => {
 async function createInitialEntity(Model, data) {
   await Model.collection.drop();
   return Promise.all(
-    data.map(async (item) => {
+    Object.keys(data).map(async (item) => {
       try {
-        const newItem = new Model(data[item]);
+        // delete data.item;
+        const newItem = new Model({ ...data[item] });
         await newItem.save();
         return newItem;
       } catch (e) {
