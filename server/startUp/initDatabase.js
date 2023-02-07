@@ -7,13 +7,14 @@ const productMock = require('../mock/products.json');
 const firmMock = require('../mock/firms.json');
 
 // Models
+// Нужны для того, чтобы с помощью их мы могли взаимодествовать с базой данных
 const Product = require('../models/Product');
 const Firm = require('../models/Firm');
-
 const chalk = require('chalk');
+
 module.exports = async () => {
-  const firms = await Firm.find();
-  console.log(chalk.blue('firms', firms));
+  const firms = await Firm.find(); // данные, которые мы смотрим в базе данных
+  // console.log(chalk.blue());
   if (firms.length !== Object.keys(firmMock).length) {
     await createInitialEntity(Firm, firmMock);
   }
@@ -24,10 +25,11 @@ async function createInitialEntity(Model, data) {
   return Promise.all(
     Object.keys(data).map(async (item) => {
       try {
-        // delete data.item;
-        const newItem = new Model({ ...data[item] });
+        const newObject = { ...firmMock[item] };
+        const newItem = new Model(newObject);
+        console.log(chalk.blue(newObject));
         await newItem.save();
-        return newItem;
+        return item;
       } catch (e) {
         return e;
       }
