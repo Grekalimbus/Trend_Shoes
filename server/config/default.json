@@ -1,4 +1,6 @@
 {
     "port": 8080,
-    "mongoUri": "mongodb+srv://danil:trend-shoes-394@cluster0.4dxvt9s.mongodb.net/app?retryWrites=true&w=majority"
+    "mongoUri": "mongodb+srv://danil:trend-shoes-394@cluster0.4dxvt9s.mongodb.net/app?retryWrites=true&w=majority",
+    "accessSecret": "super secret from backend",
+    "refreshSecret": "super refresh secret key"
 }
