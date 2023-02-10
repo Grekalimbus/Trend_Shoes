@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const tokenService = require('../services/token.service');
 const router = express.Router({ mergeParams: true });
@@ -12,34 +13,52 @@ const router = express.Router({ mergeParams: true });
 
 // =========
 // register
-router.post('/signUp', async (req, res) => {
-  try {
-    const { email, password } = await req.body; // здесь хранятся данные, которые юзер отправляет методом post
+router.post('/signUp', [
+  check('email', 'Некоректный email').isEmail(),
+  check('password', 'Минимальная длинна пароля 6 символов').isLength({
+    min: 6,
+  }),
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          error: {
+            message: 'INVALID_DATA',
+            code: 400,
+            errors: errors.array(),
+          },
+        });
+      }
+      const { email, password } = await req.body; // здесь хранятся данные, которые юзер отправляет методом post
 
-    const exitingUser = await User.findOne({ email });
-    if (exitingUser) {
-      return res.status(400).json({
-        error: {
-          message: 'EMAIL_EXISTS',
-          code: 400,
-        },
+      const exitingUser = await User.findOne({ email });
+      if (exitingUser) {
+        return res.status(400).json({
+          error: {
+            message: 'EMAIL_EXISTS',
+            code: 400,
+          },
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 12); // шифрование пароля
+      const newUser = await User.create({
+        ...req.body,
+        password: hashedPassword,
+      });
+
+      const tokens = tokenService.generate({ _id: newUser._id });
+      await tokenService.save(newUser._id, tokens.refreshToken);
+
+      res.status(201).send({ ...tokens, userId: newUser._id });
+    } catch (e) {
+      res.status(500).json({
+        message: 'На сервере произошла ошибка, попробуйте позже',
       });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 12); // шифрование пароля
-    const newUser = await User.create({
-      ...req.body,
-      password: hashedPassword,
-    });
-    const tokens = tokenService.generate({ _id: newUser._id });
-    await tokenService.save(newUser._id, tokens.refreshToken);
-    res.status(201).send({ ...tokens, userId: newUser._id });
-  } catch (e) {
-    res.status(500).json({
-      message: 'На сервере произошла ошибка, попробуйте позже',
-    });
-  }
-});
+  },
+]);
 
 // =========
 router.post('/signInWithPassword', async (req, res) => {
