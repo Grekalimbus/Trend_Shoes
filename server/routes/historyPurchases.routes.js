@@ -31,17 +31,14 @@ router.patch('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
     const list = await HistoryPurchases.findById(id);
-    console.log(chalk(list.user));
-    console.log(chalk(req.user._id));
-    if (list.user === req.user._id) {
+    if (JSON.stringify(list.user) === JSON.stringify(req.user._id)) {
       delete list._id;
       const newObject = {
         user: list.user,
         history: req.body,
       };
-      await list.update(newObject);
+      await list.updateOne(newObject);
       res.status(200).send(newObject);
-      res.send(updatedUser);
     } else {
       res.status(401).json({ message: 'UnAuthOrized' });
     }
