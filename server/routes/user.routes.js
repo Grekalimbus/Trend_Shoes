@@ -23,6 +23,32 @@ router.patch('/:userId', auth, async (req, res) => {
   }
 });
 
+router.patch('/:userId/balance', auth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userData = User.findById(userId);
+    const newDataUser = {
+      email: userData.email,
+      password: userData.password,
+      balance: req.body,
+    };
+
+    // userId === current user _id
+    if (userId === req.user._id) {
+      const updatedUser = await User.findByIdAndUpdate(userId, newDataUser, {
+        new: true,
+      });
+      res.send(updatedUser);
+    } else {
+      res.status(401).json({ message: 'UnAuthOrized' });
+    }
+  } catch (e) {
+    res.status(500).json({
+      message: 'На сервере произошла ошибка, попробуйте позже',
+    });
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     const list = await User.find();

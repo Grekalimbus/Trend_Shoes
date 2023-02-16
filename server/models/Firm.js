@@ -6,6 +6,10 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    id: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

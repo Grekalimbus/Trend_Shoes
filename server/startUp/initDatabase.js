@@ -19,7 +19,7 @@ module.exports = async () => {
   }
   const firms = await Firm.find(); // данные, которые мы смотрим в базе данных
   if (firms.length !== Object.keys(firmMock).length) {
-    await createInitialEntity(Firm, firmMock);
+    await createInitialEntityFirm(Firm, firmMock);
   }
 };
 
@@ -29,10 +29,24 @@ async function createInitialEntity(Model, data) {
     Object.keys(data).map(async (item, index) => {
       try {
         delete data[item]._id;
-        if (index === 0) {
-          console.log(chalk.blue(JSON.stringify(data[item])));
-        }
         const newItem = new Model(data[item]);
+        await newItem.save();
+        return item;
+      } catch (e) {
+        return e;
+      }
+    })
+  );
+}
+
+async function createInitialEntityFirm(Model, data) {
+  await Model.collection.drop();
+  return Promise.all(
+    Object.keys(data).map(async (item, index) => {
+      try {
+        const id = data[item]._id;
+        const newObject = { id, name: data[item].name };
+        const newItem = new Model(newObject);
         await newItem.save();
         return item;
       } catch (e) {

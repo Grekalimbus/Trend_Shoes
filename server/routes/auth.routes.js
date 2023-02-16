@@ -46,9 +46,9 @@ router.post('/signUp', [
       const hashedPassword = await bcrypt.hash(password, 12); // шифрование пароля
       const newUser = await User.create({
         ...req.body,
+        balance: 10000,
         password: hashedPassword,
       });
-
       const tokens = tokenService.generate({ _id: newUser._id });
       await tokenService.save(newUser._id, tokens.refreshToken);
 
