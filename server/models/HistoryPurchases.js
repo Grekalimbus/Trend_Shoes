@@ -2,11 +2,12 @@ const { Schema, model } = require('mongoose');
 
 const schema = new Schema(
   {
-    user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    history: { type: Array },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = model('User', schema);
+module.exports = model('HistoryPurchases', schema);

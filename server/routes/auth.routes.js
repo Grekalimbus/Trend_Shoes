@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const HistoryPurchases = require('../models/HistoryPurchases');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const tokenService = require('../services/token.service');
@@ -48,6 +49,10 @@ router.post('/signUp', [
         ...req.body,
         balance: 10000,
         password: hashedPassword,
+      });
+      const newHS = await HistoryPurchases.create({
+        user: newUser._id,
+        history: [],
       });
       const tokens = tokenService.generate({ _id: newUser._id });
       await tokenService.save(newUser._id, tokens.refreshToken);
