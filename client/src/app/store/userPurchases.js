@@ -55,6 +55,6 @@ export const loadUserPurchases = () => async (dispatch, getState) => {
     }
 };
 
-export const getPurchases = () => (state) => state.userPurchases.entities;
+export const getUserPurchases = () => (state) => state.userPurchases.entities;
 
 export default userPurchasesReducer;

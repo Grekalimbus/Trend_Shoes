@@ -19,7 +19,9 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const list = await HistoryPurchases.find();
-    const hostiryById = list.filter((item) => item.user === id);
+    const hostiryById = list.filter(
+      (item) => JSON.stringify(item.user) === JSON.stringify(id)
+    );
     res.status(200).send(hostiryById);
   } catch (e) {
     res.status(500).json({

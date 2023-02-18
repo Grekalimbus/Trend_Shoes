@@ -21,9 +21,7 @@ const handleChangeProduct = async (
     const minute = newDate.getMinutes();
     const stringDate = `${day}.${month}.${year}`;
     const timeDate = `${hour}:${minute}`;
-
     const changeArrayProduct = [];
-
     const transformProductForHistory = filterProduct.map((item) => {
         return {
             ...item,
@@ -33,17 +31,16 @@ const handleChangeProduct = async (
         };
     });
     const handleChangeHistoryPurchases = () => {
-        if (historyPurchases === null) {
+        if (!historyPurchases[0].history.length) {
             return transformProductForHistory;
-        } else if (historyPurchases !== null) {
-            const newArr = historyPurchases
+        } else if (historyPurchases[0].history.length) {
+            const newArr = historyPurchases[0].history
                 .concat(transformProductForHistory)
                 .reverse();
             return newArr;
         }
     };
     const newHistoryArr = handleChangeHistoryPurchases();
-
     if (product) {
         product.forEach((objectProduct) => {
             filterProduct.forEach((itemBasket) => {
@@ -112,8 +109,9 @@ const handleChangeProduct = async (
             `historyPurchases/${userID}`,
             newHistoryArr
         );
-        const dataPrice = await httpServices.put(
-            `users/${userID}/balance`,
+        console.log(newHistoryArr);
+        const dataPrice = await httpServices.patch(
+            `user/${userID}/balance`,
             newBalance
         );
         const { data } = await httpServices.put(`/product`, {

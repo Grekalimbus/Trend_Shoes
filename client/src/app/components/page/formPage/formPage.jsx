@@ -7,21 +7,24 @@ import getFilterProductCart from "../../../utils/filterProductCart";
 import validatorConfig from "../../../utils/validatorConfig";
 import handleChangeProduct from "../../../services/purchases.service";
 import { useSelector } from "react-redux";
-import { getPurchases } from "../../../store/userPurchases";
+import { getUserPurchases } from "../../../store/userPurchases";
 import { getProduct } from "../../../store/product";
 import { getUser } from "../../../store/user";
 // import { useApi } from "../../hooks/useApi";
 
 const FormPage = () => {
-    const historyPurchases = useSelector(getPurchases());
+    const historyPurchases = useSelector(getUserPurchases());
     const product = useSelector(getProduct());
     const user = useSelector(getUser());
+    // const [data, setData] = useState({
+    //     user: "",
+    //     phone: "",
+    //     email: "",
+    //     telegram: "",
+    //     adress: ""
+    // });
     const [data, setData] = useState({
-        user: "",
-        phone: "",
-        email: "",
-        telegram: "",
-        adress: ""
+        user: ""
     });
     const filterProductCart = getFilterProductCart();
     const [errors, setErrors] = useState({});
@@ -76,7 +79,7 @@ const FormPage = () => {
                     styles={styles}
                     error={errors.user}
                 />
-                <Form
+                {/* <Form
                     name={"phone"}
                     value={data.phone}
                     label={"Телефон"}
@@ -106,8 +109,8 @@ const FormPage = () => {
                     label={"Адресс куда отправить посылку"}
                     handleChangeForm={handleChangeForm}
                     styles={styles}
-                    error={errors.adress}
-                />
+                    error={errors.adress} */}
+                {/* /> */}
                 <div className={styles.blockCheckBox}>
                     <input type="checkbox" value={true} name="checkbox" />
                     <label htmlFor="checkbox" className={styles.labelCheckBox}>

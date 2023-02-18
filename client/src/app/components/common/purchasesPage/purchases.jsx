@@ -3,12 +3,12 @@ import styles from "./index.module.css";
 import CardPurchases from "./cardPurchases";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getPurchases } from "../../../store/userPurchases";
+import { getUserPurchases } from "../../../store/userPurchases";
 import { getAllPurchases } from "../../../store/allPurchases";
 
 const Purchases = () => {
     const { other } = useParams();
-    const historyPurchases = useSelector(getPurchases());
+    const historyPurchases = useSelector(getUserPurchases());
     const allHistoryPurchases = useSelector(getAllPurchases());
     console.log("historyPurchases", historyPurchases);
     console.log("allHistoryPurchases", allHistoryPurchases);

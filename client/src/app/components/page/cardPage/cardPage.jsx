@@ -5,12 +5,16 @@ import BlockImg from "./blockImg";
 import BlockInfoProduct from "./blockInfoProduct";
 import styles from "./card.module.css";
 import servicesBascket from "../../../utils/servisecBascket";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../../../store/product";
 
 const CardPage = () => {
-    const [data, setData] = useState(null);
-    // const [activeSize, setActiveSize] = useState(null);
+    const dispatch = useDispatch();
+    const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
     const { id } = useParams();
+    const product = useSelector(getProduct()).id;
+    const [data, setData] = useState(product);
     useEffect(() => {
         const getDataQuantity = async () => {
             const dataQuantity = await httpServices
@@ -28,8 +32,8 @@ const CardPage = () => {
     const handleAddProduct = (activeSize) => {
         servicesBascket.increment(activeSize, data, setData, dataSizes);
     };
-
-    return data === null && dataSizes === null ? (
+    // console.log(data === !data);
+    return !data && !dataSizes ? (
         <h1>Loading</h1>
     ) : (
         <div className={styles.flex}>
