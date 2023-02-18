@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import CardPurchases from "./cardPurchases";
 import { useParams } from "react-router-dom";
@@ -10,8 +10,17 @@ const Purchases = () => {
     const { other } = useParams();
     const historyPurchases = useSelector(getUserPurchases());
     const allHistoryPurchases = useSelector(getAllPurchases());
-    console.log("historyPurchases", historyPurchases);
-    console.log("allHistoryPurchases", allHistoryPurchases);
+    const [arrayUserHistory, setArrayUserHistory] = useState(null);
+    useEffect(() => {
+        if (
+            historyPurchases &&
+            historyPurchases[0] &&
+            historyPurchases.length
+        ) {
+            setArrayUserHistory(historyPurchases[0].history);
+            console.log(historyPurchases[0].history);
+        }
+    }, [historyPurchases]);
 
     const createArrayHistoryAll = () => {
         const allHistoryArray = [];
@@ -26,110 +35,41 @@ const Purchases = () => {
             return [];
         }
     };
-    // const keyUsers =
-    //     allHistoryPurchases !== null ? Object.keys(allHistoryPurchases) : null;
+    const allHistoryArray = createArrayHistoryAll();
 
-    // const createArrayHistory = () => {
-    //     const allHistory = [];
-    //     if (keyUsers !== null && allHistoryPurchases !== null) {
-    //         keyUsers.forEach((key) => {
-    //             allHistoryPurchases[key].forEach((item) => {
-    //                 allHistory.push(item);
-    //             });
-    //         });
-    //         return allHistory;
-    //     } else {
-    //         return null;
-    //     }
-    // };
-    const arrayAllHistory = createArrayHistoryAll();
-    const reserveAllHistory = arrayAllHistory
-        ? arrayAllHistory.reverse()
-        : null;
-    // const reversehistoryPurchases = () => {
-    //     const reversehistoryPurchases = [];
-    //     if (historyPurchases) {
-    //         const index = historyPurchases.map((el, index) => index);
-    //         const reverseIndex = index.reverse();
-    //         reverseIndex.forEach((item) =>
-    //             reversehistoryPurchases.push(historyPurchases[item])
-    //         );
-    //         return reversehistoryPurchases;
-    //     }
-    // };
-    // reversehistoryPurchases();
     function randomIntFromInterval(min, max) {
         // min and max included
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    // if (other !== undefined) {
-    //     return (
-    //         <div className={styles.mainBlokInfo}>
-    //             {!historyPurchases && !allHistoryPurchases ? (
-    //                 <div>Loading</div>
-    //             ) : (
-    //                 reserveAllHistory.map((item) => {
-    //                     return (
-    //                         <CardPurchases
-    //                             key={item._id + randomIntFromInterval(1, 1500)}
-    //                             historyPurchases={item}
-    //                         />
-    //                     );
-    //                 })
-    //             )}
-    //         </div>
-    //     );
-    // } else if (other === undefined) {
-    //     return (
-    //         <div className={styles.mainBlokInfo}>
-    //             {!historyPurchases && !allHistoryPurchases ? (
-    //                 <div>Loadnig</div>
-    //             ) : (
-    //                 reversehistoryPurchases().map((item) => {
-    //                     return (
-    //                         <CardPurchases
-    //                             key={item._id + randomIntFromInterval(1, 1500)}
-    //                             historyPurchases={item}
-    //                         />
-    //                     );
-    //                 })
-    //             )}
-    //         </div>
-    //     );
-    // }
     if (other !== undefined) {
-        return (
+        return !allHistoryArray ? (
+            <h2>loading</h2>
+        ) : (
             <div className={styles.mainBlokInfo}>
-                {!historyPurchases?.history && !allHistoryPurchases ? (
-                    <div>Loading</div>
-                ) : (
-                    reserveAllHistory.map((item) => {
-                        return (
-                            <CardPurchases
-                                key={item._id + randomIntFromInterval(1, 1500)}
-                                historyPurchases={item.history}
-                            />
-                        );
-                    })
-                )}
+                {allHistoryArray.map((item) => {
+                    return (
+                        <CardPurchases
+                            key={item._id + randomIntFromInterval(1, 1500)}
+                            historyPurchases={item}
+                        />
+                    );
+                })}
             </div>
         );
     } else if (other === undefined) {
-        return (
+        return !arrayUserHistory ? (
+            <h2>loading</h2>
+        ) : (
             <div className={styles.mainBlokInfo}>
-                {!historyPurchases?.history && !allHistoryPurchases ? (
-                    <div>Loadnig</div>
-                ) : (
-                    reserveAllHistory.map((item) => {
-                        return (
-                            <CardPurchases
-                                key={item._id + randomIntFromInterval(1, 1500)}
-                                historyPurchases={item.history}
-                            />
-                        );
-                    })
-                )}
+                {arrayUserHistory.map((item) => {
+                    return (
+                        <CardPurchases
+                            key={item._id + randomIntFromInterval(1, 1500)}
+                            historyPurchases={item}
+                        />
+                    );
+                })}
             </div>
         );
     }

@@ -3,9 +3,8 @@ import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
 const CardPurchases = ({ historyPurchases }) => {
-    const { history } = historyPurchases;
-    const filterQuantity = history
-        ? history.quantity.filter((item) => {
+    const filterQuantity = historyPurchases
+        ? historyPurchases.quantity.filter((item) => {
               return item.value !== 0;
           })
         : null;
@@ -13,7 +12,7 @@ const CardPurchases = ({ historyPurchases }) => {
         // min and max included
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
-    return !history ? (
+    return !historyPurchases ? (
         <div>Loading</div>
     ) : (
         <div className={styles.cardInfo}>
@@ -21,7 +20,7 @@ const CardPurchases = ({ historyPurchases }) => {
                 <div className={styles.wrappImg}>
                     <img
                         className={styles.img}
-                        src={history.imgProduct[0]}
+                        src={historyPurchases.imgProduct[0]}
                         alt="imageProduct"
                     />
                 </div>
@@ -32,29 +31,31 @@ const CardPurchases = ({ historyPurchases }) => {
                         Данные заполненные в форме
                     </div>
                     <div className={styles.inforTitle}>
-                        ФИО: {history.dataForm.user}
+                        ФИО: {historyPurchases.dataForm.user}
                     </div>
                     <div className={styles.inforTitle}>
-                        Почта: {history.dataForm.email}
+                        Почта: {historyPurchases.dataForm.email}
                     </div>
                     <div className={styles.inforTitle}>
-                        Телефон: {history.dataForm.phone}
+                        Телефон: {historyPurchases.dataForm.phone}
                     </div>
                     <div className={styles.inforTitle}>
-                        Телеграм: {history.dataForm.telegram}
+                        Телеграм: {historyPurchases.dataForm.telegram}
                     </div>
                     <div className={styles.inforTitle}>
-                        Адрес: {history.dataForm.adress}
+                        Адрес: {historyPurchases.dataForm.adress}
                     </div>
                     <div className={styles.inforTitle}>
-                        Дата оформления заказа: {history.date}
+                        Дата оформления заказа: {historyPurchases.date}
                     </div>
                 </div>
                 <div className={styles.flexElemInfo}>
                     <div className={styles.mainTitle}>Данные о товаре</div>
-                    <div className={styles.inforTitle}>{history.name}</div>
                     <div className={styles.inforTitle}>
-                        Цена: {history.price}
+                        {historyPurchases.name}
+                    </div>
+                    <div className={styles.inforTitle}>
+                        Цена: {historyPurchases.price}
                     </div>
 
                     {filterQuantity.map((item) => {
@@ -63,7 +64,7 @@ const CardPurchases = ({ historyPurchases }) => {
                                 key={
                                     item.sizes +
                                     randomIntFromInterval(1, 500) +
-                                    history.date
+                                    historyPurchases.date
                                 }
                                 className={styles.inforTitle}
                             >
@@ -74,7 +75,7 @@ const CardPurchases = ({ historyPurchases }) => {
                     })}
 
                     <div className={styles.inforTitle}>
-                        ID Товара: {history._id}
+                        ID Товара: {historyPurchases._id}
                     </div>
                 </div>
             </div>
@@ -83,7 +84,7 @@ const CardPurchases = ({ historyPurchases }) => {
 };
 
 CardPurchases.propTypes = {
-    historyPurchases: PropTypes.array
+    historyPurchases: PropTypes.object
 };
 
 export default CardPurchases;
