@@ -26,12 +26,14 @@ const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
             return arrSizes;
         }
     };
-
     useEffect(() => {
         const getFirm = async () => {
             try {
-                const { data } = await httpServices.get(`firm/.json`);
-                setFirm(data);
+                const dataFirm = await httpServices.get(`firm`);
+                const filterFirm = dataFirm.data.filter(
+                    (item) => item.id === data.firm
+                );
+                setFirm(filterFirm[0]);
             } catch (error) {
                 console.log("expectedErrors");
             }
@@ -41,6 +43,7 @@ const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
     const changeSize = ({ target }) => {
         setactiveSize(target.value);
     };
+
     return (
         <div className={styles.flex}>
             <div className={styles.infoBlockDiv} style={{ width: "100%" }}>
@@ -51,9 +54,7 @@ const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
                         <h1 className={styles.h1}>{data.name}</h1>
                         <h2 className={styles.h2}>id: {data._id}</h2>
                         <h2 className={styles.h2}>Стоимость: {data.price}</h2>
-                        <h2 className={styles.h2}>
-                            Фирма: {firm[data.firm].name}
-                        </h2>
+                        <h2 className={styles.h2}>Фирма: {firm.name}</h2>
                         <h2 className={styles.h2}>
                             Количество: {getQuantity()}
                         </h2>

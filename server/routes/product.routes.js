@@ -105,6 +105,20 @@ router.patch('/:id/quantity', async (req, res) => {
   }
 });
 
+// getQuantity
+router.get('/:id/quantity', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const list = await Product.findById(id);
+    res.status(200).send(list.quantity);
+  } catch (e) {
+    res.status(500).json({
+      message: 'На сервере произошла ошибка, попробуйте позже',
+      e,
+    });
+  }
+});
+
 // removeProduct
 router.delete('/:id', async (req, res) => {
   try {

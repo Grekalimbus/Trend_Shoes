@@ -39,7 +39,7 @@ export const loadFirmList = () => async (dispatch, getState) => {
     if (isOutDate(lastFeatch)) {
         dispatch(firmRequested());
         try {
-            const { data } = await httpServices.get("firm/.json");
+            const { data } = await httpServices.get("firm");
             dispatch(firmReceved(data));
         } catch (error) {
             dispatch(firmRequestFiled(error.message));

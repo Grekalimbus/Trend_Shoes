@@ -9,7 +9,7 @@ const useProductBasket = () => {
         // в dataCart пушатся вся товарка с базы данных, изменяется ключ quantity в котором value везде по 0
         const getAllProduct = async () => {
             try {
-                const { data } = await httpServices.get("product/.json");
+                const { data } = await httpServices.get("product");
                 const arrData = Object.keys(data).map((item) => data[item]);
                 // Размеры (объекты)
                 const arrSizes = arrData.map((item) => {

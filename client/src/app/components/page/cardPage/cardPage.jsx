@@ -14,7 +14,7 @@ const CardPage = () => {
     useEffect(() => {
         const getDataQuantity = async () => {
             const dataQuantity = await httpServices
-                .get(`/product/${id}/quantity.json`)
+                .get(`/product/${id}/quantity`)
                 .then((res) => setDataSizes(res.data));
         };
         getDataQuantity();

@@ -39,7 +39,7 @@ export const loadProduct = () => async (dispatch, getState) => {
     if (isOutDate(lastFeatch)) {
         dispatch(productRequested());
         try {
-            const { data } = await httpServices.get("/product.json");
+            const { data } = await httpServices.get("product");
             const arrData = [];
             Object.keys(data).forEach((item) => arrData.push(data[item]));
             dispatch(productReceved(arrData));

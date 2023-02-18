@@ -40,7 +40,7 @@ export const loadAllPurchases = () => async (dispatch, getState) => {
     if (isOutDate(lastFeatch)) {
         dispatch(allPurchasesRequested());
         try {
-            const { data } = await httpServices.get(`historyPurchases.json`);
+            const { data } = await httpServices.get(`historyPurchases`);
             dispatch(allPurchasesReceved(data));
         } catch (error) {
             dispatch(allPurchasesRequestFiled(error.message));

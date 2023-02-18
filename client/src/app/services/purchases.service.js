@@ -109,8 +109,7 @@ const handleChangeProduct = async (
     const newBalance = user.balance - amount;
     try {
         // console.log(newHistoryArr);
-        const { data } = await httpServices.get(`historyPurchases.json`);
-        console.log(data.SshHK2iLeigjChTjv3O2ySchyX02);
+        const { data } = await httpServices.get(`historyPurchases`);
         // const dataHistoryPurchases = await httpServices.put(
         //     `historyPurchases/${userID}.json?auth=${accessToken}`,
         //     newHistoryArr

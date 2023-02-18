@@ -46,7 +46,7 @@ export const loadUserPurchases = () => async (dispatch, getState) => {
         dispatch(userPurchasesRequested());
         try {
             const { data } = await httpServices.get(
-                `historyPurchases/${userID}.json`
+                `historyPurchases/${userID}`
             );
             dispatch(userPurchasesReceved(data));
         } catch (error) {

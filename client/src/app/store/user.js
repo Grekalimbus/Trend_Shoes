@@ -5,6 +5,7 @@ import localStorageService, {
     getRefreshToken
 } from "../services/localStorage.service";
 import userService from "../services/user.service";
+import config from "../../config.json";
 
 const userSlice = createSlice({
     name: "user",
@@ -87,7 +88,7 @@ export const signUp = (dataUserKey) => async (dispatch) => {
 };
 
 export const refreshTokenChek = async () => {
-    const url = "https://securetoken.googleapis.com/v1/token?key=";
+    const url = config.api + "auth/token";
     const expiresDate = getTokenExpiresDate();
     const refreshToken = getRefreshToken();
     if (refreshToken && expiresDate < Date.now()) {
