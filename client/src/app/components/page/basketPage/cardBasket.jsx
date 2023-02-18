@@ -17,7 +17,7 @@ const CardBasket = ({
     useEffect(() => {
         const getDataQuantity = async () => {
             const dataQuantity = await httpServices
-                .get(`/product/${data._id}/quantity.json`)
+                .get(`product/${data._id}/quantity`)
                 .then((res) => setDataSizes(res.data));
         };
         getDataQuantity();

@@ -67,7 +67,7 @@ const CardHaveProduct = ({ quantity, image, id }) => {
                 await changeQuantity(id, filterSizesArray);
                 localStorage.removeItem("storageBasket");
                 localStorage.removeItem("dataSizes");
-                window.location.reload();
+                // window.location.reload();
             }
             if (filterSizesArray.length === 0) {
                 toast.error("Удалите товар в другой вкладке");

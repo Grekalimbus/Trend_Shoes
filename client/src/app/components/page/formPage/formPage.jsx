@@ -55,8 +55,8 @@ const FormPage = () => {
                 product,
                 historyPurchases
             );
-            // localStorage.setItem("storageBasket", "[]");
-            // window.location.reload();
+            localStorage.setItem("storageBasket", "[]");
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }

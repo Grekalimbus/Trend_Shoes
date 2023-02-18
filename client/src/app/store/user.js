@@ -5,7 +5,6 @@ import localStorageService, {
     getRefreshToken
 } from "../services/localStorage.service";
 import userService from "../services/user.service";
-import config from "../../config.json";
 
 const userSlice = createSlice({
     name: "user",
@@ -43,34 +42,23 @@ export const loadUser = () => async (dispatch) => {
     }
 };
 
-const key = "AIzaSyCypYdSOsrKE2MT68JMCTLT9XKPESR35xU";
 export const loginIn = (dataForm) => async (dispatch) => {
     dispatch(userRequested());
     const { email, password } = dataForm;
     try {
         const data = await authServices.loginIn({ email, password });
         dispatch(loadUser());
-        window.location.reload();
-    } catch (error) {
-        dispatch(userRequestFiled(error.message));
-    }
-};
-// ===========
-const createUser = (dataUserKey) => (dispatch) => {
-    try {
-        const data = userService.create(dataUserKey);
-        dispatch(loadUser());
-        window.location.reload();
+        // window.location.reload();
     } catch (error) {
         dispatch(userRequestFiled(error.message));
     }
 };
 
+// ===========
 export const signUp = (dataUserKey) => async (dispatch) => {
     const { email, password } = dataUserKey;
     try {
         const data = await authServices.signUp({ email, password });
-        dispatch(createUser({ ...data, balance: 10000 }));
         dispatch(loadUser());
     } catch (error) {
         const { code, message } = error.response.data.error;
@@ -88,7 +76,6 @@ export const signUp = (dataUserKey) => async (dispatch) => {
 };
 
 export const refreshTokenChek = async () => {
-    const url = config.api + "auth/token";
     const expiresDate = getTokenExpiresDate();
     const refreshToken = getRefreshToken();
     if (refreshToken && expiresDate < Date.now()) {

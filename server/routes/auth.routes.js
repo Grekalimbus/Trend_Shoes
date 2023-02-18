@@ -50,7 +50,7 @@ router.post('/signUp', [
         balance: 10000,
         password: hashedPassword,
       });
-      const newHS = await HistoryPurchases.create({
+      await HistoryPurchases.create({
         user: newUser._id,
         history: [],
       });

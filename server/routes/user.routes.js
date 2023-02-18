@@ -60,4 +60,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:userId', auth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const list = await User.findById(userId);
+    if (userId === req.user._id) {
+      res.send(list);
+    } else {
+      res.status(401).json({ message: 'UnAuthOrized' });
+    }
+  } catch (e) {
+    res.status(500).json({
+      message: 'На сервере произошла ошибка, попробуйте позже',
+    });
+  }
+});
+
 module.exports = router;
