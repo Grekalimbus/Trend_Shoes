@@ -29,9 +29,9 @@ const productService = {
             console.log(error);
         }
     },
-    remove: async (object) => {
+    remove: async (id) => {
         try {
-            const data = await httpServices.put(`product.json`, object);
+            const data = await httpServices.put(`product.json`, id);
             console.log(data);
         } catch (error) {
             toast.error(error.message);

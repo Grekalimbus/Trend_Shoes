@@ -9,13 +9,13 @@ const DeleteProduct = () => {
     const product = useSelector(getProduct());
     const { remove } = productService;
     const handleDeletProduct = async (id) => {
-        const filterProduct = product.filter((item) => item._id !== id);
-        const updatedDataProduct = {};
-        filterProduct.forEach((item) => {
-            updatedDataProduct[item._id] = item;
-        });
+        // const filterProduct = product.filter((item) => item._id !== id);
+        // const updatedDataProduct = {};
+        // filterProduct.forEach((item) => {
+        //     updatedDataProduct[item._id] = item;
+        // });
         try {
-            await remove(updatedDataProduct);
+            await remove(id);
             localStorage.removeItem("storageBasket");
             localStorage.removeItem("dataSizes");
             window.location.reload();

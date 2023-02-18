@@ -27,6 +27,7 @@ const AddFirm = () => {
             if (data.id.length >= 8 && data.firm !== "") {
                 const object = { _id: data.id, name: data.firm };
                 await addFirm(data.id, object);
+                console.log(object);
                 window.location.reload();
             }
             if (data.id.length < 8 && data.firm !== "") {

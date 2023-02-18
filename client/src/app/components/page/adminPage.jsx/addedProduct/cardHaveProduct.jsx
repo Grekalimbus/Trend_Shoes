@@ -75,7 +75,6 @@ const CardHaveProduct = ({ quantity, image, id }) => {
         } catch (error) {
             console.log(error);
         }
-        console.log(filterSizesArray);
     };
 
     return !quantity ? (
