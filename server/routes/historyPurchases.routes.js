@@ -17,8 +17,10 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
+    const { id } = req.params;
     const list = await HistoryPurchases.find();
-    res.status(200).send(list);
+    const hostiryById = list.filter((item) => item.user === id);
+    res.status(200).send(hostiryById);
   } catch (e) {
     res.status(500).json({
       message: 'На сервере произошла ошибка, попробуйте позже',
@@ -30,14 +32,18 @@ router.get('/:id', async (req, res) => {
 router.patch('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
-    const list = await HistoryPurchases.findById(id);
-    if (JSON.stringify(list.user) === JSON.stringify(req.user._id)) {
+    const list = await HistoryPurchases.find();
+    const hostiryById = list.filter(
+      (item) => JSON.stringify(item.user) === JSON.stringify(id)
+    );
+    const listId = await HistoryPurchases.findById(hostiryById[0]._id);
+    if (JSON.stringify(hostiryById[0].user) === JSON.stringify(req.user._id)) {
       delete list._id;
       const newObject = {
         user: list.user,
         history: req.body,
       };
-      await list.updateOne(newObject);
+      await listId.update(newObject);
       res.status(200).send(newObject);
     } else {
       res.status(401).json({ message: 'UnAuthOrized' });

@@ -108,7 +108,7 @@ const handleChangeProduct = async (
     const amount = localStorage.getItem("amount");
     const newBalance = user.balance - amount;
     try {
-        const dataHistoryPurchases = await httpServices.put(
+        const dataHistoryPurchases = await httpServices.patch(
             `historyPurchases/${userID}`,
             newHistoryArr
         );
