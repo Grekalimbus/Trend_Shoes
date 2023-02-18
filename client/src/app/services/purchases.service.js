@@ -110,10 +110,9 @@ const handleChangeProduct = async (
             newHistoryArr
         );
         console.log(newHistoryArr);
-        const dataPrice = await httpServices.patch(
-            `user/${userID}/balance`,
-            newBalance
-        );
+        const dataPrice = await httpServices.patch(`user/${userID}/balance`, {
+            balance: newBalance
+        });
         const { data } = await httpServices.put(`/product`, {
             ...transformProduct()
         });

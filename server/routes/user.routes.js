@@ -30,11 +30,11 @@ router.patch('/:userId/balance', auth, async (req, res) => {
     const newDataUser = {
       email: userData.email,
       password: userData.password,
-      balance: req.body,
+      balance: req.body.balance,
     };
 
     // userId === current user _id
-    if (userId === req.user._id) {
+    if (JSON.stringify(userId) === JSON.stringify(req.user._id)) {
       const updatedUser = await User.findByIdAndUpdate(userId, newDataUser, {
         new: true,
       });
