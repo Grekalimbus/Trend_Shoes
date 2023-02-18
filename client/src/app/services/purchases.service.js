@@ -108,20 +108,17 @@ const handleChangeProduct = async (
     const amount = localStorage.getItem("amount");
     const newBalance = user.balance - amount;
     try {
-        // console.log(newHistoryArr);
-        const { data } = await httpServices.get(`historyPurchases`);
-        // const dataHistoryPurchases = await httpServices.put(
-        //     `historyPurchases/${userID}.json?auth=${accessToken}`,
-        //     newHistoryArr
-        // );
-        // const dataPrice = await httpServices.put(
-        //     `users/${userID}/balance.json?auth=${accessToken}`,
-        //     newBalance
-        // );
-        // const { data } = await httpServices.put(
-        //     `/product.json?auth=${accessToken}`,
-        //     { ...transformProduct() }
-        // );
+        const dataHistoryPurchases = await httpServices.put(
+            `historyPurchases/${userID}`,
+            newHistoryArr
+        );
+        const dataPrice = await httpServices.put(
+            `users/${userID}/balance`,
+            newBalance
+        );
+        const { data } = await httpServices.put(`/product`, {
+            ...transformProduct()
+        });
     } catch (error) {
         toast.error(error.message);
         console.log(error);

@@ -33,7 +33,6 @@ const authServices = {
             grant_type: "refresh_token",
             refresh_token: refreshToken
         });
-        httpAuth.params = { Authorization: `Bearer ${data.accessToken}` };
         localStorageService.setTokens(data);
         return data;
     }
