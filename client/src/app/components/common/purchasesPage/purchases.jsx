@@ -58,7 +58,9 @@ const Purchases = () => {
         );
     } else if (other === undefined) {
         return !arrayUserHistory ? (
-            <h2>loading</h2>
+            <h2 className={styles.notPurchases}>
+                У вас нет покупок на данный момент
+            </h2>
         ) : (
             <div className={styles.mainBlokInfo}>
                 {arrayUserHistory.map((item) => {

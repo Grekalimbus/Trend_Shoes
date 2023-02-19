@@ -19,8 +19,9 @@ const PrivateCard = ({ data }) => {
             target.style.backgroundColor = "rgb(0, 0, 0)";
         }, 700);
     };
-
-    return (
+    return !data ? (
+        <h2>Loading</h2>
+    ) : (
         <div className={styles.wrapper}>
             <div className={styles.blockInfo}>
                 <h1>{data.name}</h1>

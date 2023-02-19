@@ -13,37 +13,37 @@ const CardPage = () => {
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
     const { id } = useParams();
-    const product = useSelector(getProduct()).id;
-    const [data, setData] = useState(product);
+    const product = useSelector(getProduct()).filter((item) => item._id === id);
+    const [data, setData] = useState(null);
     useEffect(() => {
-        const getDataQuantity = async () => {
-            const dataQuantity = await httpServices
-                .get(`/product/${id}/quantity`)
-                .then((res) => setDataSizes(res.data));
-        };
-        getDataQuantity();
-        const basketLocalStorage = JSON.parse(
-            localStorage.getItem("storageBasket")
-        );
-        const filterData = basketLocalStorage.filter((item) => item._id === id);
-        setData(filterData[0]);
+        if (product) {
+            setDataSizes(product[0].quantity);
+            const basketLocalStorage = JSON.parse(
+                localStorage.getItem("storageBasket")
+            );
+            const filterData = basketLocalStorage.filter(
+                (item) => item._id === id
+            );
+            setData(filterData[0]);
+            console.log("filterData[0]", filterData);
+        }
     }, []);
 
     const handleAddProduct = (activeSize) => {
         servicesBascket.increment(activeSize, data, setData, dataSizes);
     };
-    // console.log(data === !data);
-    return !data && !dataSizes ? (
+
+    return !dataSizes && !data && !product[0] ? (
         <h1>Loading</h1>
     ) : (
         <div className={styles.flex}>
             <div className={styles.blockImg}>
-                <BlockImg image={data.imgProduct} />
+                <BlockImg image={product[0].imgProduct} />
             </div>
             <div className={styles.blockInfo}>
                 <BlockInfoProduct
                     dataSizes={dataSizes}
-                    data={data}
+                    data={product[0]}
                     handleAddProduct={handleAddProduct}
                 />
             </div>
