@@ -113,9 +113,10 @@ const handleChangeProduct = async (
         const dataPrice = await httpServices.patch(`user/${userID}/balance`, {
             balance: newBalance
         });
-        const { data } = await httpServices.put(`/product`, {
+        const { data } = await httpServices.patch(`/product`, {
             ...transformProduct()
         });
+        console.log({ ...transformProduct() });
     } catch (error) {
         toast.error(error.message);
         console.log(error);

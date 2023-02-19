@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 // changeAllProduct
-router.put('/', async (req, res) => {
+router.patch('/', async (req, res) => {
   try {
     await createInitialEntity(Product, req.body);
     res.status(200).send(req.body);

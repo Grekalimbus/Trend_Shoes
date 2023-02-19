@@ -12,7 +12,8 @@ const Buttons = ({ amount }) => {
     const user = useSelector(getUser());
     const clearBasket = () => {
         localStorage.setItem("storageBasket", "[]");
-        // window.location.reload();
+        localStorage.setItem("dataSizes", "[]");
+        window.location.reload();
     };
     const needAutn = () => {
         if (user && amount > user.balance) {

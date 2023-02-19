@@ -18,7 +18,6 @@ const Purchases = () => {
             historyPurchases.length
         ) {
             setArrayUserHistory(historyPurchases[0].history);
-            console.log(historyPurchases[0].history);
         }
     }, [historyPurchases]);
 
