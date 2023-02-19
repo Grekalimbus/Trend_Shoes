@@ -1,8 +1,8 @@
 const validatorConfig = {
     user: {
-        isRequired: { message: "ФИО обязательно для заполнения" },
+        isRequired: { message: "Обязательно для заполнения" },
         isUser: {
-            message: "Введине ФИО полностью"
+            message: "Данные не корректны"
         }
     },
     phone: {

@@ -5,6 +5,13 @@ function validator(data, config) {
             case "isRequired":
                 if (data.trim() === "") return config.message;
                 break;
+            case "isUser": {
+                const arrayData = data.split(" ");
+                if (arrayData.length < 2 || arrayData[1] === "") {
+                    return config.message;
+                }
+                break;
+            }
             case "isEmail": {
                 const emailRegExp = /^\S+@\S+\.\S+$/g;
                 if (!emailRegExp.test(data)) return config.message;
@@ -12,7 +19,9 @@ function validator(data, config) {
             }
             case "isNumbers": {
                 const phoneRegExp = /^\S+\D/g;
-                if (phoneRegExp.test(data)) return config.message;
+                if (phoneRegExp.test(data.replaceAll(" ", ""))) {
+                    return config.message;
+                }
                 break;
             }
             case "isRepeat": {

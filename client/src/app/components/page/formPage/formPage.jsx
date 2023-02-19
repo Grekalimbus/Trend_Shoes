@@ -72,7 +72,7 @@ const FormPage = () => {
                 <Form
                     name={"user"}
                     value={data.user}
-                    label={"ФИО"}
+                    label={"Имя Фамилия"}
                     handleChangeForm={handleChangeForm}
                     styles={styles}
                     error={errors.user}
