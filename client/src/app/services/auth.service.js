@@ -24,7 +24,7 @@ const authServices = {
             password,
             returnSecureToken: true
         });
-        setTokens({ ...data, balance: 10000 });
+        setTokens({ ...data });
         return data;
     },
     refreshToken: async () => {

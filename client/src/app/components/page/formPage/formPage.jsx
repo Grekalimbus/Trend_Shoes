@@ -28,6 +28,13 @@ const FormPage = () => {
     useEffect(() => {
         validate();
     }, [data]);
+    useEffect(() => {
+        if (localStorage.getItem("dataForm")) {
+            setData(JSON.parse(localStorage.getItem("dataForm")));
+        } else {
+            localStorage.removeItem("dataForm");
+        }
+    }, []);
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
@@ -47,6 +54,13 @@ const FormPage = () => {
             return item.quantity;
         });
         try {
+            console.log(e.target[5].checked);
+            if (e.target[5].checked) {
+                localStorage.setItem("dataForm", JSON.stringify(data));
+            }
+            if (!e.target[5].checked) {
+                localStorage.removeItem("dataForm");
+            }
             await handleChangeProduct(
                 filterProductCart,
                 quantityProduct,
@@ -110,7 +124,7 @@ const FormPage = () => {
                     error={errors.adress}
                 />
                 <div className={styles.blockCheckBox}>
-                    <input type="checkbox" value={true} name="checkbox" />
+                    <input type="checkbox" name="checkbox" />
                     <label htmlFor="checkbox" className={styles.labelCheckBox}>
                         Запомнить данные
                     </label>

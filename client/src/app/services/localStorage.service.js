@@ -27,9 +27,6 @@ export function deleteTokens() {
     localStorage.removeItem(EXPIRES_KEY);
     localStorage.removeItem(BALANCE);
 }
-export function setAmount(balance) {
-    localStorage.setItem(AMOUNT, balance);
-}
 export function getAmount() {
     localStorage.getItem(AMOUNT);
 }
@@ -54,7 +51,6 @@ export function getUserId() {
 
 const localStorageService = {
     setTokens,
-    setAmount,
     getAmount,
     deleteTokens,
     getAccessToken,

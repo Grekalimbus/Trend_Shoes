@@ -14,6 +14,7 @@ const useProductBasket = () => {
                 const validateBasketProducts = getBasketProduct().every(
                     (item, index) => item._id === data[index]._id
                 );
+                console.log(validateBasketProducts);
                 if (!validateBasketProducts) {
                     localStorage.setItem("storageBasket", "[]");
                     localStorage.setItem("dataSizes", "[]");
@@ -58,9 +59,6 @@ const useProductBasket = () => {
             const stringDataCart = JSON.stringify(dataSizes);
             localStorage.setItem("dataSizes", stringDataCart);
         }
-    }
-    if (!localStorageService.getAmount()) {
-        localStorageService.setAmount(0);
     }
 };
 

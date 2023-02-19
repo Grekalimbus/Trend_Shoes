@@ -16,8 +16,8 @@ const DeleteProduct = () => {
         // });
         try {
             await remove(id);
-            localStorage.removeItem("storageBasket");
-            localStorage.removeItem("dataSizes");
+            localStorage.setItem("storageBasket", "[]");
+            localStorage.setItem("dataSizes", "[]");
             window.location.reload();
         } catch (error) {
             console.log(error);
