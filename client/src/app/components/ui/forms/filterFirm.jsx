@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const FilterFirm = ({ handleChangeForm, clear, firm, dataFirm }) => {
     const handleChange = ({ target }) => {
         handleChangeForm(target);
+        console.log(target);
     };
     return (
         <div className={styles.blockFirm}>
@@ -27,7 +28,7 @@ const FilterFirm = ({ handleChangeForm, clear, firm, dataFirm }) => {
                                 return (
                                     <option
                                         key={item}
-                                        value={item}
+                                        value={dataFirm[item].id}
                                         className={styles.option}
                                     >
                                         {dataFirm[item].name}

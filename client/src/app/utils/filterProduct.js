@@ -40,7 +40,7 @@ const filter = (product, data) => {
 const filterProduct = (product, cardID) => {
     if (product !== null) {
         const filterArr = product.filter((item) => {
-            return item._id === cardID;
+            return item.id === cardID;
         });
         return filterArr;
     }

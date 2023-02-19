@@ -22,6 +22,7 @@ const ContentProductPage = () => {
         firm: ""
     });
     const dataFirm = useSelector(getFirm());
+    console.log(filtersMethod);
 
     const handleChangeForm = (target) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
