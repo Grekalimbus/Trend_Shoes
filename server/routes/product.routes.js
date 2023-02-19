@@ -72,10 +72,9 @@ router.patch('/:add', async (req, res) => {
 });
 
 // changeProductId / accepted
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    delete req.body._id;
     await Product.findById(id).update(req.body);
     res.status(200).send(req.body);
   } catch (e) {

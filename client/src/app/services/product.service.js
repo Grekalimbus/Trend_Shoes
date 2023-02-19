@@ -39,7 +39,7 @@ const productService = {
     },
     changeProduct: async (id, object) => {
         try {
-            const data = await httpServices.patch(`product/${id}`, object);
+            const data = await httpServices.put(`product/${id}`, object);
         } catch (error) {
             console.log(error);
         }
