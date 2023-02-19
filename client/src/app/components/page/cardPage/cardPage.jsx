@@ -25,7 +25,6 @@ const CardPage = () => {
                 (item) => item._id === id
             );
             setData(filterData[0]);
-            console.log("filterData[0]", filterData);
         }
     }, []);
 

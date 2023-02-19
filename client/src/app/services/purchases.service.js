@@ -30,8 +30,9 @@ const handleChangeProduct = async (
             time: timeDate
         };
     });
+    console.log("historyPurchases", historyPurchases);
     const handleChangeHistoryPurchases = () => {
-        if (!historyPurchases[0].history.length) {
+        if (!historyPurchases || !historyPurchases[0].history.length) {
             return transformProductForHistory;
         } else if (historyPurchases[0].history.length) {
             const newArr = historyPurchases[0].history
@@ -116,7 +117,6 @@ const handleChangeProduct = async (
         const { data } = await httpServices.patch(`/product`, {
             ...transformProduct()
         });
-        console.log({ ...transformProduct() });
     } catch (error) {
         toast.error(error.message);
         console.log(error);

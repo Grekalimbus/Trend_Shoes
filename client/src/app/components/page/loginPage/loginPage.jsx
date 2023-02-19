@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import SignInForm from "./signInForm";
 import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
@@ -15,6 +15,7 @@ import {
 } from "../../../store/user";
 
 const LoginPage = () => {
+    const history = useHistory();
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -41,21 +42,29 @@ const LoginPage = () => {
     const handleChangeForm = ({ target }) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
         if (!exit) {
-            dispatch(signUp(data));
             if (error) {
                 validate();
                 setErrors({ ...error });
             }
+            dispatch(signUp(data));
+            history.push("/");
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
         }
         if (exit) {
             dispatch(loginIn(data));
+            history.push("/");
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
         }
     };
     if (user) {
