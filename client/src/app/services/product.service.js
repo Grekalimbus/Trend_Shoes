@@ -31,8 +31,7 @@ const productService = {
     },
     remove: async (id) => {
         try {
-            const data = await httpServices.put(`product`, id);
-            console.log(data);
+            const data = await httpServices.delete(`product/${id.id}`, id);
         } catch (error) {
             toast.error(error.message);
             console.log(error);

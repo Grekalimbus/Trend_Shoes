@@ -15,10 +15,10 @@ const DeleteProduct = () => {
         //     updatedDataProduct[item._id] = item;
         // });
         try {
-            await remove(id);
+            await remove({ id });
             localStorage.setItem("storageBasket", "[]");
             localStorage.setItem("dataSizes", "[]");
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.log(error);
         }
