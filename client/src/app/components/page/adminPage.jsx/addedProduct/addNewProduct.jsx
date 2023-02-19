@@ -103,10 +103,11 @@ const AddNewProduct = () => {
             imgProduct: filterArrayUrl
         };
         try {
-            await add(data.id, newObjectForDataBase);
+            console.log(newObjectForDataBase);
+            await add(newObjectForDataBase);
             localStorage.setItem("storageBasket", "[]");
             localStorage.setItem("dataSizes", "[]");
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.log(error);
         }
@@ -130,7 +131,7 @@ const AddNewProduct = () => {
                         return (
                             <option
                                 key={item}
-                                value={item}
+                                value={dataFirm[item].id}
                                 className={styles.option}
                             >
                                 {dataFirm[item].name}

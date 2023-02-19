@@ -56,15 +56,17 @@ router.get('/:id', async (req, res) => {
 });
 
 // addProduct / accepted
-router.patch('/', async (req, res) => {
+router.patch('/:add', async (req, res) => {
   try {
-    delete req.body._id;
-    await Product.create(req.body);
-    res.status(200).send(req.body);
+    const { add } = req.params;
+    if (add) {
+      delete req.body._id;
+      await Product.create(req.body);
+      res.status(200).send(req.body);
+    }
   } catch (e) {
     res.status(500).json({
       message: 'На сервере произошла ошибка, попробуйте позже',
-      e,
     });
   }
 });

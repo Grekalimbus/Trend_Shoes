@@ -28,7 +28,7 @@ const AddFirm = () => {
                 const object = { _id: data.id, name: data.firm };
                 await addFirm(data.id, object);
                 console.log(object);
-                window.location.reload();
+                // window.location.reload();
             }
             if (data.id.length < 8 && data.firm !== "") {
                 toast.error("Заполните правильно участки");

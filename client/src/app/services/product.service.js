@@ -2,9 +2,9 @@ import { toast } from "react-toastify";
 import httpServices from "./http.service";
 
 const productService = {
-    add: async (id, object) => {
+    add: async (object) => {
         try {
-            const data = await httpServices.put(`product/${id}`, object);
+            const data = await httpServices.patch(`product/add`, object);
         } catch (error) {
             toast.error(error.message);
             console.log(error);
@@ -12,7 +12,7 @@ const productService = {
     },
     changeQuantity: async (id, array) => {
         try {
-            const data = await httpServices.put(
+            const data = await httpServices.patch(
                 `product/${id}/quantity`,
                 array
             );
@@ -23,7 +23,7 @@ const productService = {
     },
     addFirm: async (id, object) => {
         try {
-            const data = await httpServices.put(`firm/${id}`, object);
+            const data = await httpServices.patch(`firm`, object);
         } catch (error) {
             toast.error(error.message);
             console.log(error);
@@ -39,7 +39,7 @@ const productService = {
     },
     changeProduct: async (id, object) => {
         try {
-            const data = await httpServices.put(`product/${id}`, object);
+            const data = await httpServices.patch(`product/${id}`, object);
         } catch (error) {
             console.log(error);
         }

@@ -9,16 +9,11 @@ const DeleteProduct = () => {
     const product = useSelector(getProduct());
     const { remove } = productService;
     const handleDeletProduct = async (id) => {
-        // const filterProduct = product.filter((item) => item._id !== id);
-        // const updatedDataProduct = {};
-        // filterProduct.forEach((item) => {
-        //     updatedDataProduct[item._id] = item;
-        // });
         try {
             await remove({ id });
             localStorage.setItem("storageBasket", "[]");
             localStorage.setItem("dataSizes", "[]");
-            // window.location.reload();
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }

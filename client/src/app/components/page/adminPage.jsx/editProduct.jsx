@@ -95,7 +95,7 @@ const EditProduct = () => {
         const newDataProduct = changeObjectProduct(objectProduct);
         try {
             await changeProduct(newDataProduct._id, newDataProduct);
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.log(error);
         }
