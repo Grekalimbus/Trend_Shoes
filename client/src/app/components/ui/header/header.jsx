@@ -28,6 +28,8 @@ const Header = () => {
     const handleGoOut = () => {
         deleteTokens();
         history.push("/");
+        localStorage.setItem("storageBasket", "[]");
+        localStorage.setItem("dataSizes", "[]");
         window.location.reload();
     };
     const handleMenu = () => {

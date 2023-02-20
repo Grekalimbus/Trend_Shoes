@@ -57,14 +57,14 @@ const LoginPage = () => {
             history.push("/");
             setTimeout(() => {
                 window.location.reload();
-            }, 2000);
+            }, 1000);
         }
         if (exit) {
             dispatch(loginIn(data));
             history.push("/");
             setTimeout(() => {
                 window.location.reload();
-            }, 2000);
+            }, 1000);
         }
     };
     if (user) {

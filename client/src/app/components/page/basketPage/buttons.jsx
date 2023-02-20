@@ -12,7 +12,6 @@ const Buttons = ({ amount }) => {
     const user = useSelector(getUser());
     const clearBasket = () => {
         localStorage.setItem("storageBasket", "[]");
-        localStorage.setItem("dataSizes", "[]");
         window.location.reload();
     };
     const needAutn = () => {

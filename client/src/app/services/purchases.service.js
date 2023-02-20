@@ -30,7 +30,6 @@ const handleChangeProduct = async (
             time: timeDate
         };
     });
-    console.log("historyPurchases", historyPurchases);
     const handleChangeHistoryPurchases = () => {
         if (!historyPurchases || !historyPurchases[0].history.length) {
             return transformProductForHistory;

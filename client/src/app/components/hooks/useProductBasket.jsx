@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import httpServices from "../../services/http.service";
 import localStorageService from "../../services/localStorage.service";
-import { getBasketProduct } from "../../utils/getBasket";
 
 const useProductBasket = () => {
     const [dataCart, setDataCart] = useState(null);
@@ -11,14 +10,6 @@ const useProductBasket = () => {
         const getAllProduct = async () => {
             try {
                 const { data } = await httpServices.get("product");
-                const validateBasketProducts = getBasketProduct().every(
-                    (item, index) => item._id === data[index]._id
-                );
-                console.log(validateBasketProducts);
-                if (!validateBasketProducts) {
-                    localStorage.setItem("storageBasket", "[]");
-                    localStorage.setItem("dataSizes", "[]");
-                }
                 const arrData = Object.keys(data).map((item) => data[item]);
                 // Размеры (объекты)
                 const arrSizes = arrData.map((item) => {
@@ -59,6 +50,9 @@ const useProductBasket = () => {
             const stringDataCart = JSON.stringify(dataSizes);
             localStorage.setItem("dataSizes", stringDataCart);
         }
+    }
+    if (!localStorageService.getAmount()) {
+        localStorageService.setAmount(0);
     }
 };
 

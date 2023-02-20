@@ -30,8 +30,8 @@ export function deleteTokens() {
 export function getAmount() {
     localStorage.getItem(AMOUNT);
 }
-export function setBalance(newBalance) {
-    localStorage.setItem(BALANCE, newBalance);
+export function setAmount(balance) {
+    localStorage.setItem(AMOUNT, balance);
 }
 export function getBalance() {
     return localStorage.getItem(BALANCE);
@@ -51,13 +51,13 @@ export function getUserId() {
 
 const localStorageService = {
     setTokens,
+    setAmount,
     getAmount,
     deleteTokens,
     getAccessToken,
     getRefreshToken,
     getTokenExpiresDate,
     getBalance,
-    setBalance,
     getUserId
 };
 export default localStorageService;
