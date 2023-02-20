@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import httpServices from "../../services/http.service";
 import localStorageService from "../../services/localStorage.service";
 import { getBasketProduct } from "../../utils/getBasket";
+
 const useProductBasket = () => {
     const [dataCart, setDataCart] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);

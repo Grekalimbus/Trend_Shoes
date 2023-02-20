@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
 
 const CardPage = () => {
-    const dispatch = useDispatch();
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
     const { id } = useParams();
