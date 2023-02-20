@@ -10,12 +10,14 @@ const useProductBasket = () => {
         const getAllProduct = async () => {
             try {
                 const { data } = await httpServices.get("product");
-                const validateBasketProducts = getBasketProduct().every(
-                    (item, index) => item._id === data[index]._id
-                );
-                if (!validateBasketProducts) {
-                    localStorage.setItem("storageBasket", "[]");
-                    localStorage.setItem("dataSizes", "[]");
+                if (getBasketProduct()) {
+                    const validateBasketProducts = getBasketProduct().every(
+                        (item, index) => item._id === data[index]._id
+                    );
+                    if (!validateBasketProducts) {
+                        localStorage.setItem("storageBasket", "[]");
+                        localStorage.setItem("dataSizes", "[]");
+                    }
                 }
                 const arrData = Object.keys(data).map((item) => data[item]);
                 // Размеры (объекты)

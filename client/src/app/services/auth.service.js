@@ -26,6 +26,9 @@ const authServices = {
             if (e.response.data.error.message === "INVALID_PASSWORD") {
                 return toast.error("Неверный пароль");
             }
+            if (e.response.data.error.message === "EMAIL_NOT_FOUND") {
+                return toast.error("Такого email не существует");
+            }
         }
     },
     signUp: async ({ email, password }) => {
@@ -35,6 +38,7 @@ const authServices = {
             returnSecureToken: true
         });
         setTokens({ ...data, balance: 10000 });
+        window.location.reload();
         return data;
     },
     refreshToken: async () => {

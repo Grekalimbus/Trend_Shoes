@@ -55,7 +55,6 @@ const LoginPage = () => {
                     setErrors({ ...error });
                 }
                 dispatch(signUp(data));
-                window.location.reload();
             }
             if (exit) {
                 dispatch(loginIn(data));
