@@ -54,7 +54,6 @@ const FormPage = () => {
             return item.quantity;
         });
         try {
-            console.log(e.target[5].checked);
             if (e.target[5].checked) {
                 localStorage.setItem("dataForm", JSON.stringify(data));
             }
