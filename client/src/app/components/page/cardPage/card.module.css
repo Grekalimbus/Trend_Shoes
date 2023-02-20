@@ -218,10 +218,12 @@
     }
     .blockInfo{
         width: 90%;
-        height: 60vh;
+        height: 100%;
     }
     .basket{       
         margin: 0 auto;
         margin-top: 5%;
+        width: 50%;
+        margin-bottom: 3%;
     }    
   } 

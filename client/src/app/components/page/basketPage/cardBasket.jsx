@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import img from "../../../../img/basket.png";
 import PropTypes from "prop-types";
-import httpServices from "../../../services/http.service";
 import servicesBascket from "../../../utils/servisecBascket";
+import { useSelector } from "react-redux";
+import { getProduct } from "../../../store/product";
 
 const CardBasket = ({
     dataProduct,
@@ -14,14 +15,14 @@ const CardBasket = ({
     const [activeImg, setAvtiveImg] = useState(data.imgProduct[0]);
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
+    const product = useSelector(getProduct()).filter(
+        (item) => item._id === data._id
+    );
     useEffect(() => {
-        const getDataQuantity = async () => {
-            const dataQuantity = await httpServices
-                .get(`product/${data._id}/quantity`)
-                .then((res) => setDataSizes(res.data));
-        };
-        getDataQuantity();
-    }, []);
+        if (product) {
+            setDataSizes(product.quantity);
+        }
+    }, [product]);
 
     const quantityProduct = () => {
         let value = 0;
