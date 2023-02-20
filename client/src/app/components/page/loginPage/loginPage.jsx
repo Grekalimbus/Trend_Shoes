@@ -42,29 +42,26 @@ const LoginPage = () => {
     const handleChangeForm = ({ target }) => {
         setData((prevState) => ({ ...prevState, [target.name]: target.value }));
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
-        if (!exit) {
-            if (error) {
-                validate();
-                setErrors({ ...error });
+        try {
+            if (!exit) {
+                if (error) {
+                    validate();
+                    setErrors({ ...error });
+                }
+                dispatch(signUp(data));
+                window.location.reload();
             }
-            dispatch(signUp(data));
-            history.push("/");
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-        }
-        if (exit) {
-            dispatch(loginIn(data));
-            history.push("/");
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+            if (exit) {
+                dispatch(loginIn(data));
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
     if (user) {

@@ -34,6 +34,10 @@ http.interceptors.request.use(
             error.response.status >= 400 &&
             error.response < 500;
         if (!expectedErrors) {
+            if (error.message === "INVALID_PASSWORD") {
+                console.log(error);
+                toast.error("INVALID_PASSWORD");
+            }
             if (error.message === "Network Error") {
                 console.log(error);
             }
@@ -43,6 +47,7 @@ http.interceptors.request.use(
             ) {
                 toast.error("Пользователь с таким email уже зарегестрирован");
             } else {
+                console.log(error);
                 toast.warning(error.message);
             }
         }

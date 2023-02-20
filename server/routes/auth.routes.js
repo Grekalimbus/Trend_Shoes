@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const tokenService = require('../services/token.service');
 const Token = require('../models/Token');
 const router = express.Router({ mergeParams: true });
-
+const toast = require('react-toastify');
 // 1. get data from req (email, password)
 // 2. check if user ready exists
 // 3. hash password

@@ -4,19 +4,29 @@ import localStorageService, {
     getRefreshToken
 } from "./localStorage.service";
 import config from "../../config.json";
+import { toast } from "react-toastify";
 
 const httpAuth = axios.create({
     baseURL: config.api + "auth/"
 });
+
 const authServices = {
     loginIn: async ({ email, password }) => {
-        const { data } = await httpAuth.post("signInWithPassword", {
-            email,
-            password,
-            returnSecureToken: true
-        });
-        setTokens({ ...data });
-        return data;
+        try {
+            const { data } = await httpAuth.post("signInWithPassword", {
+                email,
+                password,
+                returnSecureToken: true
+            });
+            setTokens({ ...data });
+            window.location.reload();
+            return data;
+        } catch (e) {
+            console.log(e);
+            if (e.response.data.error.message === "INVALID_PASSWORD") {
+                return toast.error("Неверный пароль");
+            }
+        }
     },
     signUp: async ({ email, password }) => {
         const { data } = await httpAuth.post("signUp", {
