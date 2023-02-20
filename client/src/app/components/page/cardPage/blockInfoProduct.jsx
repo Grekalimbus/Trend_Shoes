@@ -20,7 +20,10 @@ const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
     };
     const getSizes = () => {
         if (Object.keys(data).length !== 0) {
-            const arrSizes = data.quantity.map((item) => {
+            const filterQuantity = data.quantity.filter((item) => {
+                return item.value !== 0;
+            });
+            const arrSizes = filterQuantity.map((item) => {
                 return item.sizes;
             });
             return arrSizes;
