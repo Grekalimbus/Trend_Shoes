@@ -20,7 +20,7 @@ const CardBasket = ({
     );
     useEffect(() => {
         if (product) {
-            setDataSizes(product.quantity);
+            setDataSizes(product[0].quantity);
         }
     }, [product]);
 
