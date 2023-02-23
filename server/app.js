@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use('/api', routes);
 
-const PORT = config.get('port') ?? 8000;
+const PORT = config.get('port') ?? 8080;
 
 async function start() {
   try {
