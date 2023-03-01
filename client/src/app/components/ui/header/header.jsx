@@ -4,16 +4,16 @@ import { Link, useHistory } from "react-router-dom";
 import localStorageService, {
     deleteTokens
 } from "../../../services/localStorage.service";
-import { useSelector } from "react-redux";
 import { getUser } from "../../../store/user";
-import { getAllPurchases } from "../../../store/allPurchases";
+import { useSelector } from "react-redux";
+import NotUser from "./notUser";
+import HaveUser from "./haveUser";
 
 const Header = () => {
     const [statusMenu, setStatusMenu] = useState(false);
     const [styleMenu, setStyleMenu] = useState(styles.buttonMenu);
     const [styleHeader, setStyleHeader] = useState(styles.header);
     const [styleButton, setStyleButton] = useState(styles.button);
-    const historyPurchases = useSelector(getAllPurchases());
     const history = useHistory();
     const user = useSelector(getUser());
     function isAdminStatus() {
@@ -53,76 +53,26 @@ const Header = () => {
     };
     return (
         <header>
-            <div className={styleHeader}>
-                <div onClick={handleMenu} className={styleMenu}>
-                    MENU
-                </div>
-                <Link to="/" className={styleButton} onClick={handleHideMenu}>
-                    <h2 className={styles.h2}>Главная</h2>
-                </Link>
-                <Link
-                    to="/productPage"
-                    className={styleButton}
-                    onClick={handleHideMenu}
-                >
-                    <h2 className={styles.h2}>Каталог</h2>
-                </Link>
-
-                <div className={styleButton}>
-                    <h2 className={styles.h2}>
-                        ₽:{" "}
-                        {user !== undefined && user !== null
-                            ? user.balance
-                            : "----"}
-                    </h2>
-                </div>
-                <Link
-                    to="/basketPage"
-                    className={styleButton}
-                    onClick={handleHideMenu}
-                >
-                    <h2 className={styles.h2}>Корзина</h2>
-                </Link>
-                {historyPurchases === null ? (
-                    <div className={styleButton}>Покупки</div>
-                ) : (
-                    <Link
-                        to="/purchases"
-                        className={styleButton}
-                        onClick={handleHideMenu}
-                    >
-                        <h2 className={styles.h2}>Покупки</h2>
-                    </Link>
-                )}
-                {isAdminStatus() && (
-                    <Link
-                        to="/adminPage"
-                        className={styleButton}
-                        onClick={handleHideMenu}
-                    >
-                        <h2 className={styles.h2}>Админка</h2>
-                    </Link>
-                )}
-
-                {!user ? (
-                    <Link
-                        to="/login"
-                        className={styleButton}
-                        onClick={handleHideMenu}
-                    >
-                        <h2 className={styles.h2}>Вход</h2>
-                    </Link>
-                ) : (
-                    <div
-                        className={styleButton}
-                        onClick={() => {
-                            handleGoOut();
-                        }}
-                    >
-                        <h2 className={styles.h2}>Выйти</h2>
-                    </div>
-                )}
-            </div>
+            {!user ? (
+                <NotUser
+                    handleMenu={handleMenu}
+                    handleHideMenu={handleHideMenu}
+                    styleMenu={styleMenu}
+                    styleHeader={styleHeader}
+                    styleButton={styleButton}
+                />
+            ) : (
+                <HaveUser
+                    handleHideMenu={handleHideMenu}
+                    handleMenu={handleMenu}
+                    isAdminStatus={isAdminStatus}
+                    handleGoOut={handleGoOut}
+                    balance={user.balance}
+                    styleMenu={styleMenu}
+                    styleHeader={styleHeader}
+                    styleButton={styleButton}
+                />
+            )}
         </header>
     );
 };
