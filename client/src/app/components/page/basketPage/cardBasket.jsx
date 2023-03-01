@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import servicesBascket from "../../../utils/servisecBascket";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
+import { toast } from "react-toastify";
+import { basketService } from "../../../services/basket.service";
+import { getUser } from "../../../store/user";
+import { getBasketUser } from "../../../store/basketUser";
 
 const CardBasket = ({
     dataProduct,
@@ -15,6 +19,9 @@ const CardBasket = ({
     const [activeImg, setAvtiveImg] = useState(data.imgProduct[0]);
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
+    const { increment } = basketService;
+    const userId = useSelector(getUser());
+    const basketFromDB = useSelector(getBasketUser());
     const product = useSelector(getProduct()).filter(
         (item) => item._id === data._id
     );
@@ -34,19 +41,33 @@ const CardBasket = ({
     const changeAvtiveImg = ({ target }) => {
         setAvtiveImg(target.alt);
     };
+
     const handleIncrement = () => {
-        servicesBascket.increment(activeSize, data, setData, dataSizes);
-        data.quantity.forEach((item, index) => {
-            if (
-                item.sizes === activeSize &&
-                item.value !== dataSizes[index].value
-            ) {
-                handleIncrementAmount(data.price);
-            }
-        });
+        if (!activeSize) {
+            toast.error("Укажите размер");
+        } else if (userId && data) {
+            increment(
+                data,
+                activeSize,
+                dataSizes,
+                setData,
+                userId,
+                basketFromDB
+            );
+        }
+
+        // servicesBascket.increment(activeSize, data, setData, dataSizes);
+        // data.quantity.forEach((item, index) => {
+        //     if (
+        //         item.sizes === activeSize &&
+        //         item.value !== dataSizes[index].value
+        //     ) {
+        //         handleIncrementAmount(data.price);
+        //     }
+        // });
     };
     const handleDecrement = () => {
-        servicesBascket.decrement(activeSize, data, setData);
+        servicesBascket.decrement(activeSize, data, setData, setData);
         data.quantity.forEach((item) => {
             if (item.sizes === activeSize && item.value < 1) {
                 handleIncrementAmount(data.price);

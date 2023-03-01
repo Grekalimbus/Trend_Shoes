@@ -4,7 +4,6 @@ import httpServices from "./http.service";
 const addInitialItemBasket = async (
     activeSize,
     data,
-    changeState,
     dataSizes,
     userId,
     productDB
@@ -21,58 +20,64 @@ const addInitialItemBasket = async (
         }
         return item;
     });
-    const filterChangeQuantity = changeQuantity.filter((item) => {
-        return item.value !== 0;
-    });
     const validateQuantity = changeQuantity.every((item) => item);
 
     if (validateQuantity) {
-        const changeQuantityDB = productDB.quantity.map((item) => {
-            if (item.sizes === activeSize) {
-                const newObject = { ...item };
-                return {
-                    sizes: newObject.sizes,
-                    value: (newObject.value -= 1)
-                };
-            }
-            return item;
-        });
-        const filterChangedQuantityDB = changeQuantityDB.filter(
-            (item) => item.value !== 0
-        );
-        const changeProductDB = {
-            ...productDB,
-            quantity: filterChangedQuantityDB
-        };
-        const nullValueForQuantity = changeProductDB.quantity.map((item) => {
-            return { sizes: item.sizes, value: 0 };
-        });
-        const objectForChangeState = {
-            ...changeProductDB,
-            quantity: nullValueForQuantity
-        };
-        const changeData = { ...data, quantity: filterChangeQuantity };
-        console.log(changeQuantity);
-        const dataBasket = httpServices.patch(`basket/${userId}`, {
-            ...changeProductDB,
-            quantity: changeQuantity
-        });
-        const dataProduct = httpServices.put(
-            `product/${changeData._id}`,
-            changeProductDB
-        );
-        changeState(objectForChangeState);
+        const changeData = { ...data, quantity: changeQuantity };
+        const dataBasket = httpServices.patch(`basket/${userId}`, changeData);
         toast.success("Товар был добавлен в корзину");
     }
 };
 
-const handleIncrement = async (activeSize) => {
-    if (!activeSize) {
-        toast.error("Укажите размер");
+function compareQuantity(item, dataSizes) {
+    if (JSON.stringify(item) === JSON.stringify(dataSizes)) {
+        return true;
     }
+    return false;
+}
+const increment = async (
+    data,
+    activeSize,
+    dataSizes,
+    changeState,
+    user,
+    basketFromDB
+) => {
+    let copyData = { ...data };
+    data.quantity.forEach((item, index) => {
+        if (
+            item.sizes === activeSize &&
+            compareQuantity(item, dataSizes[index])
+        ) {
+            toast.info("Размеров больше нет");
+        } else if (
+            item.sizes === activeSize &&
+            !compareQuantity(item, dataSizes[index])
+        ) {
+            const newQuantityForCopyData = copyData.quantity.map((item) => {
+                if (item.sizes === activeSize) {
+                    const newObject = { ...item };
+                    return {
+                        sizes: newObject.sizes,
+                        value: (newObject.value += 1)
+                    };
+                }
+                return item;
+            });
+            copyData = { ...data, quantity: newQuantityForCopyData };
+            changeState(copyData);
+            const historyForDB = basketFromDB.map((item) => {
+                if (item._id === copyData._id) {
+                    return copyData;
+                }
+                return item;
+            });
+            httpServices.put(`basket/${user._id}`, historyForDB);
+        }
+    });
 };
 
-const handleDecrement = async (activeSize) => {
+const decrement = async (activeSize) => {
     if (!activeSize) {
         toast.error("Укажите размер");
     }
@@ -80,6 +85,6 @@ const handleDecrement = async (activeSize) => {
 
 export const basketService = {
     addInitialItemBasket,
-    handleIncrement,
-    handleDecrement
+    increment,
+    decrement
 };

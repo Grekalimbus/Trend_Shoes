@@ -16,7 +16,7 @@ const HaveUser = ({
     styleButton
 }) => {
     const historyPurchases = useSelector(getUserPurchases());
-    const purchases = historyPurchases[0].history.length === 0 ? false : true;
+    const purchases = historyPurchases?.[0].history.length === 0 ? false : true;
     return (
         <div className={styleHeader}>
             <div onClick={handleMenu} className={styleMenu}>

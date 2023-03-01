@@ -45,12 +45,11 @@ const CardPage = () => {
                 addInitialItemBasket(
                     activeSize,
                     data,
-                    setData,
                     dataSizes,
                     userId._id,
                     product[0]
                 );
-                // window.location.reload();
+                window.location.reload();
             } else if (
                 activeSize &&
                 basketUser.length !== 0 &&
