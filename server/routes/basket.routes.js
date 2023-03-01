@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // getBasketId
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const list = await Basket.find();
@@ -34,11 +34,18 @@ router.get('/:id', auth, async (req, res) => {
 // changeBasketId
 router.patch('/:id', async (req, res) => {
   try {
+    const list = await Basket.find();
     const { id } = req.params;
-    const list = await Basket.findById(id);
-    delete list._id;
-    await list.update(req.body);
-    res.status(200).send(list);
+    const basketById = list.filter((item) => {
+      return JSON.stringify(item.user) === JSON.stringify(id);
+    });
+    const idBasket = basketById[0]._id;
+    const listById = await Basket.findById(idBasket);
+    delete listById._id;
+
+    const newData = { user: listById.user, basket: req.body };
+    await listById.update(newData);
+    res.status(200).send(newData);
   } catch (e) {
     res.status(500).json({
       message: 'На сервере произошла ошибка, попробуйте позже',

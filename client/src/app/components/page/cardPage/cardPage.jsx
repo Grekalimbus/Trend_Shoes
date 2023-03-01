@@ -10,11 +10,14 @@ import { getProduct } from "../../../store/product";
 import { getBasketUser } from "../../../store/basketUser";
 import { toast } from "react-toastify";
 import { basketService } from "../../../services/basket.service";
+import { getUser } from "../../../store/user";
 
 const CardPage = () => {
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
     const { id } = useParams();
+    const userId = useSelector(getUser());
+
     const product = useSelector(getProduct()).filter((item) => item._id === id);
     const [data, setData] = useState(null);
     const basketUser = useSelector(getBasketUser());
@@ -22,14 +25,14 @@ const CardPage = () => {
     useEffect(() => {
         if (product) {
             setDataSizes(product[0].quantity);
-            const basketLocalStorage = JSON.parse(
-                localStorage.getItem("storageBasket")
-            );
-            const filterData = basketLocalStorage.filter(
-                (item) => item._id === id
-            );
-            setData(filterData[0]);
-            console.log(filterData[0]);
+            const transformQuantity = product[0].quantity.map((item) => {
+                return { sizes: item.sizes, value: 0 };
+            });
+            const transformProduct = {
+                ...product[0],
+                quantity: transformQuantity
+            };
+            setData(transformProduct);
         }
     }, []);
 
@@ -38,8 +41,23 @@ const CardPage = () => {
             toast.error("Укажите размер");
         }
         try {
-            if (activeSize && basketUser.length === 0) {
-                addInitialItemBasket(activeSize, data, setData, dataSizes);
+            if (activeSize && basketUser.length === 0 && userId && product[0]) {
+                addInitialItemBasket(
+                    activeSize,
+                    data,
+                    setData,
+                    dataSizes,
+                    userId._id,
+                    product[0]
+                );
+                // window.location.reload();
+            } else if (
+                activeSize &&
+                basketUser.length !== 0 &&
+                userId &&
+                product[0]
+            ) {
+                console.log("increment");
             }
         } catch (e) {}
 
