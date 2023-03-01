@@ -6,6 +6,7 @@ import firmReducer from "./firm";
 import userPurchasesReducer from "./userPurchases";
 import allPurchasesReducer from "./allPurchases";
 import allBasketReducer from "./allBasket";
+import basketUserReducer from "./basketUser";
 
 const rootReducer = combineReducers({
     firm: firmReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     product: productReducer,
     userPurchases: userPurchasesReducer,
     allPurchases: allPurchasesReducer,
-    allBasket: allBasketReducer
+    allBasket: allBasketReducer,
+    basketUser: basketUserReducer
 });
 
 export function createStore() {

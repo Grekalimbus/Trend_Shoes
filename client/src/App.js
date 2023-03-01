@@ -22,6 +22,7 @@ import { getErrorProduct, getProduct, loadProduct } from "./app/store/product";
 import { loadUserPurchases } from "./app/store/userPurchases";
 import { loadAllPurchases } from "./app/store/allPurchases";
 import { loadAllBasket } from "./app/store/allBasket";
+import { loadBasketUser } from "./app/store/basketUser";
 function App() {
     // const user = useSelector(getUser());
     const error = useSelector(getErrorProduct());
@@ -29,6 +30,7 @@ function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         refreshTokenChek();
+        dispatch(loadBasketUser());
         dispatch(loadAllBasket());
         dispatch(loadAllPurchases());
         dispatch(loadUserPurchases());
