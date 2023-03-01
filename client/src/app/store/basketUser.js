@@ -40,6 +40,6 @@ export const loadBasketUser = () => async (dispatch, getState) => {
     }
 };
 
-export const getBasketUser = () => (state) => state.allBasket.entities;
+export const getBasketUser = () => (state) => state.basketUser.entities;
 
 export default basketUserReducer;

@@ -7,6 +7,9 @@ import styles from "./card.module.css";
 import servicesBascket from "../../../utils/servisecBascket";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
+import { getBasketUser } from "../../../store/basketUser";
+import { toast } from "react-toastify";
+import { basketService } from "../../../services/basket.service";
 
 const CardPage = () => {
     const [activeSize, setActiveSize] = useState(null);
@@ -14,6 +17,8 @@ const CardPage = () => {
     const { id } = useParams();
     const product = useSelector(getProduct()).filter((item) => item._id === id);
     const [data, setData] = useState(null);
+    const basketUser = useSelector(getBasketUser());
+    const { addInitialItemBasket } = basketService;
     useEffect(() => {
         if (product) {
             setDataSizes(product[0].quantity);
@@ -24,11 +29,21 @@ const CardPage = () => {
                 (item) => item._id === id
             );
             setData(filterData[0]);
+            console.log(filterData[0]);
         }
     }, []);
 
-    const handleAddProduct = (activeSize) => {
-        servicesBascket.increment(activeSize, data, setData, dataSizes);
+    const handleAddProduct = async (activeSize) => {
+        if (!activeSize) {
+            toast.error("Укажите размер");
+        }
+        try {
+            if (activeSize && basketUser.length === 0) {
+                addInitialItemBasket(activeSize, data, setData, dataSizes);
+            }
+        } catch (e) {}
+
+        // servicesBascket.increment(activeSize, data, setData, dataSizes);
     };
 
     return !dataSizes && !data && !product[0] ? (
