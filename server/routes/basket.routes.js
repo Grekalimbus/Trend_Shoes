@@ -3,6 +3,7 @@ const Basket = require('../models/Basket');
 const router = express.Router({ mergeParams: true });
 const auth = require('../middleware/auth.middleware');
 
+// getAllBasket
 router.get('/', async (req, res) => {
   try {
     const list = await Basket.find();
@@ -14,6 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// getBasketId
 router.get('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;

@@ -3,6 +3,7 @@ const HistoryPurchases = require('../models/HistoryPurchases');
 const router = express.Router({ mergeParams: true });
 const auth = require('../middleware/auth.middleware');
 
+// getAllPurchases
 router.get('/', async (req, res) => {
   try {
     const list = await HistoryPurchases.find();
@@ -14,6 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// getPurchasesId
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -29,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// change
+// changePurchasesId
 router.patch('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
