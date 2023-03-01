@@ -21,6 +21,7 @@ import localStorageService from "./app/services/localStorage.service";
 import { getErrorProduct, getProduct, loadProduct } from "./app/store/product";
 import { loadUserPurchases } from "./app/store/userPurchases";
 import { loadAllPurchases } from "./app/store/allPurchases";
+import { loadAllBasket } from "./app/store/allBasket";
 function App() {
     // const user = useSelector(getUser());
     const error = useSelector(getErrorProduct());
@@ -28,6 +29,7 @@ function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         refreshTokenChek();
+        dispatch(loadAllBasket());
         dispatch(loadAllPurchases());
         dispatch(loadUserPurchases());
         dispatch(loadFirmList());

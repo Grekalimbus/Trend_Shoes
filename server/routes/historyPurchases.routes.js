@@ -2,7 +2,6 @@ const express = require('express');
 const HistoryPurchases = require('../models/HistoryPurchases');
 const router = express.Router({ mergeParams: true });
 const auth = require('../middleware/auth.middleware');
-const chalk = require('chalk');
 
 router.get('/', async (req, res) => {
   try {

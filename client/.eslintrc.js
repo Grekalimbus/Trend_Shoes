@@ -24,6 +24,7 @@ module.exports = {
         "no-useless-return": "off",
         "no-unused-vars": "off",
         "no-unneeded-ternary": "off",
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "no-use-before-define": "off"
     }
 };

@@ -27,6 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 async function start() {
   try {
     // запись о том, что как только открыто соеденение, выполняется колбек
+    mongoose.set('strictQuery', true);
     mongoose.connection.once('open', () => {
       initDatabase();
     });
