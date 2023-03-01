@@ -52,10 +52,11 @@ const addInitialItemBasket = async (
             quantity: nullValueForQuantity
         };
         const changeData = { ...data, quantity: filterChangeQuantity };
-        const dataBasket = httpServices.patch(
-            `basket/${userId}`,
-            changeProductDB
-        );
+        console.log(changeQuantity);
+        const dataBasket = httpServices.patch(`basket/${userId}`, {
+            ...changeProductDB,
+            quantity: changeQuantity
+        });
         const dataProduct = httpServices.put(
             `product/${changeData._id}`,
             changeProductDB
