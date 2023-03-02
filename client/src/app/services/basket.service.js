@@ -70,7 +70,7 @@ const increment = async (
                     newDataForBasketDB.concat(basketFromDB);
                 httpServices.put(`basket/${user._id}`, dataConcatWithBasketDB);
                 if (history !== "/basketPage") {
-                    toast.success("Товар был добавлен в корзину");
+                    toast.dark("Товар был добавлен в корзину");
                 }
             } else {
                 const historyForDB = basketFromDB.map((item) => {
@@ -81,7 +81,7 @@ const increment = async (
                 });
                 httpServices.put(`basket/${user._id}`, historyForDB);
                 if (history !== "/basketPage") {
-                    toast.success("Товар был добавлен в корзину");
+                    toast.dark("Товар был добавлен в корзину");
                 }
             }
         }

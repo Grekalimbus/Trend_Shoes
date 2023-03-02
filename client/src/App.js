@@ -40,7 +40,7 @@ function App() {
             dispatch(loadUser());
         }
     }, []);
-    useProductBasket();
+    // useProductBasket();
 
     if (error) {
         if (error === "Network Error") {

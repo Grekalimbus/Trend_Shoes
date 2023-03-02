@@ -105,8 +105,6 @@ const AddNewProduct = () => {
         try {
             console.log(newObjectForDataBase);
             await add(newObjectForDataBase);
-            localStorage.setItem("storageBasket", "[]");
-            localStorage.setItem("dataSizes", "[]");
             window.location.reload();
         } catch (error) {
             console.log(error);

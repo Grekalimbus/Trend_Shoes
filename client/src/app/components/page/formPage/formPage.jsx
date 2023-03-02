@@ -68,8 +68,6 @@ const FormPage = () => {
                 product,
                 historyPurchases
             );
-            localStorage.setItem("storageBasket", "[]");
-            localStorage.setItem("dataSizes", "[]");
             window.location.reload();
         } catch (error) {
             console.log(error);

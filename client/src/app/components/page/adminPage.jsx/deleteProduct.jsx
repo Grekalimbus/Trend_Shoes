@@ -11,8 +11,6 @@ const DeleteProduct = () => {
     const handleDeletProduct = async (id) => {
         try {
             await remove({ id });
-            localStorage.setItem("storageBasket", "[]");
-            localStorage.setItem("dataSizes", "[]");
             window.location.reload();
         } catch (error) {
             console.log(error);

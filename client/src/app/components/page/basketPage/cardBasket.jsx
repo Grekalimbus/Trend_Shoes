@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import img from "../../../../img/basket.png";
 import PropTypes from "prop-types";
-import servicesBascket from "../../../utils/servisecBascket";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
 import { toast } from "react-toastify";

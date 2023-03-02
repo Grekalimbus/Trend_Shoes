@@ -65,8 +65,6 @@ const CardHaveProduct = ({ quantity, image, id }) => {
         try {
             if (filterSizesArray.length !== 0) {
                 await changeQuantity(id, filterSizesArray);
-                localStorage.setItem("storageBasket", "[]");
-                localStorage.setItem("dataSizes", "[]");
                 window.location.reload();
             }
             if (filterSizesArray.length === 0) {

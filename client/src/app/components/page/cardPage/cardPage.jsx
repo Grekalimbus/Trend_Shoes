@@ -4,7 +4,6 @@ import httpServices from "../../../services/http.service";
 import BlockImg from "./blockImg";
 import BlockInfoProduct from "./blockInfoProduct";
 import styles from "./card.module.css";
-import servicesBascket from "../../../utils/servisecBascket";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
 import { getBasketUser } from "../../../store/basketUser";
@@ -41,6 +40,9 @@ const CardPage = () => {
         if (!activeSize) {
             toast.error("Укажите размер");
         }
+        if (!userId) {
+            toast.dark("Войдите в аккаунт, чтобы продолжить покупки");
+        }
         try {
             if (activeSize && basketUser.length === 0 && userId && product[0]) {
                 addInitialItemBasket(activeSize, data, dataSizes, userId._id);
@@ -61,9 +63,9 @@ const CardPage = () => {
                     basketFromDB
                 );
             }
-        } catch (e) {}
-
-        // servicesBascket.increment(activeSize, data, setData, dataSizes);
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return !dataSizes && !data && !product[0] ? (
