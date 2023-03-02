@@ -9,6 +9,7 @@ import handleChangeQuantityFunc from "../../../../utils/changeSizes";
 import { useSelector } from "react-redux";
 import { getFirm, getIsLoadingFirmStatus } from "../../../../store/firm";
 import productService from "../../../../services/product.service";
+import Loader from "../../../common/loader/loader";
 
 const AddNewProduct = () => {
     const dataFirm = useSelector(getFirm());
@@ -111,7 +112,7 @@ const AddNewProduct = () => {
         }
     };
     if (isLoading) {
-        return <div>Loading</div>;
+        return <Loader />;
     } else if (!isLoading) {
         return (
             <div className={styles.wrappNewProduct}>

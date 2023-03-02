@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import productService from "../../../services/product.service";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
+import Loader from "../../common/loader/loader";
 
 const EditProduct = () => {
     const { changeProduct } = productService;
@@ -101,7 +102,7 @@ const EditProduct = () => {
         }
     };
     return product === null ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div className={styles.wrapPageEdit}>
             <div className={styles.flexElemProduct}>

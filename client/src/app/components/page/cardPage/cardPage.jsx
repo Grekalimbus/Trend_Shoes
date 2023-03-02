@@ -10,6 +10,7 @@ import { getBasketUser } from "../../../store/basketUser";
 import { toast } from "react-toastify";
 import { basketService } from "../../../services/basket.service";
 import { getUser } from "../../../store/user";
+import Loader from "../../common/loader/loader";
 
 const CardPage = () => {
     const [activeSize, setActiveSize] = useState(null);
@@ -69,7 +70,7 @@ const CardPage = () => {
     };
 
     return !dataSizes && !data && !product[0] ? (
-        <h1>Loading</h1>
+        <Loader />
     ) : (
         <div className={styles.flex}>
             <div className={styles.blockImg}>

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import handleChangeQuantityFunc from "../../../../utils/changeSizes";
 import { toast } from "react-toastify";
 import productService from "../../../../services/product.service";
+import Loader from "../../../common/loader/loader";
 
 const CardHaveProduct = ({ quantity, image, id }) => {
     const { changeQuantity } = productService;
@@ -76,7 +77,7 @@ const CardHaveProduct = ({ quantity, image, id }) => {
     };
 
     return !quantity ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div className={styles.cardWrapp}>
             <div className={styles.flexElemBlockImg}>

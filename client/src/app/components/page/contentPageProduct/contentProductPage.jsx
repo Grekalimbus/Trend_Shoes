@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { getFirm } from "../../../store/firm";
 import { getProduct } from "../../../store/product";
 import formClearServices from "../../../services/formClear.service";
+import Loader from "../../common/loader/loader";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
@@ -40,7 +41,7 @@ const ContentProductPage = () => {
         clearAll
     };
     return !product ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div>
             <div className={styles.flex}>

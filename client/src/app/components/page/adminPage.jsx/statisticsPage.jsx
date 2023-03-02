@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import { useSelector } from "react-redux";
 import { getAllPurchases } from "../../../store/allPurchases";
+import Loader from "../../common/loader/loader";
 
 const StatisticPage = () => {
     const [amount, setAmount] = useState(0);
@@ -43,7 +44,7 @@ const StatisticPage = () => {
     }, []);
 
     return !allHistoryArray ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div className={styles.wrapStatistic}>
             <div className={styles.flexElemStatistic}>

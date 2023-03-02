@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
+import Loader from "../../common/loader/loader";
 
 const FilterFirm = ({ handleChangeForm, clear, firm, dataFirm }) => {
     const handleChange = ({ target }) => {
@@ -12,7 +13,7 @@ const FilterFirm = ({ handleChangeForm, clear, firm, dataFirm }) => {
             <div className={styles.wrapperButtons}>
                 <div className={styles.blockSelect}>
                     {!dataFirm ? (
-                        <h2>Loading</h2>
+                        <Loader />
                     ) : (
                         <select
                             className={`form-select ${styles.selectWrapper}`}

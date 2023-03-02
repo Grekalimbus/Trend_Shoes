@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUserPurchases } from "../../../store/userPurchases";
 import { getAllPurchases } from "../../../store/allPurchases";
+import Loader from "../loader/loader";
 
 const Purchases = () => {
     const { other } = useParams();
@@ -43,7 +44,7 @@ const Purchases = () => {
 
     if (other !== undefined) {
         return !allHistoryArray ? (
-            <h2>loading</h2>
+            <Loader />
         ) : (
             <div className={styles.mainBlokInfo}>
                 {allHistoryArray.map((item) => {

@@ -22,6 +22,7 @@ import { loadUserPurchases } from "./app/store/userPurchases";
 import { loadAllPurchases } from "./app/store/allPurchases";
 import { loadAllBasket } from "./app/store/allBasket";
 import { loadBasketUser } from "./app/store/basketUser";
+import Loader from "./app/components/common/loader/loader";
 function App() {
     const error = useSelector(getErrorProduct());
     const product = useSelector(getProduct());
@@ -51,7 +52,7 @@ function App() {
         return <h1>{error}</h1>;
     }
     if (!product) {
-        return <h1>Loading</h1>;
+        return <Loader />;
     } else {
         return (
             <div className={styles.wrapperPage}>
