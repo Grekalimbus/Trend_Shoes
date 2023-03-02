@@ -35,7 +35,8 @@ const increment = async (
     dataSizes,
     changeState,
     user,
-    basketFromDB
+    basketFromDB,
+    history
 ) => {
     let copyData = { ...data };
     data.quantity.forEach((item, index) => {
@@ -68,7 +69,9 @@ const increment = async (
                 const dataConcatWithBasketDB =
                     newDataForBasketDB.concat(basketFromDB);
                 httpServices.put(`basket/${user._id}`, dataConcatWithBasketDB);
-                toast.success("Товар был добавлен в корзину");
+                if (history !== "/basketPage") {
+                    toast.success("Товар был добавлен в корзину");
+                }
             } else {
                 const historyForDB = basketFromDB.map((item) => {
                     if (item._id === copyData._id) {
@@ -77,7 +80,9 @@ const increment = async (
                     return item;
                 });
                 httpServices.put(`basket/${user._id}`, historyForDB);
-                toast.success("Товар был добавлен в корзину");
+                if (history !== "/basketPage") {
+                    toast.success("Товар был добавлен в корзину");
+                }
             }
         }
     });

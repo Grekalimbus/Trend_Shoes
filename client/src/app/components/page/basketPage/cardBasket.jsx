@@ -9,12 +9,14 @@ import { toast } from "react-toastify";
 import { basketService } from "../../../services/basket.service";
 import { getUser } from "../../../store/user";
 import { getBasketUser } from "../../../store/basketUser";
+import { useHistory } from "react-router-dom";
 
 const CardBasket = ({
     dataProduct,
     handleIncrementAmount,
     handleDecrementAmount
 }) => {
+    const history = useHistory();
     const [data, setData] = useState(dataProduct);
     const [activeImg, setAvtiveImg] = useState(data.imgProduct[0]);
     const [activeSize, setActiveSize] = useState(null);
@@ -52,7 +54,8 @@ const CardBasket = ({
                 dataSizes,
                 setData,
                 userId,
-                basketFromDB
+                basketFromDB,
+                history.location.pathname
             );
             data.quantity.forEach((item, index) => {
                 if (
