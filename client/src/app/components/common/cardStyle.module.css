@@ -3,11 +3,12 @@
     border-radius: 5px;
     margin-bottom: 1%;
     width: 85%;
-    height: 18.9vh;
+    height: 23.8%;
     border: 3px solid rgb(248, 173, 59); 
     background-color: rgba(10, 7, 1, 0.486);
     display: flex;   
     transition: all 2s;
+    
 }
 .cardProduct:hover{
     background-color: rgba(248, 172, 59, 0.637);
@@ -70,4 +71,8 @@
         width: 70%;
         height: 4vh;
     }       
+    .cardProduct{
+        width: 100%;
+        margin-left: 0%;
+    }
   } 

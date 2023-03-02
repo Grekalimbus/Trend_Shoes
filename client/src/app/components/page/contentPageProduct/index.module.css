@@ -1,20 +1,24 @@
 .flex {
     display: flex;
-    height: 85vh;   
+    height: 84vh;   
+    overflow: hidden;    
+    justify-content: space-between;
+    align-items: center;        
 }
 .flexForms {
     flex: 1 1 auto;
     display: flex;
-    flex-direction: column;   
-    overflow: hidden;  
+    height: 100%;
+    flex-direction: column;     
+    overflow: hidden;         
    }
 
 .blockProduct {
     width: 60%;
-    height: 80vh;
-    margin-top: 0.9%;
+    height: 99%;  
+    margin-top: 0.5%; 
     overflow: auto;
-    z-index: 5;      
+    z-index: 5;       
 }
 .blockProduct::-webkit-scrollbar {
     border-radius: 10px;
@@ -37,10 +41,13 @@
         height: 100%;              
     }
     .flexForms{
-        flex: 1 1 500px;        
+        width: 90%;
+        flex: 1 1 500px;  
+        /* border: 3px solid rgba(241, 39, 13, 0.863);               */
     }
     .blockProduct{
-        width: 100%;        
+        width: 90%;   
+        /* border: 3px solid rgba(241, 39, 13, 0.863);       */
     }
     .buttonCard{
         width: 80%;

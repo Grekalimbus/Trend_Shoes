@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap");
 .dFlex {
-    display: flex;
+    display: flex;    
 }
 .textCentr {
     text-align: center;
@@ -9,48 +9,60 @@
 }
 /* ============= */
 .blockName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
     width: 90%;
-    height: 10vh;
+    height: 12%;
     background-color: rgba(10, 7, 1, 0.486);  
     border-radius: 5px;
-    margin-top: 2.6%;
+    margin-top: 1%;
     margin-left: 3%;
     overflow: hidden;    
-    border: 3px solid rgba(245, 189, 67, 0.863);
+    border: 3px solid rgba(245, 189, 67, 0.863); 
+                     
 }
 .blockPrice {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;    
     width: 90%;
-    height: 20vh;
+    height: 20%;
     background-color: rgba(10, 7, 1, 0.486);
     border: 3px solid rgba(245, 189, 67, 0.863);
     border-radius: 5px;
-    margin-top: 3%;
+    margin-top: 1%;
     margin-left: 3%;
-    overflow: hidden;            
+    overflow: hidden;                    
 }
 /* ============= */
 
 /* ============= */
 .label {
-    margin-top: 3%;
+    margin-top: 3px;
     text-align: center;
-    color: #f9f9f9;
+    color: #f9f9f9;             
 }
 .inputDivName {
-    height: 3.5vh;                
+    height: 70%; 
+    width: 100%;     
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;                       
 }
 .inputName {
     font-size: 18px;
-    height: 100%;
-    margin-left: 14.5%;
-    margin-top: 2%;
-    margin-bottom: 5%;
+    height: 80%;       
     width: 70%;
     color: #f9f9f9;
     border-radius: 5px;
     background-color: #000000;
     text-align: center;
-    cursor: pointer;    
+    cursor: pointer;     
+    margin-bottom: 3px;              
 }
 .inputName:focus {
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.72);
@@ -59,45 +71,53 @@
 /* ============= */
 
 /* ============= */
+.wrapPriceForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    width: 80%;
+    height: 80%;         
+}
 .inputPrice {
     font-size: 18px;
-    height: 100%;
-    margin-left: 5.5%;
-    margin-top: 2%;
-    margin-bottom: 5%;
-    width: 70%;
+    height: 60%;
+    margin-left: 5.5%;    
+    width: 80%;
     border-radius: 5px;
     background-color: #000000;
     color: #f9f9f9;
     text-align: center;
-    cursor: pointer;          
-}
+    cursor: pointer;           
+    }
 .inputPrice:focus {
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.72);
     border: 2px solid rgba(245, 189, 67, 0.863);
 }
 .blockInputPrice {
     display: flex;
-    margin-top: 4%;
-    height: 3.5vh;   
+    width: 100%; 
+    height: 80%;        
+    display: flex;    
+    align-items: center;
+    text-align: center;    
 }
 .p {
-    font-weight: bold;
-    margin-left: 5%;
-    margin-top: 3.5%;
-    color: #f9f9f9;
+    font-weight: bold;      
+    color: #f9f9f9;    
 }
 /* ============= */
 
 .blockFirm {
     width: 90%;
-    height: 44.3vh;
+    height: 90%;
     background-color: rgba(10, 7, 1, 0.486);
     border-radius: 5px;
-    margin-top: 3%;
+    margin-top: 1%;
     margin-left: 3%;
     overflow: hidden;
     border: 3px solid rgba(245, 189, 67, 0.863);
+    
 }
 .wrapperButtons {
     display: flex;
@@ -155,20 +175,59 @@
 
 @media (max-width: 650px) {   
     .blockName{
-        height: 14vh;
-    }
-    .blockPrice{
-        height: 25vh;
+        height: 16%;  
+        width: 100%;
+        margin-left: 0;      
     }
     .inputName{
-        height: 100%;               
+        height: 70%; 
+    }
+    .blockPrice{
+        height: 25%;
+        width: 100%;
+        margin-left: 0;  
+    }
+    .blockFirm{
+        width: 100%;
+        margin-left: 0;  
     }
     .inputPrice{
-        height: 100%;        
-        margin-top: 0%;       
+        height: 50%;
     }
     .clearSort{
         height: 4vh;
     }
         
   } 
+  @media(max-height: 700px) { 
+    .blockName{
+        height: 16%;
+    }
+    .inputName{
+        height: 70%; 
+    }
+    .blockPrice{
+        height: 23%;
+    }
+  }
+  @media(max-height: 550px) { 
+    .blockName{
+        height: 20%;
+    }
+    .inputName{
+        height: 90%; 
+    }
+    .blockPrice{
+        height: 28%;
+    }
+    
+  }
+  @media(max-height: 400px) { 
+    .blockName{
+        height: 20%;
+    }
+    .blockPrice{
+        height: 32%;
+    }
+
+  }

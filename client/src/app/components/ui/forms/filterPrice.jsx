@@ -12,7 +12,7 @@ const FilterPrice = ({ handleChangeForm, from, before }) => {
             <div className={styles.label}>
                 <label htmlFor="name">Фильтр по цене</label>
             </div>
-            <div>
+            <div className={styles.wrapPriceForm}>
                 <div className={styles.blockInputPrice}>
                     <p className={styles.p}>От:</p>
                     <input
