@@ -19,7 +19,7 @@ const CardBasket = ({
     const [activeImg, setAvtiveImg] = useState(data.imgProduct[0]);
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
-    const { increment } = basketService;
+    const { increment, decrement } = basketService;
     const userId = useSelector(getUser());
     const basketFromDB = useSelector(getBasketUser());
     const product = useSelector(getProduct()).filter(
@@ -54,26 +54,35 @@ const CardBasket = ({
                 userId,
                 basketFromDB
             );
+            data.quantity.forEach((item, index) => {
+                if (
+                    item.sizes === activeSize &&
+                    item.value !== dataSizes[index].value
+                ) {
+                    handleIncrementAmount(data.price);
+                }
+            });
         }
-
-        // servicesBascket.increment(activeSize, data, setData, dataSizes);
-        // data.quantity.forEach((item, index) => {
-        //     if (
-        //         item.sizes === activeSize &&
-        //         item.value !== dataSizes[index].value
-        //     ) {
-        //         handleIncrementAmount(data.price);
-        //     }
-        // });
     };
     const handleDecrement = () => {
-        servicesBascket.decrement(activeSize, data, setData, setData);
-        data.quantity.forEach((item) => {
-            if (item.sizes === activeSize && item.value < 1) {
-                handleIncrementAmount(data.price);
-            }
-        });
-        handleDecrementAmount(data.price);
+        if (!activeSize) {
+            toast.error("Укажите размер");
+        } else if (userId && data) {
+            decrement(
+                data,
+                activeSize,
+                dataSizes,
+                setData,
+                userId,
+                basketFromDB
+            );
+            data.quantity.forEach((item) => {
+                if (item.sizes === activeSize && item.value < 1) {
+                    handleIncrementAmount(data.price);
+                }
+            });
+            handleDecrementAmount(data.price);
+        }
     };
     const deleteProduct = () => {
         servicesBascket.delete(data);

@@ -83,10 +83,51 @@ const increment = async (
     });
 };
 
-const decrement = async (activeSize) => {
-    if (!activeSize) {
-        toast.error("Укажите размер");
-    }
+const decrement = async (
+    data,
+    activeSize,
+    dataSizes,
+    changeState,
+    user,
+    basketFromDB
+) => {
+    let copyData = { ...data };
+    data.quantity.forEach((item, index) => {
+        if (item.sizes === activeSize && item.value !== 0) {
+            const newQuantityForCopyData = copyData.quantity.map((item) => {
+                if (item.sizes === activeSize) {
+                    const newObject = { ...item };
+                    return {
+                        sizes: newObject.sizes,
+                        value: (newObject.value -= 1)
+                    };
+                }
+                return item;
+            });
+            copyData = { ...data, quantity: newQuantityForCopyData };
+
+            changeState(copyData);
+            const validateDataQuantity = copyData.quantity.every(
+                (item) => !item.value
+            );
+
+            if (validateDataQuantity) {
+                const filterData = basketFromDB.filter(
+                    (item) => item._id !== data._id
+                );
+                httpServices.put(`basket/${user._id}`, filterData);
+                window.location.reload();
+            } else {
+                const historyForDB = basketFromDB.map((item) => {
+                    if (item._id === copyData._id) {
+                        return copyData;
+                    }
+                    return item;
+                });
+                httpServices.put(`basket/${user._id}`, historyForDB);
+            }
+        }
+    });
 };
 
 const clearBasket = async (user) => {
