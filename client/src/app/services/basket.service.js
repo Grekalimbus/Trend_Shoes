@@ -140,9 +140,16 @@ const clearBasket = async (user) => {
     window.location.reload();
 };
 
+const deleteProductDB = async (data, user, basketFromDB) => {
+    const filterData = basketFromDB.filter((item) => item._id !== data._id);
+    httpServices.put(`basket/${user._id}`, filterData);
+    window.location.reload();
+};
+
 export const basketService = {
     addInitialItemBasket,
     increment,
     decrement,
-    clearBasket
+    clearBasket,
+    deleteProductDB
 };

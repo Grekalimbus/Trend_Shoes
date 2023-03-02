@@ -21,7 +21,7 @@ const CardBasket = ({
     const [activeImg, setAvtiveImg] = useState(data.imgProduct[0]);
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
-    const { increment, decrement } = basketService;
+    const { increment, decrement, deleteProductDB } = basketService;
     const userId = useSelector(getUser());
     const basketFromDB = useSelector(getBasketUser());
     const product = useSelector(getProduct()).filter(
@@ -88,7 +88,7 @@ const CardBasket = ({
         }
     };
     const deleteProduct = () => {
-        servicesBascket.delete(data);
+        deleteProductDB(data, userId, basketFromDB);
     };
     const changeActiveSize = (size) => {
         setActiveSize(size);
