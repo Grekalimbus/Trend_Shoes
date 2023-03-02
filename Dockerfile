@@ -1,4 +1,4 @@
-FROM node:16.17.0 as client
+FROM node:18.14.0 as client
 
 WORKDIR /app/client
 
