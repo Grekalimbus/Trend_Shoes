@@ -23,3 +23,9 @@
     top: -11%;
     left: 34%;
 }
+
+@media(max-height: 700px) { 
+    .mainPage{        
+        background-size: 0% 0% ;
+    }    
+  }
