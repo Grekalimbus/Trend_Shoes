@@ -3,18 +3,21 @@ import styles from "./index.module.css";
 import Form from "../../common/form";
 import validator from "../../../utils/validator";
 import { toast } from "react-toastify";
-import getFilterProductCart from "../../../utils/filterProductCart";
 import validatorConfig from "../../../utils/validatorConfig";
 import handleChangeProduct from "../../../services/purchases.service";
 import { useSelector } from "react-redux";
 import { getUserPurchases } from "../../../store/userPurchases";
 import { getProduct } from "../../../store/product";
 import { getUser } from "../../../store/user";
+import { getBasketUser } from "../../../store/basketUser";
+import { basketService } from "../../../services/basket.service";
 
 const FormPage = () => {
     const historyPurchases = useSelector(getUserPurchases());
     const product = useSelector(getProduct());
+    const basketProduct = useSelector(getBasketUser());
     const user = useSelector(getUser());
+    const { clearBasket } = basketService;
     const [data, setData] = useState({
         user: "",
         phone: "",
@@ -23,7 +26,6 @@ const FormPage = () => {
         adress: ""
     });
 
-    const filterProductCart = getFilterProductCart();
     const [errors, setErrors] = useState({});
     useEffect(() => {
         validate();
@@ -50,7 +52,7 @@ const FormPage = () => {
         if (!isValid) {
             return toast.error("Правильно заполните все участки формы");
         }
-        const quantityProduct = filterProductCart.map((item) => {
+        const quantityProduct = basketProduct.map((item) => {
             return item.quantity;
         });
         try {
@@ -61,19 +63,20 @@ const FormPage = () => {
                 localStorage.removeItem("dataForm");
             }
             await handleChangeProduct(
-                filterProductCart,
+                basketProduct,
                 quantityProduct,
                 data,
                 user,
                 product,
                 historyPurchases
             );
+            clearBasket(user);
             window.location.reload();
         } catch (error) {
             console.log(error);
         }
     };
-    return filterProductCart.length === 0 ? (
+    return !basketProduct || basketProduct?.length === 0 ? (
         <div className={styles.processing}>
             Вы оформили заказ и находится в обработке
         </div>

@@ -10,13 +10,12 @@ import Header from "./app/components/ui/header/header";
 import Footer from "./app/components/ui/footer/footer";
 import BasketPage from "./app/components/page/basketPage/basketPage";
 import FormPage from "./app/components/page/formPage/formPage";
-import useProductBasket from "./app/components/hooks/useProductBasket";
 import LoginPage from "./app/components/page/loginPage/loginPage";
 import Purchases from "./app/components/common/purchasesPage/purchases";
 import AdminPage from "./app/components/page/adminPage.jsx/adminPage";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFirmList } from "./app/store/firm";
-import { getUser, loadUser, refreshTokenChek } from "./app/store/user";
+import { loadUser, refreshTokenChek } from "./app/store/user";
 import localStorageService from "./app/services/localStorage.service";
 import { getErrorProduct, getProduct, loadProduct } from "./app/store/product";
 import { loadUserPurchases } from "./app/store/userPurchases";
@@ -24,7 +23,6 @@ import { loadAllPurchases } from "./app/store/allPurchases";
 import { loadAllBasket } from "./app/store/allBasket";
 import { loadBasketUser } from "./app/store/basketUser";
 function App() {
-    // const user = useSelector(getUser());
     const error = useSelector(getErrorProduct());
     const product = useSelector(getProduct());
     const dispatch = useDispatch();
@@ -40,7 +38,6 @@ function App() {
             dispatch(loadUser());
         }
     }, []);
-    // useProductBasket();
 
     if (error) {
         if (error === "Network Error") {

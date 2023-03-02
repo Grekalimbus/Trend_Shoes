@@ -28,7 +28,7 @@ const CardBasket = ({
     );
     useEffect(() => {
         if (product) {
-            setDataSizes(product[0].quantity);
+            setDataSizes(product[0]?.quantity);
         }
     }, [product]);
 
