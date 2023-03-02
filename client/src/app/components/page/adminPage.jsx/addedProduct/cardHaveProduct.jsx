@@ -86,9 +86,7 @@ const CardHaveProduct = ({ quantity, image, id }) => {
                 </div>
             </div>
             <div className={styles.flexElemInfo}>
-                <div className={styles.flexInfo}>
-                    1.Size - 2.Value: Name Lakai
-                </div>
+                <div className={styles.flexInfo}>1.Size - 2.Value</div>
                 <div className={styles.flexElemSizes}>
                     {quantityObject.map((item) => {
                         return (
