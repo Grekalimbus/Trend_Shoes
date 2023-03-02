@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import handleChangeQuantityFunc from "../../../../utils/changeSizes";
 import { toast } from "react-toastify";
 import productService from "../../../../services/product.service";
+import Loader from "../../../common/loader/loader";
 
 const CardHaveProduct = ({ quantity, image, id }) => {
     const { changeQuantity } = productService;
@@ -65,8 +66,6 @@ const CardHaveProduct = ({ quantity, image, id }) => {
         try {
             if (filterSizesArray.length !== 0) {
                 await changeQuantity(id, filterSizesArray);
-                localStorage.setItem("storageBasket", "[]");
-                localStorage.setItem("dataSizes", "[]");
                 window.location.reload();
             }
             if (filterSizesArray.length === 0) {
@@ -78,7 +77,7 @@ const CardHaveProduct = ({ quantity, image, id }) => {
     };
 
     return !quantity ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div className={styles.cardWrapp}>
             <div className={styles.flexElemBlockImg}>
@@ -87,9 +86,7 @@ const CardHaveProduct = ({ quantity, image, id }) => {
                 </div>
             </div>
             <div className={styles.flexElemInfo}>
-                <div className={styles.flexInfo}>
-                    1.Size - 2.Value: Name Lakai
-                </div>
+                <div className={styles.flexInfo}>1.Size - 2.Value</div>
                 <div className={styles.flexElemSizes}>
                     {quantityObject.map((item) => {
                         return (

@@ -21,7 +21,7 @@ const CardProduct = ({
                 <h3>{name}</h3>
                 <h3>Стоимость: {price} ₽</h3>
                 {buttonTitle === "Открыть карточку" ? (
-                    <Link to={`/productPage/${idCard}`}>
+                    <Link to={`/cardPage/${idCard}`}>
                         <button className={styles.buttonCard}>
                             {buttonTitle}
                         </button>

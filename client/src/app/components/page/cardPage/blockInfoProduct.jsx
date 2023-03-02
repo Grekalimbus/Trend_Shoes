@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./card.module.css";
 import httpServices from "../../../services/http.service";
 import { Link } from "react-router-dom";
+import Loader from "../../common/loader/loader";
 
 const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
     const [firm, setFirm] = useState(null);
@@ -51,7 +52,7 @@ const BlockInfoProduct = ({ data, handleAddProduct, dataSizes }) => {
         <div className={styles.flex}>
             <div className={styles.infoBlockDiv} style={{ width: "100%" }}>
                 {Object.keys(data).length === 0 || firm === null ? (
-                    <h1>loading</h1>
+                    <Loader />
                 ) : (
                     <div>
                         <h1 className={styles.h1}>{data.name}</h1>

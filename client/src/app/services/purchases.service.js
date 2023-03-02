@@ -11,7 +11,9 @@ const handleChangeProduct = async (
     product,
     historyPurchases
 ) => {
-    const basketDataSizes = dataBasket.getBasketSizes();
+    const basketDataSizes = filterProduct.filter((item) => {
+        return item.quantity;
+    });
     const userID = localStorageService.getUserId();
     const newDate = new Date();
     const day = newDate.getDate();
@@ -31,10 +33,10 @@ const handleChangeProduct = async (
         };
     });
     const handleChangeHistoryPurchases = () => {
-        if (!historyPurchases || !historyPurchases[0].history.length) {
+        if (!historyPurchases || !historyPurchases[0]?.history.length) {
             return transformProductForHistory;
-        } else if (historyPurchases[0].history.length) {
-            const newArr = historyPurchases[0].history
+        } else if (historyPurchases[0]?.history.length) {
+            const newArr = historyPurchases[0]?.history
                 .concat(transformProductForHistory)
                 .reverse();
             return newArr;

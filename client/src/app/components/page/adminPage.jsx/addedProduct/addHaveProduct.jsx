@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import CardHaveProduct from "./cardHaveProduct";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../../store/product";
+import Loader from "../../../common/loader/loader";
 const AddHaveProduct = () => {
     const product = useSelector(getProduct());
     const [quantity, setQuantity] = useState(null);
@@ -16,7 +17,7 @@ const AddHaveProduct = () => {
             setQuantity(quantityArr);
         }
     }, [product]);
-    if (quantity === null) return <div>Loading</div>;
+    if (quantity === null) return <Loader />;
     if (quantity) {
         return (
             <div className={styles.wrapAddHaveProduct}>

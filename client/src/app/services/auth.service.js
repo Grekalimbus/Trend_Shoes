@@ -37,7 +37,7 @@ const authServices = {
             password,
             returnSecureToken: true
         });
-        setTokens({ ...data, balance: 10000 });
+        setTokens({ ...data });
         window.location.reload();
         return data;
     },

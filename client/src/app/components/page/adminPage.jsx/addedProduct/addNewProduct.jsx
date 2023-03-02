@@ -9,6 +9,7 @@ import handleChangeQuantityFunc from "../../../../utils/changeSizes";
 import { useSelector } from "react-redux";
 import { getFirm, getIsLoadingFirmStatus } from "../../../../store/firm";
 import productService from "../../../../services/product.service";
+import Loader from "../../../common/loader/loader";
 
 const AddNewProduct = () => {
     const dataFirm = useSelector(getFirm());
@@ -105,15 +106,13 @@ const AddNewProduct = () => {
         try {
             console.log(newObjectForDataBase);
             await add(newObjectForDataBase);
-            localStorage.setItem("storageBasket", "[]");
-            localStorage.setItem("dataSizes", "[]");
             window.location.reload();
         } catch (error) {
             console.log(error);
         }
     };
     if (isLoading) {
-        return <div>Loading</div>;
+        return <Loader />;
     } else if (!isLoading) {
         return (
             <div className={styles.wrappNewProduct}>

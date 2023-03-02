@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./card.module.css";
+import Loader from "../../common/loader/loader";
 
 const BlockImg = ({ image }) => {
     const [dataImage, setDataImage] = useState(null);
@@ -11,7 +12,7 @@ const BlockImg = ({ image }) => {
         setDataImage(target.src);
     };
     return !dataImage && !image ? (
-        <h1>loading...</h1>
+        <Loader />
     ) : (
         <div>
             <div className={styles.mainImg}>

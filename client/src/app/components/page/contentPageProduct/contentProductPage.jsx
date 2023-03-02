@@ -5,12 +5,12 @@ import FilterPrice from "../../ui/forms/filterPrice";
 import styles from "./index.module.css";
 import CardProduct from "../../common/cardProduct";
 import { useParams } from "react-router-dom";
-import PrivateCard from "../privateCard/privateCard";
 import filtersMethod from "../../../utils/filterProduct";
 import { useSelector } from "react-redux";
 import { getFirm } from "../../../store/firm";
 import { getProduct } from "../../../store/product";
 import formClearServices from "../../../services/formClear.service";
+import Loader from "../../common/loader/loader";
 
 const ContentProductPage = () => {
     const { cardID } = useParams();
@@ -40,50 +40,45 @@ const ContentProductPage = () => {
         clearFirm,
         clearAll
     };
-
-    if (product !== null) {
-        return cardID !== undefined ? (
-            <PrivateCard data={filtersMethod.filterProduct(product, cardID)} />
-        ) : (
-            <div>
-                <div className={styles.flex}>
-                    <div className={styles.flexForms}>
-                        <FilterName
-                            handleChangeForm={handleChangeForm}
-                            name={data.name}
-                        />
-                        <FilterPrice
-                            handleChangeForm={handleChangeForm}
-                            from={data.from}
-                            before={data.before}
-                        />
-                        <FilterFirm
-                            handleChangeForm={handleChangeForm}
-                            clear={clear}
-                            firm={data.firm}
-                            dataFirm={dataFirm}
-                        />
-                    </div>
-                    <div className={styles.blockProduct}>
-                        {filtersMethod.filter(product, data).map((item) => {
-                            return (
-                                <CardProduct
-                                    idCard={item._id}
-                                    key={item._id}
-                                    name={item.name}
-                                    price={item.price}
-                                    imgUrl={item.imgProduct[0]}
-                                    buttonTitle={"Открыть карточку"}
-                                />
-                            );
-                        })}
-                    </div>
+    return !product ? (
+        <Loader />
+    ) : (
+        <div>
+            <div className={styles.flex}>
+                <div className={styles.flexForms}>
+                    <FilterName
+                        handleChangeForm={handleChangeForm}
+                        name={data.name}
+                    />
+                    <FilterPrice
+                        handleChangeForm={handleChangeForm}
+                        from={data.from}
+                        before={data.before}
+                    />
+                    <FilterFirm
+                        handleChangeForm={handleChangeForm}
+                        clear={clear}
+                        firm={data.firm}
+                        dataFirm={dataFirm}
+                    />
+                </div>
+                <div className={styles.blockProduct}>
+                    {filtersMethod.filter(product, data).map((item) => {
+                        return (
+                            <CardProduct
+                                idCard={item._id}
+                                key={item._id}
+                                name={item.name}
+                                price={item.price}
+                                imgUrl={item.imgProduct[0]}
+                                buttonTitle={"Открыть карточку"}
+                            />
+                        );
+                    })}
                 </div>
             </div>
-        );
-    } else {
-        return <div>Loading...</div>;
-    }
+        </div>
+    );
 };
 
 export default ContentProductPage;

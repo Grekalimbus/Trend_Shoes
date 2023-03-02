@@ -3,7 +3,8 @@
     height: 70vh;
     margin: 0 auto;
     margin-top: 1%;        
-    color: rgb(0, 0, 0);       
+    color: rgb(0, 0, 0);    
+    overflow: auto;   
 }
 .blockBasket::-webkit-scrollbar {
     border-radius: 10px;

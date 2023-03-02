@@ -2,25 +2,33 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import img from "../../../../img/basket.png";
 import PropTypes from "prop-types";
-import servicesBascket from "../../../utils/servisecBascket";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
+import { toast } from "react-toastify";
+import { basketService } from "../../../services/basket.service";
+import { getUser } from "../../../store/user";
+import { getBasketUser } from "../../../store/basketUser";
+import { useHistory } from "react-router-dom";
 
 const CardBasket = ({
     dataProduct,
     handleIncrementAmount,
     handleDecrementAmount
 }) => {
+    const history = useHistory();
     const [data, setData] = useState(dataProduct);
     const [activeImg, setAvtiveImg] = useState(data.imgProduct[0]);
     const [activeSize, setActiveSize] = useState(null);
     const [dataSizes, setDataSizes] = useState(null);
+    const { increment, decrement, deleteProductDB } = basketService;
+    const userId = useSelector(getUser());
+    const basketFromDB = useSelector(getBasketUser());
     const product = useSelector(getProduct()).filter(
         (item) => item._id === data._id
     );
     useEffect(() => {
         if (product) {
-            setDataSizes(product[0].quantity);
+            setDataSizes(product[0]?.quantity);
         }
     }, [product]);
 
@@ -34,28 +42,45 @@ const CardBasket = ({
     const changeAvtiveImg = ({ target }) => {
         setAvtiveImg(target.alt);
     };
+
     const handleIncrement = () => {
-        servicesBascket.increment(activeSize, data, setData, dataSizes);
-        data.quantity.forEach((item, index) => {
-            if (
-                item.sizes === activeSize &&
-                item.value !== dataSizes[index].value
-            ) {
-                handleIncrementAmount(data.price);
-            }
-        });
+        if (!activeSize) {
+            toast.error("Укажите размер");
+        } else if (userId && data) {
+            increment(
+                data,
+                activeSize,
+                dataSizes,
+                setData,
+                userId,
+                basketFromDB,
+                history.location.pathname
+            );
+            data.quantity.forEach((item, index) => {
+                if (
+                    item.sizes === activeSize &&
+                    item.value !== dataSizes[index].value
+                ) {
+                    handleIncrementAmount(data.price);
+                }
+            });
+        }
     };
     const handleDecrement = () => {
-        servicesBascket.decrement(activeSize, data, setData);
-        data.quantity.forEach((item) => {
-            if (item.sizes === activeSize && item.value < 1) {
-                handleIncrementAmount(data.price);
-            }
-        });
-        handleDecrementAmount(data.price);
+        if (!activeSize) {
+            toast.error("Укажите размер");
+        } else if (userId && data) {
+            decrement(data, activeSize, setData, userId, basketFromDB);
+            data.quantity.forEach((item) => {
+                if (item.sizes === activeSize && item.value < 1) {
+                    handleIncrementAmount(data.price);
+                }
+            });
+            handleDecrementAmount(data.price);
+        }
     };
     const deleteProduct = () => {
-        servicesBascket.delete(data);
+        deleteProductDB(data, userId, basketFromDB);
     };
     const changeActiveSize = (size) => {
         setActiveSize(size);

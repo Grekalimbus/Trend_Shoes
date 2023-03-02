@@ -1,10 +1,10 @@
 const express = require('express');
 const User = require('../models/User');
 const HistoryPurchases = require('../models/HistoryPurchases');
+const Basket = require('../models/Basket');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const tokenService = require('../services/token.service');
-const Token = require('../models/Token');
 const router = express.Router({ mergeParams: true });
 // 1. get data from req (email, password)
 // 2. check if user ready exists
@@ -53,6 +53,7 @@ router.post('/signUp', [
         user: newUser._id,
         history: [],
       });
+      await Basket.create({ user: newUser._id, basket: [] });
       const tokens = tokenService.generate({ _id: newUser._id });
       await tokenService.save(newUser._id, tokens.refreshToken);
 

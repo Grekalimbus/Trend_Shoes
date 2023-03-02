@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
+import Loader from "../loader/loader";
 
 const CardPurchases = ({ historyPurchases }) => {
     const filterQuantity = historyPurchases
@@ -13,7 +14,7 @@ const CardPurchases = ({ historyPurchases }) => {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     return !historyPurchases ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div className={styles.cardInfo}>
             <div className={styles.elemFlexTwo}>

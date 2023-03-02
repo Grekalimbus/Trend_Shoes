@@ -4,6 +4,7 @@ import CardProduct from "../../common/cardProduct";
 import productService from "../../../services/product.service";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../store/product";
+import Loader from "../../common/loader/loader";
 
 const DeleteProduct = () => {
     const product = useSelector(getProduct());
@@ -11,15 +12,13 @@ const DeleteProduct = () => {
     const handleDeletProduct = async (id) => {
         try {
             await remove({ id });
-            localStorage.setItem("storageBasket", "[]");
-            localStorage.setItem("dataSizes", "[]");
             window.location.reload();
         } catch (error) {
             console.log(error);
         }
     };
     return product === null ? (
-        <div>Loading</div>
+        <Loader />
     ) : (
         <div className={styles.wrapDeletePage}>
             {product.map((item) => {
