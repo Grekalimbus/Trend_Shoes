@@ -1,13 +1,7 @@
 import { toast } from "react-toastify";
 import httpServices from "./http.service";
 
-const addInitialItemBasket = async (
-    activeSize,
-    data,
-    dataSizes,
-    userId,
-    productDB
-) => {
+const addInitialItemBasket = async (activeSize, data, dataSizes, userId) => {
     const changeQuantity = data.quantity.map((item, index) => {
         if (
             dataSizes[index].value === 0 &&
@@ -66,13 +60,25 @@ const increment = async (
             });
             copyData = { ...data, quantity: newQuantityForCopyData };
             changeState(copyData);
-            const historyForDB = basketFromDB.map((item) => {
-                if (item._id === copyData._id) {
-                    return copyData;
-                }
-                return item;
+            const checkProductForBasket = basketFromDB.some((item) => {
+                return item._id === data._id;
             });
-            httpServices.put(`basket/${user._id}`, historyForDB);
+            if (!checkProductForBasket) {
+                const newDataForBasketDB = [copyData];
+                const dataConcatWithBasketDB =
+                    newDataForBasketDB.concat(basketFromDB);
+                httpServices.put(`basket/${user._id}`, dataConcatWithBasketDB);
+                toast.success("Товар был добавлен в корзину");
+            } else {
+                const historyForDB = basketFromDB.map((item) => {
+                    if (item._id === copyData._id) {
+                        return copyData;
+                    }
+                    return item;
+                });
+                httpServices.put(`basket/${user._id}`, historyForDB);
+                toast.success("Товар был добавлен в корзину");
+            }
         }
     });
 };
@@ -83,8 +89,14 @@ const decrement = async (activeSize) => {
     }
 };
 
+const clearBasket = async (user) => {
+    httpServices.put(`basket/${user._id}`, []);
+    window.location.reload();
+};
+
 export const basketService = {
     addInitialItemBasket,
     increment,
-    decrement
+    decrement,
+    clearBasket
 };

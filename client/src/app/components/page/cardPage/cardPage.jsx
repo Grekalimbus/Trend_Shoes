@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import httpServices from "../../../services/http.service";
 import BlockImg from "./blockImg";
 import BlockInfoProduct from "./blockInfoProduct";
@@ -17,11 +17,12 @@ const CardPage = () => {
     const [dataSizes, setDataSizes] = useState(null);
     const { id } = useParams();
     const userId = useSelector(getUser());
-
+    const basketFromDB = useSelector(getBasketUser());
+    const history = useHistory();
     const product = useSelector(getProduct()).filter((item) => item._id === id);
     const [data, setData] = useState(null);
     const basketUser = useSelector(getBasketUser());
-    const { addInitialItemBasket } = basketService;
+    const { addInitialItemBasket, increment } = basketService;
     useEffect(() => {
         if (product) {
             setDataSizes(product[0].quantity);
@@ -42,13 +43,8 @@ const CardPage = () => {
         }
         try {
             if (activeSize && basketUser.length === 0 && userId && product[0]) {
-                addInitialItemBasket(
-                    activeSize,
-                    data,
-                    dataSizes,
-                    userId._id,
-                    product[0]
-                );
+                addInitialItemBasket(activeSize, data, dataSizes, userId._id);
+                history.push("/basketPage");
                 window.location.reload();
             } else if (
                 activeSize &&
@@ -56,7 +52,14 @@ const CardPage = () => {
                 userId &&
                 product[0]
             ) {
-                console.log("increment");
+                increment(
+                    data,
+                    activeSize,
+                    dataSizes,
+                    setData,
+                    userId,
+                    basketFromDB
+                );
             }
         } catch (e) {}
 

@@ -6,14 +6,12 @@ import { useHistory } from "react-router-dom";
 import localStorageService from "../../../services/localStorage.service";
 import { useSelector } from "react-redux";
 import { getUser } from "../../../store/user";
+import { basketService } from "../../../services/basket.service";
 
 const Buttons = ({ amount }) => {
     const history = useHistory();
     const user = useSelector(getUser());
-    const clearBasket = () => {
-        localStorage.setItem("storageBasket", "[]");
-        window.location.reload();
-    };
+    const { clearBasket } = basketService;
     const needAutn = () => {
         if (user && amount > user.balance) {
             toast.error("Сумма превышает счет вашего баланса");
@@ -28,7 +26,12 @@ const Buttons = ({ amount }) => {
 
     return (
         <div className={styles.blockButton}>
-            <div className={styles.buttonClick} onClick={clearBasket}>
+            <div
+                className={styles.buttonClick}
+                onClick={() => {
+                    clearBasket(user);
+                }}
+            >
                 Очистить
             </div>
             <div className={styles.amount}>Сумма: {amount}</div>
