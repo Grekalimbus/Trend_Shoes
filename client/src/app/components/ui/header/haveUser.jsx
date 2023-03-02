@@ -13,7 +13,8 @@ const HaveUser = ({
     balance,
     styleMenu,
     styleHeader,
-    styleButton
+    styleButton,
+    reloadForBasket
 }) => {
     const historyPurchases = useSelector(getUserPurchases());
     const purchases = historyPurchases?.[0].history.length === 0 ? false : true;
@@ -39,7 +40,7 @@ const HaveUser = ({
             <Link
                 to="/basketPage"
                 className={styleButton}
-                onClick={handleHideMenu}
+                onClick={reloadForBasket}
             >
                 <h2 className={styles.h2}>Корзина</h2>
             </Link>
@@ -76,7 +77,8 @@ HaveUser.propTypes = {
     balance: PropTypes.number,
     styleMenu: PropTypes.string,
     styleHeader: PropTypes.string,
-    styleButton: PropTypes.string
+    styleButton: PropTypes.string,
+    reloadForBasket: PropTypes.func
 };
 
 export default HaveUser;

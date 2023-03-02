@@ -51,6 +51,14 @@ const Header = () => {
         setStyleHeader(styles.header);
         setStyleButton(styles.button);
     };
+    const reloadForBasket = () => {
+        setStatusMenu(false);
+        setStyleMenu(styles.buttonMenu);
+        setStyleHeader(styles.header);
+        setStyleButton(styles.button);
+        history.push("/basketPage");
+        window.location.reload();
+    };
     return (
         <header>
             {!user ? (
@@ -71,6 +79,7 @@ const Header = () => {
                     styleMenu={styleMenu}
                     styleHeader={styleHeader}
                     styleButton={styleButton}
+                    reloadForBasket={reloadForBasket}
                 />
             )}
         </header>
