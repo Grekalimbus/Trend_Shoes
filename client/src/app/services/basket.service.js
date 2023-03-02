@@ -88,16 +88,9 @@ const increment = async (
     });
 };
 
-const decrement = async (
-    data,
-    activeSize,
-    dataSizes,
-    changeState,
-    user,
-    basketFromDB
-) => {
+const decrement = async (data, activeSize, changeState, user, basketFromDB) => {
     let copyData = { ...data };
-    data.quantity.forEach((item, index) => {
+    data.quantity.forEach((item) => {
         if (item.sizes === activeSize && item.value !== 0) {
             const newQuantityForCopyData = copyData.quantity.map((item) => {
                 if (item.sizes === activeSize) {
@@ -121,7 +114,9 @@ const decrement = async (
                     (item) => item._id !== data._id
                 );
                 httpServices.put(`basket/${user._id}`, filterData);
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
             } else {
                 const historyForDB = basketFromDB.map((item) => {
                     if (item._id === copyData._id) {
@@ -130,6 +125,9 @@ const decrement = async (
                     return item;
                 });
                 httpServices.put(`basket/${user._id}`, historyForDB);
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
             }
         }
     });
@@ -137,13 +135,17 @@ const decrement = async (
 
 const clearBasket = async (user) => {
     httpServices.put(`basket/${user._id}`, []);
-    window.location.reload();
+    setTimeout(() => {
+        window.location.reload();
+    }, 500);
 };
 
 const deleteProductDB = async (data, user, basketFromDB) => {
     const filterData = basketFromDB.filter((item) => item._id !== data._id);
     httpServices.put(`basket/${user._id}`, filterData);
-    window.location.reload();
+    setTimeout(() => {
+        window.location.reload();
+    }, 500);
 };
 
 export const basketService = {

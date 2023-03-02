@@ -70,14 +70,7 @@ const CardBasket = ({
         if (!activeSize) {
             toast.error("Укажите размер");
         } else if (userId && data) {
-            decrement(
-                data,
-                activeSize,
-                dataSizes,
-                setData,
-                userId,
-                basketFromDB
-            );
+            decrement(data, activeSize, setData, userId, basketFromDB);
             data.quantity.forEach((item) => {
                 if (item.sizes === activeSize && item.value < 1) {
                     handleIncrementAmount(data.price);

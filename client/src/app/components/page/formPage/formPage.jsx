@@ -71,7 +71,9 @@ const FormPage = () => {
                 historyPurchases
             );
             clearBasket(user);
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
         } catch (error) {
             console.log(error);
         }
