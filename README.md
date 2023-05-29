@@ -4,7 +4,7 @@
 ## The project can be run locally
     1. Clone repository
     2. Go to client and server folders and install dependencies with "npm install"
-    3. In the folder server run "npm run server"
+    3. In the folder server run "npm run serve"
     4. In the folder client run "npm start"
 <br />
 
