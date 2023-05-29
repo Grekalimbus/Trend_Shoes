@@ -51,7 +51,6 @@ Every time I was faced with the fact that I had to solve some problem, but I had
 ## Presentation
 ![Image1](https://i.postimg.cc/GtmBPKn0/image.png)
 ![Image1](https://i.postimg.cc/442nkzTd/portfolio.jpg)
-![Image1](https://i.postimg.cc/8s8SkkHy/image.png)
 ![Image1](https://i.postimg.cc/Hs7M6S7H/image.png)
 ![Image1](https://i.postimg.cc/D01Xw0h0/image.png)
 ![Image1](https://i.postimg.cc/XYYpTQrp/image.png)
