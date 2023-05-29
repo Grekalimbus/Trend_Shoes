@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SignInForm from "./signInForm";
 import SignUPForm from "./signUpForm";
 import validatorConfig from "../../../utils/validatorConfig";
@@ -15,7 +15,6 @@ import {
 } from "../../../store/user";
 
 const LoginPage = () => {
-    const history = useHistory();
     const [data, setData] = useState({
         email: "",
         password: "",

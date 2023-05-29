@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import localStorageService from "./localStorage.service";
 import httpServices from "./http.service";
-import dataBasket from "../utils/getBasket";
 
 const handleChangeProduct = async (
     filterProduct,

@@ -48,7 +48,6 @@ export const loginIn = (dataForm) => async (dispatch) => {
     try {
         const data = await authServices.loginIn({ email, password });
         dispatch(loadUser());
-        // window.location.reload();
     } catch (error) {
         dispatch(userRequestFiled(error.message));
     }
